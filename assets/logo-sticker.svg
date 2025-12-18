@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 160">
+  <!-- Sticker style with border -->
+  <rect x="5" y="5" width="410" height="150" rx="10" fill="#0a0a0a" stroke="#00ff88" stroke-width="3"/>
+
+  <!-- Top line: spaceorbust -->
+  <text x="210" y="65" text-anchor="middle" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold">
+    <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+  </text>
+
+  <!-- Bottom line: tsubroecaps (reversed) -->
+  <text x="210" y="115" text-anchor="middle" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold">
+    <tspan fill="#e0e0e0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+  </text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140">
+  <!-- For light backgrounds (white shirts, etc.) -->
+  <rect width="400" height="140" fill="#ffffff"/>
+
+  <!-- Top line: spaceorbust -->
+  <text x="200" y="55" text-anchor="middle" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold">
+    <tspan fill="#006644">space</tspan><tspan fill="#0a0a0a">orbust</tspan>
+  </text>
+
+  <!-- Bottom line: tsubroecaps (reversed) -->
+  <text x="200" y="100" text-anchor="middle" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold">
+    <tspan fill="#0a0a0a">tsubro</tspan><tspan fill="#006644">ecaps</tspan>
+  </text>
+</svg>

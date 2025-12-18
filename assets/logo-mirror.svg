@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <!-- Background: transparent for versatility -->
+
+  <!-- Top line: spaceorbust -->
+  <text x="200" y="45" text-anchor="middle" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold">
+    <tspan fill="#00ff88">space</tspan><tspan fill="#ffffff">orbust</tspan>
+  </text>
+
+  <!-- Bottom line: tsubroecaps (reversed) -->
+  <text x="200" y="85" text-anchor="middle" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold">
+    <tspan fill="#ffffff">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+  </text>
+</svg>
