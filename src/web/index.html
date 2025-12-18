@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceOrBust - Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --text: #e0e0e0;
+      --text-dim: #888;
+      --accent: #4a9eff;
+      --energy: #ffcc00;
+      --materials: #00cc66;
+      --data: #cc66ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      color: var(--accent);
+    }
+
+    h1 span {
+      color: var(--text-dim);
+      font-size: 0.875rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .resource {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .resource-label {
+      width: 100px;
+      font-size: 0.875rem;
+    }
+
+    .resource-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0 1rem;
+    }
+
+    .resource-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .resource-fill.energy { background: var(--energy); }
+    .resource-fill.materials { background: var(--materials); }
+    .resource-fill.data { background: var(--data); }
+
+    .resource-value {
+      font-size: 0.875rem;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .tech-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tech-item:last-child {
+      border-bottom: none;
+    }
+
+    .tech-name {
+      font-size: 0.875rem;
+    }
+
+    .tech-status {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    .tech-status.available {
+      background: rgba(74, 158, 255, 0.2);
+      color: var(--accent);
+    }
+
+    .tech-status.locked {
+      background: rgba(136, 136, 136, 0.2);
+      color: var(--text-dim);
+    }
+
+    .tech-status.completed {
+      background: rgba(0, 204, 102, 0.2);
+      color: var(--materials);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .ascii-art {
+      font-size: 0.5rem;
+      line-height: 1;
+      color: var(--text-dim);
+      white-space: pre;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .not-connected {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .not-connected p {
+      margin-bottom: 1rem;
+    }
+
+    code {
+      background: var(--border);
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SPACEORBUST <span>v0.1.0 | Year: 2024 | Era: Earth-Bound</span></h1>
+    </header>
+
+    <div class="ascii-art">
+            *  .  *
+       .        *        .
+    *    ___---___     *
+       .'         '.
+      /  O       O  \
+     |       ^       |        *
+     |    \     /    |    .
+      \    '---'    /
+       '.         .'
+    *    '-------'    *
+         EARTH
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Resources</h2>
+        <div class="resource">
+          <span class="resource-label">Energy</span>
+          <div class="resource-bar">
+            <div class="resource-fill energy" style="width: 10%"></div>
+          </div>
+          <span class="resource-value">100</span>
+        </div>
+        <div class="resource">
+          <span class="resource-label">Materials</span>
+          <div class="resource-bar">
+            <div class="resource-fill materials" style="width: 5%"></div>
+          </div>
+          <span class="resource-value">50</span>
+        </div>
+        <div class="resource">
+          <span class="resource-label">Data</span>
+          <div class="resource-bar">
+            <div class="resource-fill data" style="width: 2.5%"></div>
+          </div>
+          <span class="resource-value">25</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Statistics</h2>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">1.0B</div>
+            <div class="stat-label">Population</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Days Played</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Total Commits</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Available Research</h2>
+        <div class="tech-item">
+          <span class="tech-name">Reusable Rockets</span>
+          <span class="tech-status available">Available</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">Solar Power Mastery</span>
+          <span class="tech-status available">Available</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">Advanced Materials</span>
+          <span class="tech-status available">Available</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">Autonomous Systems</span>
+          <span class="tech-status available">Available</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">Closed-Loop Life Support</span>
+          <span class="tech-status locked">Locked</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Connection</h2>
+        <div class="not-connected">
+          <p>Not connected to a forge.</p>
+          <p>Run in terminal:</p>
+          <code>spaceorbust auth</code>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>SPACEORBUST - An open-source RPG gamifying humanity's journey to the stars</p>
+      <p><a href="https://github.com/zjkramer/spaceorbust">GitHub</a> | <a href="https://spaceorbust.com">spaceorbust.com</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Future: Fetch game state from API and update UI
+    // For now, this is a static preview
+
+    console.log(`
+    ╔════════════════════════════════════════════════════════════╗
+    ║   SPACEORBUST - Web Dashboard                              ║
+    ║   This is a static preview.                                ║
+    ║   Full functionality coming with spaceorbust.com launch.   ║
+    ╚════════════════════════════════════════════════════════════╝
+    `);
+  </script>
+</body>
+</html>

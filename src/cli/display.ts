@@ -261,3 +261,155 @@ export function renderAuthSuccess(username: string): string {
   Run 'spaceorbust sync' to collect your first resources.
 `;
 }
+
+/**
+ * Render tech tree / research list
+ */
+export function renderResearchList(
+  technologies: Array<{
+    id: string;
+    name: string;
+    description: string;
+    layer: number;
+    cost: Resources;
+    canResearch: boolean;
+    reason?: string;
+    completed: boolean;
+  }>,
+  completedCount: number,
+  totalCount: number
+): string {
+  const lines: string[] = [];
+
+  lines.push('');
+  lines.push('  RESEARCH - Era 1: Earth-Bound');
+  lines.push('  ' + '─'.repeat(56));
+  lines.push(`  Progress: ${completedCount}/${totalCount} technologies`);
+  lines.push('');
+
+  // Group by availability
+  const available = technologies.filter(t => t.canResearch && !t.completed);
+  const locked = technologies.filter(t => !t.canResearch && !t.completed);
+  const completed = technologies.filter(t => t.completed);
+
+  if (available.length > 0) {
+    lines.push('  AVAILABLE:');
+    for (const tech of available) {
+      lines.push(`    ○ ${tech.name}`);
+      lines.push(`      ${tech.description}`);
+      lines.push(`      Cost: ${tech.cost.energy}⚡ ${tech.cost.materials}🔧 ${tech.cost.data}📊`);
+      lines.push('');
+    }
+  }
+
+  if (locked.length > 0) {
+    lines.push('  LOCKED:');
+    for (const tech of locked.slice(0, 5)) {
+      lines.push(`    ✗ ${tech.name} - ${tech.reason}`);
+    }
+    if (locked.length > 5) {
+      lines.push(`    ... and ${locked.length - 5} more`);
+    }
+    lines.push('');
+  }
+
+  if (completed.length > 0) {
+    lines.push('  COMPLETED:');
+    for (const tech of completed) {
+      lines.push(`    ✓ ${tech.name}`);
+    }
+    lines.push('');
+  }
+
+  lines.push('  ' + '─'.repeat(56));
+  lines.push('  Usage: spaceorbust research <tech-id>');
+  lines.push('');
+
+  return lines.join('\n');
+}
+
+/**
+ * Render research success
+ */
+export function renderResearchSuccess(techName: string, resources: Resources): string {
+  return `
+  ✓ Research Complete: ${techName}
+
+  Resources spent:
+    -${resources.energy} Energy
+    -${resources.materials} Materials
+    -${resources.data} Data
+
+  New technologies may now be available.
+  Run 'spaceorbust research' to see options.
+`;
+}
+
+/**
+ * Render guild list
+ */
+export function renderGuildInfo(guild: {
+  name: string;
+  tag: string;
+  type: string;
+  members: number;
+  maxMembers: number;
+  rank: number;
+  sharedResources: Resources;
+} | null): string {
+  const lines: string[] = [];
+
+  lines.push('');
+  lines.push('  GUILD');
+  lines.push('  ' + '─'.repeat(56));
+
+  if (!guild) {
+    lines.push('  You are not in a guild.');
+    lines.push('');
+    lines.push('  Guilds provide:');
+    lines.push('    • Shared resource pools');
+    lines.push('    • Collaboration bonuses');
+    lines.push('    • Group projects and missions');
+    lines.push('    • Community and mentorship');
+    lines.push('');
+    lines.push('  Usage: spaceorbust guild create <name>');
+    lines.push('         spaceorbust guild join <guild-id>');
+  } else {
+    lines.push(`  [${guild.tag}] ${guild.name}`);
+    lines.push(`  Type: ${guild.type} | Rank: #${guild.rank}`);
+    lines.push(`  Members: ${guild.members}/${guild.maxMembers}`);
+    lines.push('');
+    lines.push('  Shared Resources:');
+    lines.push(`    Energy:    ${guild.sharedResources.energy}`);
+    lines.push(`    Materials: ${guild.sharedResources.materials}`);
+    lines.push(`    Data:      ${guild.sharedResources.data}`);
+  }
+
+  lines.push('');
+
+  return lines.join('\n');
+}
+
+/**
+ * Render forge selection
+ */
+export function renderForgeSelection(): string {
+  return `
+  SELECT FORGE TYPE
+  ─────────────────────
+
+  SpaceOrBust supports multiple git forges:
+
+  1. github    - GitHub.com (default)
+  2. gitea     - Self-hosted Gitea
+  3. forgejo   - Self-hosted Forgejo
+
+  Usage:
+    spaceorbust auth github <token>
+    spaceorbust auth gitea <base-url> <token>
+    spaceorbust auth forgejo <base-url> <token>
+
+  Example (self-hosted):
+    spaceorbust auth gitea https://git.spaceorbust.com ghp_xxxx
+`;
+}

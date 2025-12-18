@@ -60,8 +60,12 @@ export interface GameState {
 
   // Progress
   technologies: Record<string, Technology>;
+  completedTechnologies: string[];  // IDs of completed research
   activeProjects: Project[];
   completedProjects: string[];
+
+  // Guild
+  guildId?: string;
 
   // GitHub connection
   github: {

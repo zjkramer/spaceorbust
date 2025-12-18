@@ -34,8 +34,11 @@ function createInitialState(): GameState {
     resourcesPerSync: { energy: 0, materials: 0, data: 0, population: 0 },
 
     technologies: {},
+    completedTechnologies: [],
     activeProjects: [],
     completedProjects: [],
+
+    guildId: undefined,
 
     github: {
       connected: false,

@@ -21,6 +21,14 @@ import {
   addResources,
 } from '../core/resources';
 import { createGitHubClient } from '../forge/github';
+import { createGiteaClient, createForgejoClient } from '../forge/gitea';
+import { ForgeClient } from '../forge/types';
+import {
+  ERA_1_TECHNOLOGIES,
+  canResearch,
+  getTechnology,
+} from '../core/techtree';
+import { subtractResources } from '../core/resources';
 import {
   renderStatus,
   renderSyncResult,
@@ -28,6 +36,10 @@ import {
   renderWelcome,
   renderError,
   renderAuthSuccess,
+  renderResearchList,
+  renderResearchSuccess,
+  renderGuildInfo,
+  renderForgeSelection,
 } from './display';
 
 // Parse command line arguments
@@ -50,7 +62,17 @@ async function main(): Promise<void> {
         break;
 
       case 'auth':
-        await authCommand(args[1]);
+        await authCommand(args[1], args[2], args[3]);
+        break;
+
+      case 'research':
+      case 'r':
+        await researchCommand(args[1]);
+        break;
+
+      case 'guild':
+      case 'g':
+        await guildCommand(args[1], args.slice(2));
         break;
 
       case 'log':
@@ -173,15 +195,26 @@ async function syncCommand(): Promise<void> {
 }
 
 /**
- * Auth command - connect GitHub account
+ * Auth command - connect to a git forge
+ * Supports: github, gitea, forgejo
  */
-async function authCommand(token?: string): Promise<void> {
-  if (!token) {
-    console.log(`
+async function authCommand(forgeOrToken?: string, urlOrToken?: string, token?: string): Promise<void> {
+  // No args - show help
+  if (!forgeOrToken) {
+    console.log(renderForgeSelection());
+    return;
+  }
+
+  let client: ForgeClient;
+  let forgeType = 'github';
+  let actualToken: string;
+
+  // Determine which forge and create client
+  if (forgeOrToken === 'github') {
+    if (!urlOrToken) {
+      console.log(`
   GITHUB AUTHENTICATION
   ─────────────────────
-
-  To connect your GitHub account, you need a Personal Access Token.
 
   1. Go to: https://github.com/settings/tokens
   2. Click "Generate new token (classic)"
@@ -189,19 +222,49 @@ async function authCommand(token?: string): Promise<void> {
   4. Copy the token
 
   Then run:
-    spaceorbust auth <your-token>
-
-  Your token is stored locally in ~/.spaceorbust/config.json
-  It never leaves your machine.
+    spaceorbust auth github <your-token>
 `);
-    return;
+      return;
+    }
+    actualToken = urlOrToken;
+    client = createGitHubClient(actualToken);
+    forgeType = 'github';
+
+  } else if (forgeOrToken === 'gitea' || forgeOrToken === 'forgejo') {
+    if (!urlOrToken || !token) {
+      console.log(`
+  ${forgeOrToken.toUpperCase()} AUTHENTICATION
+  ─────────────────────
+
+  Usage:
+    spaceorbust auth ${forgeOrToken} <base-url> <token>
+
+  Example:
+    spaceorbust auth ${forgeOrToken} https://git.spaceorbust.com your-token
+
+  To create a token:
+    1. Go to your ${forgeOrToken} instance
+    2. Settings → Applications → Generate New Token
+    3. Select scopes: repo, read:user
+`);
+      return;
+    }
+    actualToken = token;
+    client = forgeOrToken === 'gitea'
+      ? createGiteaClient(urlOrToken, actualToken)
+      : createForgejoClient(urlOrToken, actualToken);
+    forgeType = forgeOrToken;
+
+  } else {
+    // Assume it's a GitHub token (backwards compatible)
+    actualToken = forgeOrToken;
+    client = createGitHubClient(actualToken);
+    forgeType = 'github';
   }
 
-  console.log('\n  Verifying token...\n');
+  console.log(`\n  Verifying ${forgeType} connection...\n`);
 
-  const client = createGitHubClient(token);
   const connected = await client.testConnection();
-
   if (!connected) {
     console.log(renderError('Invalid token or connection failed.'));
     return;
@@ -209,9 +272,9 @@ async function authCommand(token?: string): Promise<void> {
 
   const user = await client.getUser();
 
-  // Save token to config
+  // Save to config
   const config = loadConfig();
-  config.githubToken = token;
+  config.githubToken = actualToken;  // TODO: rename to forgeToken
   saveConfig(config);
 
   // Update state
@@ -225,10 +288,17 @@ async function authCommand(token?: string): Promise<void> {
   logEvent({
     timestamp: new Date().toISOString(),
     type: 'event',
-    message: `Connected to GitHub as ${user.username}`,
+    message: `Connected to ${forgeType} as ${user.username}`,
   });
 
-  console.log(renderAuthSuccess(user.username));
+  console.log(`
+  ✓ Authentication successful!
+
+  Connected as: ${user.username}
+  Forge: ${forgeType}
+
+  Run 'spaceorbust sync' to collect your first resources.
+`);
 }
 
 /**
@@ -289,6 +359,124 @@ async function initCommand(): Promise<void> {
     type: 'event',
     message: 'Civilization initialized',
   });
+}
+
+/**
+ * Research command - view and complete research
+ */
+async function researchCommand(techId?: string): Promise<void> {
+  let state = loadState();
+
+  if (!state.initialized) {
+    console.log(renderError('Run "spaceorbust status" first to initialize.'));
+    return;
+  }
+
+  // Initialize completedTechnologies if missing (for existing saves)
+  if (!state.completedTechnologies) {
+    state.completedTechnologies = [];
+  }
+
+  // If no tech specified, show the list
+  if (!techId) {
+    const techList = ERA_1_TECHNOLOGIES.map(tech => {
+      const check = canResearch(tech, state.completedTechnologies, state.resources);
+      return {
+        id: tech.id,
+        name: tech.name,
+        description: tech.description,
+        layer: tech.layer,
+        cost: tech.cost,
+        canResearch: check.canResearch,
+        reason: check.reason,
+        completed: state.completedTechnologies.includes(tech.id),
+      };
+    });
+
+    console.log(renderResearchList(
+      techList,
+      state.completedTechnologies.length,
+      ERA_1_TECHNOLOGIES.length
+    ));
+    return;
+  }
+
+  // Try to research the specified tech
+  const tech = getTechnology(techId);
+  if (!tech) {
+    console.log(renderError(`Unknown technology: ${techId}`));
+    return;
+  }
+
+  const check = canResearch(tech, state.completedTechnologies, state.resources);
+  if (!check.canResearch) {
+    console.log(renderError(`Cannot research ${tech.name}: ${check.reason}`));
+    return;
+  }
+
+  // Deduct resources
+  const newResources = subtractResources(state.resources, tech.cost);
+  if (!newResources) {
+    console.log(renderError('Insufficient resources'));
+    return;
+  }
+
+  // Complete the research
+  state.resources = newResources;
+  state.completedTechnologies.push(tech.id);
+
+  // Log it
+  logEvent({
+    timestamp: new Date().toISOString(),
+    type: 'research',
+    message: `Completed research: ${tech.name}`,
+  });
+
+  saveState(state);
+  console.log(renderResearchSuccess(tech.name, tech.cost));
+}
+
+/**
+ * Guild command - view and manage guild
+ */
+async function guildCommand(subcommand?: string, guildArgs: string[] = []): Promise<void> {
+  const state = loadState();
+
+  if (!state.initialized) {
+    console.log(renderError('Run "spaceorbust status" first to initialize.'));
+    return;
+  }
+
+  // For now, just show guild info (full implementation needs server)
+  if (!subcommand || subcommand === 'info') {
+    // No guild system yet - show placeholder
+    console.log(renderGuildInfo(null));
+    console.log('  Note: Full guild system requires spaceorbust.com backend.');
+    console.log('  Coming soon!\n');
+    return;
+  }
+
+  if (subcommand === 'create') {
+    console.log(`
+  CREATE GUILD
+  ────────────────────
+
+  Guild creation will be available when spaceorbust.com launches.
+
+  Cost to create a guild:
+    1000 Energy
+    500 Materials
+    250 Data
+
+  Your current resources:
+    Energy:    ${state.resources.energy}
+    Materials: ${state.resources.materials}
+    Data:      ${state.resources.data}
+`);
+    return;
+  }
+
+  console.log(renderError(`Unknown guild subcommand: ${subcommand}`));
 }
 
 // Run
