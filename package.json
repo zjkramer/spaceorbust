@@ -1,0 +1,37 @@
+{
+  "name": "spaceorbust",
+  "version": "0.1.0",
+  "description": "An open-source RPG that gamifies humanity's evolution into a spacefaring civilization",
+  "main": "dist/index.js",
+  "bin": {
+    "spaceorbust": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli/index.js",
+    "dev": "ts-node src/cli/index.ts",
+    "test": "jest"
+  },
+  "keywords": [
+    "rpg",
+    "game",
+    "space",
+    "civilization",
+    "github",
+    "cli",
+    "open-source"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zjkramer/spaceorbust.git"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.0"
+  }
+}
