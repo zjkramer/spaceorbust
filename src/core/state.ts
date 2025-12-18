@@ -73,6 +73,9 @@ function createInitialState(): GameState {
     totalCommits: 0,
     totalPRs: 0,
     daysPlayed: 0,
+    streak: 0,
+    lastActiveDate: '',
+    earnedMilestones: [],
 
     createdAt: new Date().toISOString(),
     lastPlayed: new Date().toISOString(),
@@ -114,6 +117,15 @@ export function loadState(): GameState {
       }
       if (!state.github.syncHistory) {
         state.github.syncHistory = [];
+      }
+      if (!state.earnedMilestones) {
+        state.earnedMilestones = [];
+      }
+      if (state.streak === undefined) {
+        state.streak = 0;
+      }
+      if (!state.lastActiveDate) {
+        state.lastActiveDate = '';
       }
 
       return state;

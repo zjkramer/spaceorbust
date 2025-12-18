@@ -96,6 +96,9 @@ export interface GameState {
   totalCommits: number;
   totalPRs: number;
   daysPlayed: number;
+  streak: number;           // Current daily streak
+  lastActiveDate: string;   // For streak tracking
+  earnedMilestones: string[]; // IDs of earned milestones
 
   // Timestamps
   createdAt: string;

@@ -28,6 +28,11 @@ import {
   canResearch,
   getTechnology,
 } from '../core/techtree';
+import {
+  checkMilestones,
+  renderMilestoneUnlock,
+} from '../core/milestones';
+import { getSyncCelebration } from './ascii-art';
 import { subtractResources } from '../core/resources';
 import {
   renderStatus,
@@ -109,6 +114,10 @@ async function main(): Promise<void> {
       case 'radio':
       case 'mesh':
         await commsCommand(args[1], args.slice(2));
+        break;
+
+      case 'share':
+        await shareCommand();
         break;
 
       case 'init':
@@ -242,6 +251,54 @@ async function syncCommand(subcommand?: string): Promise<void> {
     state.github.syncHistory = state.github.syncHistory.slice(-100);
   }
 
+  // Update streak
+  const today = new Date().toISOString().split('T')[0];
+  if (!state.lastActiveDate) {
+    state.streak = 1;
+  } else {
+    const lastDate = new Date(state.lastActiveDate);
+    const todayDate = new Date(today);
+    const diffDays = Math.floor((todayDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      // Same day, streak unchanged
+    } else if (diffDays === 1) {
+      // Consecutive day, increment streak
+      state.streak = (state.streak || 0) + 1;
+    } else {
+      // Streak broken, reset to 1
+      state.streak = 1;
+    }
+  }
+  state.lastActiveDate = today;
+
+  // Apply streak bonus to resources
+  const streakBonus = Math.min(30, state.streak || 0) / 100;
+  if (streakBonus > 0) {
+    const bonusEnergy = Math.floor(gained.energy * streakBonus);
+    const bonusMaterials = Math.floor(gained.materials * streakBonus);
+    const bonusData = Math.floor(gained.data * streakBonus);
+    state.resources.energy += bonusEnergy;
+    state.resources.materials += bonusMaterials;
+    state.resources.data += bonusData;
+  }
+
+  // Check for new milestones
+  if (!state.earnedMilestones) {
+    state.earnedMilestones = [];
+  }
+  const { newMilestones, rewards } = checkMilestones(state, state.earnedMilestones);
+
+  // Award milestone rewards
+  if (newMilestones.length > 0) {
+    state.resources.energy += rewards.energy;
+    state.resources.materials += rewards.materials;
+    state.resources.data += rewards.data;
+    for (const milestone of newMilestones) {
+      state.earnedMilestones.push(milestone.id);
+    }
+  }
+
   // Log the event
   logEvent({
     timestamp: new Date().toISOString(),
@@ -250,9 +307,22 @@ async function syncCommand(subcommand?: string): Promise<void> {
     data: { activity, gained },
   });
 
-  // Save and display
+  // Save state
   saveState(state);
+
+  // Display results
+  console.log(getSyncCelebration({ energy: gained.energy, materials: gained.materials, data: gained.data }));
   console.log(renderSyncResult(gained, state.resources));
+
+  // Show milestone unlocks
+  for (const milestone of newMilestones) {
+    console.log(renderMilestoneUnlock(milestone));
+  }
+
+  // Show streak info
+  if (state.streak && state.streak > 1) {
+    console.log(`  🔥 Streak: ${state.streak} days (+${Math.min(30, state.streak)}% bonus)\n`);
+  }
 }
 
 /**
@@ -685,6 +755,60 @@ async function commsCommand(subcommand?: string, commsArgs: string[] = []): Prom
 
   const result = await handleCommsCommand(subcommand, commsArgs, state);
   console.log(result);
+}
+
+/**
+ * Share command - generate shareable progress card
+ */
+async function shareCommand(): Promise<void> {
+  const state = loadState();
+
+  if (!state.initialized) {
+    console.log(renderError('Run "spaceorbust status" first to initialize.'));
+    return;
+  }
+
+  const techs = state.completedTechnologies?.length || 0;
+  const totalTechs = 42; // Approximate total
+  const eraName = ['', 'Earth-Bound', 'Inner Solar', 'Outer Solar', 'Interstellar'][state.era] || 'Unknown';
+
+  // Simple ASCII progress indicator
+  const progressPct = Math.floor((techs / totalTechs) * 100);
+  const progressBar = '█'.repeat(Math.floor(progressPct / 10)) + '░'.repeat(10 - Math.floor(progressPct / 10));
+
+  const shareText = `
+  ════════════════════════════════════════════════════════
+
+  SHARE YOUR PROGRESS
+  Copy everything between the lines:
+
+  ────────────────────────────────────────────────────────
+
+  🚀 spaceorbust Day ${state.daysPlayed}
+
+  Era: ${eraName} (${state.era}/4)
+  Techs: ${techs}/${totalTechs} [${progressBar}]
+  Commits: ${state.totalCommits.toLocaleString()}
+  ${state.streak ? `Streak: ${state.streak} days 🔥` : ''}
+
+  Resources:
+  ⚡ ${state.resources.energy.toLocaleString()} Energy
+  🔧 ${state.resources.materials.toLocaleString()} Materials
+  📊 ${state.resources.data.toLocaleString()} Data
+
+  My code powers humanity's journey to the stars.
+
+  npm install -g spaceorbust
+  https://spaceorbust.com
+
+  #spaceorbust #opensource #gamedev
+
+  ────────────────────────────────────────────────────────
+
+  ════════════════════════════════════════════════════════
+`;
+
+  console.log(shareText);
 }
 
 // Run

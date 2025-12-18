@@ -6,6 +6,7 @@
  */
 
 import { GameState, Resources, Project, SyncRecord } from '../core/types';
+import { getColonyArt, getStreakFlame } from './ascii-art';
 
 // Terminal width (conservative default)
 const WIDTH = 60;
@@ -85,7 +86,18 @@ export function renderStatus(state: GameState): string {
   // Header
   lines.push('');
   lines.push(header(`SPACEORBUST v${state.version} | Year: ${state.year} | Era: ${getEraName(state.era)}`));
-  lines.push('');
+
+  // Colony visualization
+  lines.push(getColonyArt(state));
+
+  // Streak display
+  const streak = state.streak || 0;
+  if (streak > 0) {
+    const flame = getStreakFlame(streak);
+    const multiplier = Math.min(30, streak);
+    lines.push(`  ${flame} STREAK: ${streak} days (${multiplier}% bonus) ${flame}`);
+    lines.push('');
+  }
 
   // Resources section
   lines.push('  RESOURCES');
@@ -190,6 +202,7 @@ COMMANDS:
   comms         Multi-transport sync (LoRa, QR, radio)
   hackathon     View active kaizen challenges
   guild         Guild management
+  share         Generate shareable progress card
   log           View recent events
   help          Show this help message
 
