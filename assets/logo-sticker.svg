@@ -1,14 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 304 120">
-  <!-- Sticker style with border - 20px padding around text -->
-  <rect x="2" y="2" width="300" height="116" rx="8" fill="#0a0a0a" stroke="#00ff88" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 104">
+  <!-- Sticker with border - 20px padding -->
+  <rect x="2" y="2" width="256" height="100" rx="6" fill="#0a0a0a" stroke="#00ff88" stroke-width="3"/>
 
-  <!-- Top line: spaceorbust (5 green + 6 white) -->
-  <text x="20" y="52" font-family="'Courier New', Courier, monospace" font-size="32" font-weight="bold" letter-spacing="0">
-    <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
-  </text>
+  <!-- Line 1: spaceorbust -->
+  <text x="20" y="44" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan></text>
 
-  <!-- Bottom line: tsubroecaps (6 white + 5 green) -->
-  <text x="20" y="92" font-family="'Courier New', Courier, monospace" font-size="32" font-weight="bold" letter-spacing="0">
-    <tspan fill="#e0e0e0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
-  </text>
+  <!-- Line 2: tsubroecaps (reversed) -->
+  <text x="20" y="76" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#e0e0e0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan></text>
 </svg>
