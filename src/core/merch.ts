@@ -276,6 +276,25 @@ export const INITIAL_PRODUCTS: MerchProduct[] = [
     active: true,
   },
 
+  // Mirror patch - signature design
+  {
+    id: 'patch-mirror',
+    name: 'Mirror Patch',
+    description: 'spaceorbust / tsubroecaps. Terminal colors: space(green) orbust(white), mirrored below. The reflection that started it all.',
+    category: 'patches',
+    basePrice: 1200, // $12
+    variants: [
+      { id: 'patch-mirror-os', name: 'Standard', sku: 'SOB-PATCH-MIRROR', price: 1200, inStock: true },
+    ],
+    imageUrls: [],
+    thumbnailUrl: '',
+    unlocksDigitalItem: 'badge-mirror',
+    limitedEdition: false,
+    tags: ['patches', 'logo', 'signature'],
+    releaseDate: '2024-01-01',
+    active: true,
+  },
+
   // Founder's reserve - genesis edition
   {
     id: 'patch-genesis-0814',
