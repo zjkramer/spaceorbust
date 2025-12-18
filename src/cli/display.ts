@@ -5,7 +5,7 @@
  * Like a spacecraft control panel - information dense, zero waste.
  */
 
-import { GameState, Resources, Project } from '../core/types';
+import { GameState, Resources, Project, SyncRecord } from '../core/types';
 
 // Terminal width (conservative default)
 const WIDTH = 60;
@@ -183,6 +183,7 @@ USAGE:
 COMMANDS:
   status        Show current civilization status
   sync          Sync GitHub activity and collect resources
+  sync history  View your sync history over time
   auth          Connect your GitHub account
   research      View and start research projects
   mission       Mission operations & orbital mechanics
@@ -417,4 +418,68 @@ export function renderForgeSelection(): string {
   Example (self-hosted):
     spaceorbust auth gitea https://git.spaceorbust.com ghp_xxxx
 `;
+}
+
+/**
+ * Render sync history
+ */
+export function renderSyncHistory(history: SyncRecord[]): string {
+  const lines: string[] = [];
+
+  lines.push('');
+  lines.push('  SYNC HISTORY');
+  lines.push('  ' + '─'.repeat(56));
+
+  if (history.length === 0) {
+    lines.push('  No sync history yet.');
+    lines.push('  Run "spaceorbust sync" to start tracking.');
+  } else {
+    // Show last 10 syncs in reverse order (most recent first)
+    const recent = history.slice(-10).reverse();
+
+    lines.push('');
+    lines.push('  Recent syncs (newest first):');
+    lines.push('');
+
+    for (const record of recent) {
+      const date = new Date(record.timestamp);
+      const dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      const activity = [];
+      if (record.commits > 0) activity.push(`${record.commits} commits`);
+      if (record.pullRequestsMerged > 0) activity.push(`${record.pullRequestsMerged} PRs`);
+      if (record.issuesClosed > 0) activity.push(`${record.issuesClosed} issues`);
+
+      const resources = [];
+      if (record.resourcesGained.energy > 0) resources.push(`+${record.resourcesGained.energy}⚡`);
+      if (record.resourcesGained.materials > 0) resources.push(`+${record.resourcesGained.materials}kg`);
+      if (record.resourcesGained.data > 0) resources.push(`+${record.resourcesGained.data}TB`);
+
+      lines.push(`  ${dateStr}`);
+      if (activity.length > 0) {
+        lines.push(`    Activity: ${activity.join(', ')}`);
+      }
+      if (resources.length > 0) {
+        lines.push(`    Gained: ${resources.join(' ')}`);
+      } else {
+        lines.push('    No new activity');
+      }
+      lines.push('');
+    }
+
+    // Summary stats
+    const totalEnergy = history.reduce((sum, r) => sum + r.resourcesGained.energy, 0);
+    const totalMaterials = history.reduce((sum, r) => sum + r.resourcesGained.materials, 0);
+    const totalData = history.reduce((sum, r) => sum + r.resourcesGained.data, 0);
+    const totalCommits = history.reduce((sum, r) => sum + r.commits, 0);
+
+    lines.push('  ' + '─'.repeat(56));
+    lines.push(`  Total syncs: ${history.length}`);
+    lines.push(`  Total commits: ${totalCommits}`);
+    lines.push(`  Total resources: ${totalEnergy}⚡ ${totalMaterials}kg ${totalData}TB`);
+  }
+
+  lines.push('');
+
+  return lines.join('\n');
 }

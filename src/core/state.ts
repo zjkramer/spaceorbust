@@ -67,6 +67,7 @@ function createInitialState(): GameState {
         reviews: 0,
         lastSync: '',
       },
+      syncHistory: [],
     },
 
     totalCommits: 0,
@@ -110,6 +111,9 @@ export function loadState(): GameState {
       }
       if (!state.completedTechnologies) {
         state.completedTechnologies = [];
+      }
+      if (!state.github.syncHistory) {
+        state.github.syncHistory = [];
       }
 
       return state;

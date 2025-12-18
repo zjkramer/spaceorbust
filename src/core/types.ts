@@ -21,6 +21,21 @@ export interface GitHubActivity {
   lastSync: string;    // ISO timestamp
 }
 
+// A single sync event for history tracking
+export interface SyncRecord {
+  timestamp: string;
+  commits: number;
+  pullRequestsMerged: number;
+  issuesOpened: number;
+  issuesClosed: number;
+  reviews: number;
+  resourcesGained: {
+    energy: number;
+    materials: number;
+    data: number;
+  };
+}
+
 // A research project in the tech tree
 export interface Technology {
   id: string;
@@ -74,6 +89,7 @@ export interface GameState {
     username?: string;
     token?: string;      // Stored separately in config
     activity: GitHubActivity;
+    syncHistory: SyncRecord[];  // Track all syncs over time
   };
 
   // Stats

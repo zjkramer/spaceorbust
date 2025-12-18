@@ -32,6 +32,7 @@ import { subtractResources } from '../core/resources';
 import {
   renderStatus,
   renderSyncResult,
+  renderSyncHistory,
   renderHelp,
   renderWelcome,
   renderError,
@@ -71,7 +72,7 @@ async function main(): Promise<void> {
         break;
 
       case 'sync':
-        await syncCommand();
+        await syncCommand(args[1]);
         break;
 
       case 'auth':
@@ -161,9 +162,16 @@ async function statusCommand(): Promise<void> {
 /**
  * Sync command - fetch GitHub activity and convert to resources
  */
-async function syncCommand(): Promise<void> {
+async function syncCommand(subcommand?: string): Promise<void> {
   let state = loadState();
   const config = loadConfig();
+
+  // Handle 'sync history' subcommand
+  if (subcommand === 'history') {
+    const history = state.github.syncHistory || [];
+    console.log(renderSyncHistory(history));
+    return;
+  }
 
   if (!config.githubToken) {
     console.log(renderError('Not authenticated. Run: spaceorbust auth <github-token>'));
@@ -210,6 +218,29 @@ async function syncCommand(): Promise<void> {
     reviews: state.github.activity.reviews + activity.reviews,
     lastSync: new Date().toISOString(),
   };
+
+  // Record sync history
+  if (!state.github.syncHistory) {
+    state.github.syncHistory = [];
+  }
+  state.github.syncHistory.push({
+    timestamp: new Date().toISOString(),
+    commits: activity.commits,
+    pullRequestsMerged: activity.pullRequestsMerged,
+    issuesOpened: activity.issuesOpened,
+    issuesClosed: activity.issuesClosed,
+    reviews: activity.reviews,
+    resourcesGained: {
+      energy: gained.energy,
+      materials: gained.materials,
+      data: gained.data,
+    },
+  });
+
+  // Keep only last 100 sync records
+  if (state.github.syncHistory.length > 100) {
+    state.github.syncHistory = state.github.syncHistory.slice(-100);
+  }
 
   // Log the event
   logEvent({

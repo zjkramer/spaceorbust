@@ -397,6 +397,128 @@ export const ERA_2_TECHNOLOGIES: Technology[] = [
     unlocked: false,
     completed: false,
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SYNTHETIC BIOLOGY BRANCH
+  // Bio-inspired systems for space. Nature's designs, refined for the void.
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Foundation: Understanding biological systems
+  {
+    id: 'biomimetics_research',
+    name: 'Biomimetics Research',
+    description: 'Study nature\'s solutions: gecko adhesion, spider silk, photosynthesis.',
+    era: 2,
+    layer: 7,
+    cost: { energy: 2000, materials: 1500, data: 4000, population: 0 },
+    prerequisites: ['general_ai'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Bio-inspired robotics
+  {
+    id: 'biomimetic_robotics',
+    name: 'Biomimetic Robotics',
+    description: 'Robots that move like animals: snake bots for tunnels, gecko bots for hulls.',
+    era: 2,
+    layer: 7,
+    cost: { energy: 3500, materials: 4000, data: 3000, population: 0 },
+    prerequisites: ['biomimetics_research', 'autonomous_systems'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Swarm systems
+  {
+    id: 'swarm_intelligence',
+    name: 'Swarm Intelligence',
+    description: 'Ant colonies, bee hives, bird flocks. Distributed intelligence for space ops.',
+    era: 2,
+    layer: 7,
+    cost: { energy: 3000, materials: 2500, data: 5000, population: 0 },
+    prerequisites: ['biomimetics_research', 'general_ai'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Synthetic organisms
+  {
+    id: 'synthetic_organisms',
+    name: 'Synthetic Organisms',
+    description: 'Engineered bacteria for mining, algae for O2, fungi for construction.',
+    era: 2,
+    layer: 8,
+    cost: { energy: 4000, materials: 3000, data: 6000, population: 0 },
+    prerequisites: ['biomimetics_research', 'genetic_adaptation'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Neural architectures
+  {
+    id: 'neural_architecture',
+    name: 'Neural Architecture',
+    description: 'AI modeled on biological brains. More efficient, more adaptable.',
+    era: 2,
+    layer: 7,
+    cost: { energy: 5000, materials: 3500, data: 8000, population: 0 },
+    prerequisites: ['swarm_intelligence', 'general_ai'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Bio-hybrid systems
+  {
+    id: 'bio_hybrid_systems',
+    name: 'Bio-Hybrid Systems',
+    description: 'Living tissue integrated with machines. Self-healing spacecraft hulls.',
+    era: 2,
+    layer: 8,
+    cost: { energy: 6000, materials: 5000, data: 7000, population: 0 },
+    prerequisites: ['synthetic_organisms', 'biomimetic_robotics'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Hive mind networks
+  {
+    id: 'hive_mind_networks',
+    name: 'Hive Mind Networks',
+    description: 'Collective intelligence spanning planets. Humanity thinks as one.',
+    era: 2,
+    layer: 8,
+    cost: { energy: 8000, materials: 6000, data: 12000, population: 0 },
+    prerequisites: ['neural_architecture', 'swarm_intelligence', 'deep_space_network'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Bio-AI companions
+  {
+    id: 'bio_ai_companions',
+    name: 'Bio-AI Companions',
+    description: 'Sentient bio-synthetic beings. Partners for the long journey.',
+    era: 2,
+    layer: 8,
+    cost: { energy: 10000, materials: 8000, data: 15000, population: 0 },
+    prerequisites: ['bio_hybrid_systems', 'neural_architecture'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Milestone: Synthetic Biosphere
+  {
+    id: 'synthetic_biosphere',
+    name: 'Synthetic Biosphere',
+    description: 'Fully engineered ecosystem. Life, designed from scratch, thriving in space.',
+    era: 2,
+    layer: 0,
+    cost: { energy: 15000, materials: 12000, data: 20000, population: 0 },
+    prerequisites: ['bio_ai_companions', 'synthetic_organisms', 'mars_greenhouse'],
+    unlocked: false,
+    completed: false,
+  },
 ];
 
 // All technologies combined
