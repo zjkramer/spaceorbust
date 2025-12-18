@@ -1,10 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64">
-  <!-- For light backgrounds (white shirts) -->
-  <rect width="220" height="64" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 58">
+  <!-- For light backgrounds - letters only, centered -->
+  <rect width="160" height="58" fill="#ffffff"/>
 
-  <!-- Line 1: spaceorbust -->
-  <text x="0" y="24" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#006644">space</tspan><tspan fill="#0a0a0a">orbust</tspan></text>
+  <text x="50%" y="24" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#006644">space</tspan><tspan fill="#0a0a0a">orbust</tspan></text>
 
-  <!-- Line 2: tsubroecaps (reversed) -->
-  <text x="0" y="56" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#0a0a0a">tsubro</tspan><tspan fill="#006644">ecaps</tspan></text>
+  <text x="50%" y="52" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#0a0a0a">tsubro</tspan><tspan fill="#006644">ecaps</tspan></text>
 </svg>

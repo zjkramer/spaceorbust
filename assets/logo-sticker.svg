@@ -1,10 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 104">
-  <!-- Sticker with border - 20px padding -->
-  <rect x="2" y="2" width="256" height="100" rx="6" fill="#0a0a0a" stroke="#00ff88" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 58">
+  <!-- Sticker - just letters forming rectangle shape, centered -->
+  <rect width="160" height="58" fill="#0a0a0a"/>
 
-  <!-- Line 1: spaceorbust -->
-  <text x="20" y="44" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan></text>
+  <text x="50%" y="24" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan></text>
 
-  <!-- Line 2: tsubroecaps (reversed) -->
-  <text x="20" y="76" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#e0e0e0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan></text>
+  <text x="50%" y="52" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#e0e0e0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan></text>
 </svg>

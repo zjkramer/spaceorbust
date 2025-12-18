@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 78">
+  <!-- White border version for variety -->
+  <rect x="2" y="2" width="176" height="74" rx="4" fill="#0a0a0a" stroke="#e0e0e0" stroke-width="3"/>
+
+  <text x="50%" y="34" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan></text>
+
+  <text x="50%" y="62" text-anchor="middle" font-family="'Courier New', monospace" font-size="24" font-weight="bold"><tspan fill="#e0e0e0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan></text>
+</svg>
