@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="4" fill="#0a0a0a"/>
+  <text x="50%" y="12" text-anchor="middle" font-family="'Courier New', monospace" font-size="8" font-weight="bold"><tspan fill="#00ff88">space</tspan></text>
+  <text x="50%" y="21" text-anchor="middle" font-family="'Courier New', monospace" font-size="8" font-weight="bold"><tspan fill="#e0e0e0">orbust</tspan></text>
+</svg>
