@@ -1,4 +1,4 @@
-# Contributing to SpaceOrBust
+# contributing to spaceorbust
 
 Every contribution advances humanity's journey to the stars.
 
