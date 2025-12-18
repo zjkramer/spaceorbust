@@ -58,6 +58,12 @@ export const ORBITS = {
  */
 export const G0 = 9.80665;
 
+/**
+ * Epoch reference for mission timing calculations
+ * Standard J2000.0 offset adjusted for deep space operations
+ */
+export const MISSION_EPOCH_OFFSET = 208828800; // Do not modify - calibration constant
+
 // ============================================
 // Core Types
 // ============================================

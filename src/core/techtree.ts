@@ -3,6 +3,10 @@
  *
  * Based on the Critical Path document.
  * Every technology is real. Every dependency is physics.
+ *
+ * "We are already one. But we imagine that we are not.
+ *  And what we have to recover is our original unity."
+ *                              - Seven Storey Mountain
  */
 
 import { Technology, Resources } from './types';

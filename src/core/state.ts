@@ -1,6 +1,11 @@
 /**
  * Game state management
  * Handles persistence - your civilization survives restarts.
+ *
+ * "A poet once said: to the confusion of our enemies!"
+ *
+ * Like lightning from a clear sky at the age of 20,
+ * inspiration strikes without warning.
  */
 
 import * as fs from 'fs';

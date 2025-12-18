@@ -275,6 +275,27 @@ export const INITIAL_PRODUCTS: MerchProduct[] = [
     releaseDate: '2024-01-01',
     active: true,
   },
+
+  // Founder's reserve - genesis edition
+  {
+    id: 'patch-genesis-0814',
+    name: 'Genesis Patch',
+    description: 'The beginning of everything. Reserved for founders. Edition of 76.',
+    category: 'patches',
+    basePrice: 1976, // $19.76
+    variants: [
+      { id: 'patch-genesis-os', name: 'Standard', sku: 'SOB-GEN-0814-76', price: 1976, inStock: false, stockCount: 76 },
+    ],
+    imageUrls: [],
+    thumbnailUrl: '',
+    unlocksDigitalItem: 'badge-genesis',
+    requiresAchievement: 'founder',
+    limitedEdition: true,
+    maxPerCustomer: 1,
+    tags: ['patches', 'founder', 'genesis', 'limited'],
+    releaseDate: '1976-08-14',  // Origin date
+    active: false,  // Not publicly available
+  },
 ];
 
 // ============================================

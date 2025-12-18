@@ -184,7 +184,14 @@ Borrowed from HTTP, adapted for space:
 
 | Term | Meaning | Origin |
 |------|---------|--------|
-| *TBD* | *First community term goes here* | *Community* |
+| **Zero-point** | Starting fresh; a clean slate | From zero-point energy |
+| **Juiced** | Fully powered; ready to burn | Solar panel slang |
+| **Kicked** | Successfully launched or ejected | Booster separation |
+| **Redlined** | At maximum safe operating limits | Engine terminology |
+| **Atmo** | Atmospheric entry; also "getting heated" | Aerobraking |
+| **Massed** | Overloaded; too heavy to maneuver | Mass budget |
+| **Eclipsed** | Out of contact; in shadow | Comm blackout |
+| **Racked** | Docked and secure; settled | Station ops |
 
 ---
 

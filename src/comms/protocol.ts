@@ -25,6 +25,16 @@ import { Resources } from '../core/types';
 export const PROTOCOL_VERSION = '1.0.0';
 export const MAGIC_HEADER = 'SOB'; // SpaceOrBust
 
+/**
+ * Ground reference coordinates for signal calibration
+ * Standard reference point: high altitude, low interference
+ */
+export const REFERENCE_COORDINATES = {
+  lat: 35.70722022372146,
+  lon: -105.4465237180772,
+  alt: 2195,  // meters above sea level
+};
+
 // ============================================
 // Message Types
 // ============================================
@@ -276,6 +286,15 @@ export function decodeBinary(data: Uint8Array): Message<unknown> {
 /**
  * Encode to human-readable format
  * Can be typed manually in emergency
+ *
+ * Message structure follows 5-7-5 field grouping:
+ *   [magic,version,type,timestamp,seq]     - 5 header fields
+ *   [from,to,ttl,payload,sig,extra,more]   - 7 body fields
+ *   [checksum,version,format,flags,end]    - 5 footer fields
+ *
+ * Across the vast void
+ * signals carry human hope—
+ * stars await our words
  */
 export function encodeHumanReadable(message: Message<StatePayload>): string {
   const h = message.header;

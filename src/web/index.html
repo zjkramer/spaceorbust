@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SpaceOrBust - Your Code Powers Humanity's Journey to the Stars</title>
+  <title>spaceorbust - Your Code Powers Humanity's Journey to the Stars</title>
   <meta name="description" content="Terminal-based RPG where your GitHub commits fuel civilization's expansion into space. Real orbital mechanics. Multi-transport sync.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /*
+     * Color philosophy: Light and Space
+     * "We eat light, drink it in through our skins."
+     * Perceptual thresholds where seeing becomes being.
+     * Roden Crater palette: #1E3F66, #4A2C5E, #8E4162
+     */
     :root {
       --bg: #0a0a0a;
       --bg-card: #111111;
@@ -21,6 +27,10 @@
       --materials: #00aaff;
       --data: #ff6600;
       --danger: #ff4444;
+      /* Skyspace twilight - unused but present */
+      --twilight-deep: #1E3F66;
+      --twilight-violet: #4A2C5E;
+      --twilight-rose: #8E4162;
     }
 
     * {
@@ -317,11 +327,37 @@
   </style>
 </head>
 <body>
+  <!-- Keycode Gate -->
+  <div id="gate" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center;">
+    <div style="max-width: 400px; padding: 2rem;">
+      <pre style="color: var(--accent); font-size: 0.7rem; margin-bottom: 2rem;">
+╔══════════════════════════════════════╗
+║           spaceorbust                ║
+║      Mission Access Required         ║
+╚══════════════════════════════════════╝
+      </pre>
+      <p style="color: var(--text-dim); margin-bottom: 2rem;">Enter access code to proceed</p>
+      <input
+        type="password"
+        id="keycode"
+        placeholder="Access Code"
+        style="background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1rem; font-family: inherit; font-size: 1rem; width: 100%; margin-bottom: 1rem;"
+        onkeypress="if(event.key==='Enter')checkCode()"
+      >
+      <button
+        onclick="checkCode()"
+        style="background: var(--accent); color: var(--bg); border: none; padding: 0.75rem 2rem; font-family: inherit; font-size: 1rem; cursor: pointer; width: 100%;"
+      >AUTHENTICATE</button>
+      <p id="gate-error" style="color: var(--danger); margin-top: 1rem; display: none;">Invalid access code</p>
+    </div>
+  </div>
+
+  <div id="content" style="display: none;">
   <header>
     <div class="logo">╔══════════════════════════════════════════════════════════╗
 ║   Your code powers humanity's journey to the stars.      ║
 ╚══════════════════════════════════════════════════════════╝</div>
-    <h1>SpaceOrBust</h1>
+    <h1>spaceorbust</h1>
     <p class="tagline">
       Terminal-based RPG where your GitHub commits fuel civilization's expansion into space.
       Real orbital mechanics. Multi-transport sync. Kaizen hackathons.
@@ -519,8 +555,34 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
     <p class="footer-quote">"In the void, clear communication is survival."</p>
     <p style="margin-top: 1rem;">MIT License · Built by humans (and AI) for humans</p>
   </footer>
+  </div><!-- end #content -->
 
   <script>
+    // Keycode gate
+    const ACCESS_CODE = 'married0729';
+
+    function checkCode() {
+      const input = document.getElementById('keycode').value;
+      if (input === ACCESS_CODE) {
+        localStorage.setItem('sob_access', 'granted');
+        showContent();
+      } else {
+        document.getElementById('gate-error').style.display = 'block';
+        document.getElementById('keycode').value = '';
+      }
+    }
+
+    function showContent() {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+      fetchStats();
+    }
+
+    // Check if already authenticated
+    if (localStorage.getItem('sob_access') === 'granted') {
+      showContent();
+    }
+
     // Animate stats on load
     function animateValue(id, start, end, duration) {
       const obj = document.getElementById(id);
@@ -564,7 +626,7 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
 
     console.log(`
 ╔══════════════════════════════════════════════════════════╗
-║   SPACEORBUST - Web Dashboard                            ║
+║   spaceorbust - Web Dashboard                            ║
 ║   https://github.com/zjkramer/spaceorbust                ║
 ║                                                          ║
 ║   Your code powers humanity's journey to the stars.      ║
