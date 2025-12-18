@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>spaceorbust - Your Code Powers Humanity's Journey to the Stars</title>
+  <!-- ADA: Allow text scaling, don't restrict zoom -->
   <meta name="description" content="Terminal-based RPG where your GitHub commits fuel civilization's expansion into space. Real orbital mechanics. Multi-transport sync.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -317,42 +318,89 @@
       font-style: italic;
     }
 
-    /* Responsive */
+    /* ADA: Skip link visible on focus */
+    .skip-link:focus {
+      left: 1rem;
+      top: 1rem;
+    }
+
+    /* ADA: Focus states for keyboard navigation */
+    a:focus, button:focus, input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ADA: Reduced motion for vestibular disorders */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* Responsive: Tablet */
+    @media (max-width: 900px) {
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Responsive: Mobile */
     @media (max-width: 600px) {
       h1 { font-size: 1.8rem; }
       .terminal-body { font-size: 0.75rem; }
       section { padding: 2rem 1rem; }
       .logo { font-size: 0.5rem; }
+      .features { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .hackathon { grid-template-columns: 1fr; gap: 0.5rem; }
+      .hackathon-tier { justify-self: start; }
+      .hackathon-reward { justify-self: start; }
+      header { padding: 2rem 1rem; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn { width: 100%; text-align: center; }
+    }
+
+    /* Responsive: Small mobile */
+    @media (max-width: 380px) {
+      h1 { font-size: 1.5rem; }
+      .logo { display: none; }
+      body { font-size: 14px; }
     }
   </style>
 </head>
 <body>
+  <!-- Skip link for screen readers -->
+  <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; top: 0; padding: 1rem; background: var(--accent); color: var(--bg); z-index: 1000;">Skip to main content</a>
+
   <!-- Keycode Gate -->
-  <div id="gate" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center;">
-    <div style="max-width: 400px; padding: 2rem;">
-      <pre style="color: var(--accent); font-size: 0.7rem; margin-bottom: 2rem;">
+  <div id="gate" role="dialog" aria-labelledby="gate-title" aria-describedby="gate-desc" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center;">
+    <div style="max-width: 400px; padding: 2rem; width: 100%;">
+      <pre aria-hidden="true" style="color: var(--accent); font-size: 0.7rem; margin-bottom: 2rem;">
 ╔══════════════════════════════════════╗
 ║           spaceorbust                ║
 ║      Mission Access Required         ║
 ╚══════════════════════════════════════╝
       </pre>
-      <p style="color: var(--text-dim); margin-bottom: 2rem;">Enter access code to proceed</p>
+      <h1 id="gate-title" style="position: absolute; left: -9999px;">spaceorbust Access Gate</h1>
+      <p id="gate-desc" style="color: var(--text-dim); margin-bottom: 2rem;">Enter access code to proceed</p>
+      <label for="keycode" style="position: absolute; left: -9999px;">Access Code</label>
       <input
         type="password"
         id="keycode"
         placeholder="Access Code"
+        aria-describedby="gate-error"
+        autocomplete="off"
         style="background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1rem; font-family: inherit; font-size: 1rem; width: 100%; margin-bottom: 1rem;"
         onkeypress="if(event.key==='Enter')checkCode()"
       >
       <button
         onclick="checkCode()"
+        aria-label="Submit access code"
         style="background: var(--accent); color: var(--bg); border: none; padding: 0.75rem 2rem; font-family: inherit; font-size: 1rem; cursor: pointer; width: 100%;"
       >AUTHENTICATE</button>
-      <p id="gate-error" style="color: var(--danger); margin-top: 1rem; display: none;">Invalid access code</p>
+      <p id="gate-error" role="alert" aria-live="polite" style="color: var(--danger); margin-top: 1rem; display: none;">Invalid access code</p>
     </div>
   </div>
 
   <div id="content" style="display: none;">
+  <main id="main-content">
   <header>
     <div class="logo">╔══════════════════════════════════════════════════════════╗
 ║   Your code powers humanity's journey to the stars.      ║
@@ -545,7 +593,8 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
     </div>
   </section>
 
-  <footer>
+  </main>
+  <footer role="contentinfo">
     <p>
       <a href="https://github.com/zjkramer/spaceorbust">GitHub</a> ·
       <a href="https://github.com/zjkramer/spaceorbust/discussions">Discussions</a> ·
