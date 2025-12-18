@@ -369,37 +369,7 @@
   <!-- Skip link for screen readers -->
   <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; top: 0; padding: 1rem; background: var(--accent); color: var(--bg); z-index: 1000;">Skip to main content</a>
 
-  <!-- Keycode Gate -->
-  <div id="gate" role="dialog" aria-labelledby="gate-title" aria-describedby="gate-desc" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center;">
-    <div style="max-width: 400px; padding: 2rem; width: 100%;">
-      <pre aria-hidden="true" style="color: var(--accent); font-size: 0.7rem; margin-bottom: 2rem;">
-╔══════════════════════════════════════╗
-║           spaceorbust                ║
-║      Mission Access Required         ║
-╚══════════════════════════════════════╝
-      </pre>
-      <h1 id="gate-title" style="position: absolute; left: -9999px;">spaceorbust Access Gate</h1>
-      <p id="gate-desc" style="color: var(--text-dim); margin-bottom: 2rem;">Enter access code to proceed</p>
-      <label for="keycode" style="position: absolute; left: -9999px;">Access Code</label>
-      <input
-        type="password"
-        id="keycode"
-        placeholder="Access Code"
-        aria-describedby="gate-error"
-        autocomplete="off"
-        style="background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 0.75rem 1rem; font-family: inherit; font-size: 1rem; width: 100%; margin-bottom: 1rem;"
-        onkeypress="if(event.key==='Enter')checkCode()"
-      >
-      <button
-        onclick="checkCode()"
-        aria-label="Submit access code"
-        style="background: var(--accent); color: var(--bg); border: none; padding: 0.75rem 2rem; font-family: inherit; font-size: 1rem; cursor: pointer; width: 100%;"
-      >AUTHENTICATE</button>
-      <p id="gate-error" role="alert" aria-live="polite" style="color: var(--danger); margin-top: 1rem; display: none;">Invalid access code</p>
-    </div>
-  </div>
-
-  <div id="content" style="display: none;">
+  <div id="content">
   <main id="main-content">
   <header>
     <div class="logo">╔══════════════════════════════════════════════════════════╗
@@ -608,31 +578,6 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
   </div><!-- end #content -->
 
   <script>
-    // Keycode gate
-    const ACCESS_CODE = 'married0729';
-
-    function checkCode() {
-      const input = document.getElementById('keycode').value;
-      if (input === ACCESS_CODE) {
-        localStorage.setItem('sob_access', 'granted');
-        showContent();
-      } else {
-        document.getElementById('gate-error').style.display = 'block';
-        document.getElementById('keycode').value = '';
-      }
-    }
-
-    function showContent() {
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('content').style.display = 'block';
-      fetchStats();
-    }
-
-    // Check if already authenticated
-    if (localStorage.getItem('sob_access') === 'granted') {
-      showContent();
-    }
-
     // Animate stats on load
     function animateValue(id, start, end, duration) {
       const obj = document.getElementById(id);
@@ -672,7 +617,9 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
     }
 
     // Run on load
-    document.addEventListener('DOMContentLoaded', fetchStats);
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchStats();
+    });
 
     console.log(`
 ╔══════════════════════════════════════════════════════════╗
