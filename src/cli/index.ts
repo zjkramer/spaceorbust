@@ -41,6 +41,19 @@ import {
   renderGuildInfo,
   renderForgeSelection,
 } from './display';
+import {
+  renderMissionPlanner,
+  renderMissionPlan,
+  renderHohmannTransfer,
+  renderPropellantCalc,
+  renderBodies,
+  renderEngines,
+  renderHackathonList,
+  renderHackathonDetail,
+} from './mission';
+import { calculateMission, MU } from '../physics/orbital';
+import { INITIAL_CHALLENGES, getChallenge } from '../core/hackathon';
+import { handleCommsCommand } from './comms';
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -78,6 +91,23 @@ async function main(): Promise<void> {
       case 'log':
       case 'events':
         await logCommand();
+        break;
+
+      case 'mission':
+      case 'm':
+        await missionCommand(args[1], args.slice(2));
+        break;
+
+      case 'hackathon':
+      case 'hack':
+      case 'kaizen':
+        await hackathonCommand(args[1], args.slice(2));
+        break;
+
+      case 'comms':
+      case 'radio':
+      case 'mesh':
+        await commsCommand(args[1], args.slice(2));
         break;
 
       case 'init':
@@ -477,6 +507,153 @@ async function guildCommand(subcommand?: string, guildArgs: string[] = []): Prom
   }
 
   console.log(renderError(`Unknown guild subcommand: ${subcommand}`));
+}
+
+/**
+ * Mission command - orbital mechanics and mission planning
+ */
+async function missionCommand(subcommand?: string, missionArgs: string[] = []): Promise<void> {
+  if (!subcommand) {
+    console.log(renderMissionPlanner());
+    return;
+  }
+
+  switch (subcommand) {
+    case 'plan': {
+      const from = missionArgs[0] as 'earth_surface' | 'leo' | 'moon_surface' | 'mars_surface';
+      const to = missionArgs[1] as 'leo' | 'geo' | 'moon_orbit' | 'moon_surface' | 'mars_orbit' | 'mars_surface' | 'venus' | 'jupiter';
+
+      if (!from || !to) {
+        console.log(renderError('Usage: mission plan <from> <to>'));
+        console.log('  Example: mission plan earth_surface mars_surface');
+        return;
+      }
+
+      try {
+        const result = calculateMission(from, to);
+        console.log(renderMissionPlan(from, to, result));
+      } catch {
+        console.log(renderError('Invalid mission parameters.'));
+      }
+      break;
+    }
+
+    case 'hohmann': {
+      const r1 = parseFloat(missionArgs[0]);
+      const r2 = parseFloat(missionArgs[1]);
+
+      if (isNaN(r1) || isNaN(r2)) {
+        console.log(renderError('Usage: mission hohmann <r1> <r2>'));
+        console.log('  Example: mission hohmann 6571 42164  (LEO to GEO)');
+        return;
+      }
+
+      console.log(renderHohmannTransfer(r1, r2, MU.EARTH));
+      break;
+    }
+
+    case 'fuel': {
+      const deltaV = parseFloat(missionArgs[0]);
+      const isp = parseFloat(missionArgs[1]);
+      const payload = parseFloat(missionArgs[2]);
+
+      if (isNaN(deltaV) || isNaN(isp) || isNaN(payload)) {
+        console.log(renderError('Usage: mission fuel <delta-v km/s> <isp> <payload kg>'));
+        console.log('  Example: mission fuel 4.3 363 10000');
+        return;
+      }
+
+      console.log(renderPropellantCalc(deltaV, isp, payload));
+      break;
+    }
+
+    case 'bodies':
+      console.log(renderBodies());
+      break;
+
+    case 'engines':
+      console.log(renderEngines());
+      break;
+
+    default:
+      console.log(renderError(`Unknown mission subcommand: ${subcommand}`));
+      console.log(renderMissionPlanner());
+  }
+}
+
+/**
+ * Hackathon command - view and join challenges
+ */
+async function hackathonCommand(subcommand?: string, hackArgs: string[] = []): Promise<void> {
+  if (!subcommand || subcommand === 'list') {
+    const challenges = INITIAL_CHALLENGES.map(c => ({
+      id: c.id,
+      title: c.title,
+      tier: c.tier,
+      domain: c.domain,
+      status: c.status,
+      rewards: c.rewards,
+    }));
+    console.log(renderHackathonList(challenges));
+    return;
+  }
+
+  if (subcommand === 'info') {
+    const challengeId = hackArgs[0];
+    if (!challengeId) {
+      console.log(renderError('Usage: hackathon info <challenge-id>'));
+      return;
+    }
+
+    const challenge = getChallenge(challengeId);
+    if (!challenge) {
+      console.log(renderError(`Unknown challenge: ${challengeId}`));
+      return;
+    }
+
+    console.log(renderHackathonDetail(challenge));
+    return;
+  }
+
+  if (subcommand === 'join') {
+    const challengeId = hackArgs[0];
+    if (!challengeId) {
+      console.log(renderError('Usage: hackathon join <challenge-id>'));
+      return;
+    }
+
+    console.log(`
+  JOIN HACKATHON
+  ──────────────
+
+  Challenge registration will be available when spaceorbust.com launches.
+
+  For now:
+    1. Fork the repo: github.com/zjkramer/spaceorbust
+    2. Check docs/CHALLENGES.md for requirements
+    3. Submit a PR with your solution
+
+  Community channels coming soon!
+`);
+    return;
+  }
+
+  console.log(renderError(`Unknown hackathon subcommand: ${subcommand}`));
+}
+
+/**
+ * Comms command - transport and sync operations
+ */
+async function commsCommand(subcommand?: string, commsArgs: string[] = []): Promise<void> {
+  const state = loadState();
+
+  if (!state.initialized) {
+    console.log(renderError('Run "spaceorbust status" first to initialize.'));
+    return;
+  }
+
+  const result = await handleCommsCommand(subcommand, commsArgs, state);
+  console.log(result);
 }
 
 // Run

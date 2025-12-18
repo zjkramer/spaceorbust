@@ -21,11 +21,23 @@ const INITIAL_RESOURCES: Resources = {
   population: 1000000000, // Start with Earth's population
 };
 
+// Generate a unique player ID
+function generatePlayerId(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // No confusing chars
+  let id = '';
+  for (let i = 0; i < 12; i++) {
+    id += chars[Math.floor(Math.random() * chars.length)];
+    if (i === 3 || i === 7) id += '-';
+  }
+  return id;
+}
+
 // Create a fresh game state
 function createInitialState(): GameState {
   return {
     version: '0.1.0',
     initialized: false,
+    playerId: generatePlayerId(),
 
     year: 2024,
     era: 1,
@@ -86,6 +98,15 @@ export function loadState(): GameState {
       const data = fs.readFileSync(STATE_FILE, 'utf-8');
       const state = JSON.parse(data) as GameState;
       state.lastPlayed = new Date().toISOString();
+
+      // Migrate old state files
+      if (!state.playerId) {
+        state.playerId = generatePlayerId();
+      }
+      if (!state.completedTechnologies) {
+        state.completedTechnologies = [];
+      }
+
       return state;
     } catch {
       // Corrupted state file - start fresh

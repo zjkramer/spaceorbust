@@ -185,14 +185,19 @@ COMMANDS:
   sync          Sync GitHub activity and collect resources
   auth          Connect your GitHub account
   research      View and start research projects
-  build         View and start construction projects
+  mission       Mission operations & orbital mechanics
+  comms         Multi-transport sync (LoRa, QR, radio)
+  hackathon     View active kaizen challenges
+  guild         Guild management
   log           View recent events
   help          Show this help message
 
 EXAMPLES:
-  spaceorbust status          # Check your civilization
-  spaceorbust sync            # Collect resources from GitHub activity
-  spaceorbust auth <token>    # Connect GitHub with personal access token
+  spaceorbust status                      # Check your civilization
+  spaceorbust sync                        # Collect resources from GitHub activity
+  spaceorbust auth <token>                # Connect GitHub with token
+  spaceorbust mission plan leo mars_orbit # Calculate mission delta-v
+  spaceorbust hackathon                   # View active challenges
 
 PHILOSOPHY:
   Every commit powers civilization forward.

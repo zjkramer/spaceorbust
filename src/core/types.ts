@@ -49,6 +49,7 @@ export interface Project {
 export interface GameState {
   version: string;
   initialized: boolean;
+  playerId: string;    // Unique player identifier (for sync)
 
   // Timeline
   year: number;        // In-game year (starts 2024)
