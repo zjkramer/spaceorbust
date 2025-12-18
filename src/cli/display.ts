@@ -100,10 +100,10 @@ export function renderStatus(state: GameState): string {
 
   const resourcePct = (val: number) => Math.min(100, (val / maxResource) * 100);
 
-  lines.push(`  Energy:    [${progressBar(resourcePct(state.resources.energy), 20)}] ${formatNumber(state.resources.energy)}`);
-  lines.push(`  Materials: [${progressBar(resourcePct(state.resources.materials), 20)}] ${formatNumber(state.resources.materials)}`);
-  lines.push(`  Data:      [${progressBar(resourcePct(state.resources.data), 20)}] ${formatNumber(state.resources.data)}`);
-  lines.push(`  Population: ${formatNumber(state.resources.population)}`);
+  lines.push(`  Watts ⚡:  [${progressBar(resourcePct(state.resources.energy), 20)}] ${formatNumber(state.resources.energy)}⚡`);
+  lines.push(`  Mass:      [${progressBar(resourcePct(state.resources.materials), 20)}] ${formatNumber(state.resources.materials)} kg`);
+  lines.push(`  Data:      [${progressBar(resourcePct(state.resources.data), 20)}] ${formatNumber(state.resources.data)} TB`);
+  lines.push(`  Population: ${formatNumber(state.resources.population)} souls`);
   lines.push('');
 
   // Active projects
@@ -297,7 +297,7 @@ export function renderResearchList(
     for (const tech of available) {
       lines.push(`    ○ ${tech.name}`);
       lines.push(`      ${tech.description}`);
-      lines.push(`      Cost: ${tech.cost.energy}⚡ ${tech.cost.materials}🔧 ${tech.cost.data}📊`);
+      lines.push(`      Cost: ${tech.cost.energy}⚡ | ${tech.cost.materials}kg | ${tech.cost.data}TB`);
       lines.push('');
     }
   }

@@ -210,11 +210,204 @@ export const ERA_1_TECHNOLOGIES: Technology[] = [
 ];
 
 /**
+ * Era 2: Inner Solar System (2050-2150)
+ * Moon bases, Mars colonization, asteroid mining.
+ * Prerequisite: Complete Era 1 milestone (lunar_landing)
+ */
+export const ERA_2_TECHNOLOGIES: Technology[] = [
+  // Lunar Infrastructure
+  {
+    id: 'lunar_base',
+    name: 'Permanent Lunar Base',
+    description: 'Underground habitat in lunar lava tubes. First off-world home.',
+    era: 2,
+    layer: 0,
+    cost: { energy: 3000, materials: 4000, data: 2000, population: 0 },
+    prerequisites: ['lunar_landing'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'lunar_mining',
+    name: 'Lunar ISRU Mining',
+    description: 'Extract water ice from permanently shadowed craters.',
+    era: 2,
+    layer: 3,
+    cost: { energy: 2500, materials: 3500, data: 1500, population: 0 },
+    prerequisites: ['lunar_base', 'water_extraction'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'lunar_fuel_depot',
+    name: 'Lunar Fuel Depot',
+    description: 'Produce and store propellant on the Moon. Gateway to deep space.',
+    era: 2,
+    layer: 6,
+    cost: { energy: 3500, materials: 4500, data: 2000, population: 0 },
+    prerequisites: ['lunar_mining', 'oxygen_production'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Mars Transit
+  {
+    id: 'mars_transit_vehicle',
+    name: 'Mars Transit Vehicle',
+    description: 'Reusable spacecraft for Earth-Mars transfers. 6-month journey.',
+    era: 2,
+    layer: 6,
+    cost: { energy: 5000, materials: 6000, data: 3000, population: 0 },
+    prerequisites: ['lunar_fuel_depot', 'ion_propulsion'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'artificial_gravity',
+    name: 'Artificial Gravity',
+    description: 'Rotating sections for long-duration missions. Preserve bone and muscle.',
+    era: 2,
+    layer: 8,
+    cost: { energy: 4000, materials: 5000, data: 3500, population: 0 },
+    prerequisites: ['mars_transit_vehicle'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Mars Surface
+  {
+    id: 'mars_landing',
+    name: 'Crewed Mars Landing',
+    description: 'First humans on Mars. The greatest journey.',
+    era: 2,
+    layer: 0,
+    cost: { energy: 8000, materials: 10000, data: 5000, population: 0 },
+    prerequisites: ['mars_transit_vehicle', 'artificial_gravity'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'mars_habitat',
+    name: 'Mars Surface Habitat',
+    description: 'Pressurized living space. Protection from radiation and dust storms.',
+    era: 2,
+    layer: 0,
+    cost: { energy: 6000, materials: 8000, data: 3000, population: 0 },
+    prerequisites: ['mars_landing', 'additive_manufacturing'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'mars_isru',
+    name: 'Mars ISRU Operations',
+    description: 'Produce fuel, oxygen, and water from Martian atmosphere and soil.',
+    era: 2,
+    layer: 3,
+    cost: { energy: 5000, materials: 6000, data: 4000, population: 0 },
+    prerequisites: ['mars_habitat', 'oxygen_production'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'mars_greenhouse',
+    name: 'Mars Greenhouse',
+    description: 'Grow food on Mars. First step to bioregenerative life support.',
+    era: 2,
+    layer: 2,
+    cost: { energy: 4500, materials: 5500, data: 3500, population: 0 },
+    prerequisites: ['mars_habitat', 'hydroponics'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Asteroid Belt
+  {
+    id: 'asteroid_prospecting',
+    name: 'Asteroid Prospecting',
+    description: 'Survey and map asteroid belt resources. Trillion-dollar rocks.',
+    era: 2,
+    layer: 3,
+    cost: { energy: 4000, materials: 3000, data: 5000, population: 0 },
+    prerequisites: ['deep_space_network', 'ion_propulsion'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'asteroid_mining',
+    name: 'Asteroid Mining Operations',
+    description: 'Extract metals and volatiles from asteroids. Space-based industry.',
+    era: 2,
+    layer: 3,
+    cost: { energy: 7000, materials: 8000, data: 4000, population: 0 },
+    prerequisites: ['asteroid_prospecting', 'autonomous_systems'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Advanced Systems
+  {
+    id: 'fusion_research',
+    name: 'Fusion Power Research',
+    description: 'Working toward net-positive fusion. The ultimate energy source.',
+    era: 2,
+    layer: 5,
+    cost: { energy: 10000, materials: 8000, data: 12000, population: 0 },
+    prerequisites: ['space_nuclear_fission'],
+    unlocked: false,
+    completed: false,
+  },
+  {
+    id: 'genetic_adaptation',
+    name: 'Human Genetic Adaptation',
+    description: 'Modify humans for space: radiation resistance, bone density.',
+    era: 2,
+    layer: 8,
+    cost: { energy: 6000, materials: 4000, data: 10000, population: 0 },
+    prerequisites: ['space_medicine'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // AI Evolution
+  {
+    id: 'general_ai',
+    name: 'General AI',
+    description: 'AI that can learn any task. Partners, not just tools.',
+    era: 2,
+    layer: 7,
+    cost: { energy: 8000, materials: 5000, data: 15000, population: 0 },
+    prerequisites: ['autonomous_systems', 'deep_space_network'],
+    unlocked: false,
+    completed: false,
+  },
+
+  // Milestone: Mars Colony
+  {
+    id: 'mars_colony',
+    name: 'Self-Sustaining Mars Colony',
+    description: 'Closed-loop colony on Mars. Humanity is now multi-planetary.',
+    era: 2,
+    layer: 0,
+    cost: { energy: 20000, materials: 25000, data: 15000, population: 0 },
+    prerequisites: ['mars_isru', 'mars_greenhouse', 'fusion_research'],
+    unlocked: false,
+    completed: false,
+  },
+];
+
+// All technologies combined
+export const ALL_TECHNOLOGIES: Technology[] = [
+  ...ERA_1_TECHNOLOGIES,
+  ...ERA_2_TECHNOLOGIES,
+];
+
+/**
  * Get all technologies for an era
  */
 export function getTechnologiesForEra(era: number): Technology[] {
   if (era === 1) return ERA_1_TECHNOLOGIES;
-  // Future: ERA_2, ERA_3, ERA_4
+  if (era === 2) return ERA_2_TECHNOLOGIES;
+  // Future: ERA_3, ERA_4
   return [];
 }
 
@@ -222,7 +415,7 @@ export function getTechnologiesForEra(era: number): Technology[] {
  * Get a technology by ID
  */
 export function getTechnology(id: string): Technology | undefined {
-  return ERA_1_TECHNOLOGIES.find(t => t.id === id);
+  return ALL_TECHNOLOGIES.find(t => t.id === id);
 }
 
 /**
