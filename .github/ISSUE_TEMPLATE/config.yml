@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/zjkramer/spaceorbust/discussions
+    about: Ask questions and discuss ideas
+  - name: Hackathon Challenges
+    url: https://github.com/zjkramer/spaceorbust/blob/main/docs/CHALLENGES.md
+    about: View active hackathon challenges

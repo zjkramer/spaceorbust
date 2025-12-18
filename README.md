@@ -8,6 +8,54 @@
 
 A terminal-based RPG where your GitHub commits fuel civilization's expansion into space. Real orbital mechanics. Multi-transport sync. Kaizen hackathons that solve actual spacefaring challenges.
 
+## Demo
+
+```
+$ spaceorbust status
+
+╔══════════════════════════════════════════════════════════╗
+║   SPACEORBUST v0.1.0 | Year: 2024 | Era: Earth-Bound    ║
+╚══════════════════════════════════════════════════════════╝
+
+  RESOURCES
+  ────────────────────────────────────────────────────────
+  Watts ⚡:  [████████████████░░░░] 1,523⚡
+  Mass:      [██████████░░░░░░░░░░] 847 kg
+  Data:      [████░░░░░░░░░░░░░░░░] 256 TB
+  Population: 1.0B souls
+
+  FORGE CONNECTION
+  ────────────────────────────────────────────────────────
+  ✓ Connected: zjkramer (GitHub)
+  Last sync: 2024-12-18
+  Commits tracked: 127
+
+$ spaceorbust mission plan leo mars_orbit
+
+╔══════════════════════════════════════════════════════════╗
+║                    MISSION PROFILE                       ║
+╚══════════════════════════════════════════════════════════╝
+
+  FROM: LEO
+  TO:   MARS ORBIT
+
+  MANEUVER SEQUENCE:
+  ─────────────────────────────────────────────────
+  1. Trans-Mars injection
+     Δv: 3.60 km/s  |  Cumulative: 3.60 km/s
+
+  2. Mars orbit insertion
+     Δv: 1.00 km/s  |  Cumulative: 4.60 km/s
+
+  ─────────────────────────────────────────────────
+  TOTAL Δv REQUIRED: 4.60 km/s
+  ─────────────────────────────────────────────────
+
+  PROPELLANT REQUIREMENTS (10000 kg payload):
+    Chemical (Methalox):  26,408 kg
+    Nuclear Thermal:       6,840 kg
+```
+
 ## Philosophy
 
 Every watt of energy, every calorie counts in the void of space. This game reflects that reality:
