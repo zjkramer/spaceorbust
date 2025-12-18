@@ -175,6 +175,34 @@ Preparation through research and resource allocation determines survival.
 
 ---
 
+## Real-World Community
+
+### Meetups
+- **Local chapters**: City-based groups for regular meetups
+- **Hack nights**: Code contribution events with in-game bonuses
+- **Watch parties**: Sync up for real rocket launches, astronomical events
+- **Guild gatherings**: Physical meetings for online guilds
+
+### Conventions & Events
+- **SpaceOrBust Con**: Annual gathering (start small, grow organic)
+- **Mission Simulations**: Weekend events with real-time problem solving
+- **Maker workshops**: Build physical props, patches, cosplay
+- **Guest speakers**: Real scientists, engineers, astronauts
+
+### Digital-Physical Crossover
+- Meetup attendance → in-game achievement badges
+- QR codes at events → unlock exclusive content
+- Physical challenge completions → digital rewards
+- Convention-exclusive patches that unlock digital twins
+- Real-world "missions" (citizen science, cleanups) → game resources
+
+### Community Science
+- Partner with actual space research projects
+- Citizen science integration (galaxy classification, asteroid tracking)
+- Real contributions to space exploration = in-game prestige
+
+---
+
 ## CLI Interface Concepts
 
 ```
