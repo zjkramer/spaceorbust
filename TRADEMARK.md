@@ -30,6 +30,7 @@ The brand is **protected** so we can fund development through official merchandi
 ### Contact
 
 For trademark licensing, brand partnerships, or questions:
+- Signal: [@camel2crow.108](https://signal.me/#eu/camel2crow.108)
 - Email: [ops@flatlandexpeditions.com](mailto:ops@flatlandexpeditions.com)
 - GitHub: [@zjkramer](https://github.com/zjkramer)
 - Website: [spaceorbust.com](https://spaceorbust.com)
