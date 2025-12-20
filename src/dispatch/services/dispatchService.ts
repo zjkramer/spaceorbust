@@ -185,6 +185,7 @@ class DispatchService {
     this.addIncidentLog(incident.id, {
       type: 'created',
       content: `Incident created: ${incident.title}`,
+      authorId: 'system',
     });
 
     this.queueSync('CREATE_INCIDENT', incident);
@@ -256,7 +257,7 @@ class DispatchService {
         content: notes ?? `Status changed: ${previousStatus} → ${newStatus}`,
         previousStatus,
         newStatus,
-        authorId,
+        authorId: authorId ?? 'system',
       });
     }
 
@@ -331,7 +332,7 @@ class DispatchService {
       type: 'unit_enroute',
       content: `${unit.callsign} en route`,
       unitId,
-      authorId: personnel,
+      authorId: personnel ?? 'system',
     });
   }
 
@@ -351,7 +352,7 @@ class DispatchService {
       type: 'unit_on_scene',
       content: `${unit.callsign} on scene`,
       unitId,
-      authorId: personnel,
+      authorId: personnel ?? 'system',
     });
   }
 
@@ -384,7 +385,7 @@ class DispatchService {
       type: 'unit_cleared',
       content: `${unit.callsign} cleared`,
       unitId,
-      authorId: personnel,
+      authorId: personnel ?? 'system',
     });
 
     this.emit({ type: 'UNIT_STATUS_CHANGED', unit: updatedUnit, previousStatus: unit.status });
@@ -404,7 +405,6 @@ class DispatchService {
       id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       incidentId,
       timestamp: new Date(),
-      authorId: entry.authorId ?? 'system',
       ...entry,
     };
 
@@ -682,5 +682,3 @@ class DispatchService {
 // Singleton instance
 export const dispatchService = new DispatchService();
 
-// Export types
-export type { DispatchEvent, DispatchEventListener };

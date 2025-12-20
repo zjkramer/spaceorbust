@@ -285,7 +285,7 @@ export function createTowJob(params: {
     ...createIncident({
       id: params.id,
       type: params.type,
-      title: \`\${params.type} - \${params.vehicle?.year ?? ''} \${params.vehicle?.make ?? ''} \${params.vehicle?.model ?? ''}\`.trim(),
+      title: `${params.type} - ${params.vehicle?.year ?? ''} ${params.vehicle?.make ?? ''} ${params.vehicle?.model ?? ''}`.trim(),
       location: { address: params.location },
       priority: 'routine',
       primaryOrgId: params.primaryOrgId,
@@ -304,7 +304,7 @@ export function createMission(params: {
     ...createIncident({
       id: params.id,
       type: params.type,
-      title: \`Mission: \${params.missionName}\`,
+      title: `Mission: ${params.missionName}`,
       location: {},
       priority: 'critical',
       primaryOrgId: params.primaryOrgId,

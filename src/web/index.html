@@ -312,6 +312,79 @@
       color: var(--text-dim);
     }
 
+    /* Merch Grid */
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .merch-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .merch-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .merch-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      background: #000;
+      margin-bottom: 1rem;
+    }
+
+    .merch-title {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .merch-price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .merch-type {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .merch-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-dim);
+    }
+
+    .merch-btn {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 1rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .merch-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -402,7 +475,8 @@
     <div class="cta-buttons">
       <a href="https://www.npmjs.com/package/spaceorbust" class="btn btn-primary">Install from npm</a>
       <a href="https://github.com/zjkramer/spaceorbust" class="btn">View on GitHub</a>
-      <a href="https://space-or-bust.printful.me/" class="btn">Shop Merch</a>
+      <a href="#merch" class="btn">Shop Merch</a>
+      <a href="/dispatch.html" class="btn">Dispatch Protocol</a>
       <a href="https://github.com/zjkramer/spaceorbust/blob/main/docs/CHALLENGES.md" class="btn">Join a Hackathon</a>
     </div>
     <p style="margin-top: 1.5rem; color: var(--text-dim); font-size: 0.9rem;">
@@ -535,6 +609,19 @@
     </div>
   </section>
 
+  <section id="merch">
+    <h2>Gear Up for the Mission</h2>
+    <p style="color: var(--text-dim); margin-bottom: 2rem;">Fund the journey. Rep the crew. All merch sales support spaceorbust development.</p>
+    <div class="merch-grid" id="merch-products">
+      <!-- Products loaded dynamically -->
+      <div class="merch-loading">Loading mission gear...</div>
+    </div>
+    <p style="text-align: center; margin-top: 2rem;">
+      <a href="https://space-or-bust.printful.me" class="btn btn-primary" target="_blank">Shop Now</a>
+      <a href="mailto:orders@spaceorbust.com?subject=Merch Order" class="btn">Email Order</a>
+    </p>
+  </section>
+
   <section>
     <h2>Tech Tree Preview</h2>
     <p style="color: var(--text-dim); margin-bottom: 1rem;">Era 1: Earth-Bound (2024-2050)</p>
@@ -640,9 +727,84 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
       }
     }
 
+    // Load merch products
+    function loadMerch() {
+      const products = [
+        {
+          name: 'spaceorbust Tee - Square',
+          type: 'T-Shirt',
+          price: '$29.99',
+          image: '/logos/logo-square.png',
+          variants: 'Black, Navy, Grey · S-2XL'
+        },
+        {
+          name: 'spaceorbust Tee - Split',
+          type: 'T-Shirt',
+          price: '$29.99',
+          image: '/logos/logo-square-split.png',
+          variants: 'Black, Navy, Grey · S-2XL'
+        },
+        {
+          name: 'spaceorbust Hoodie - Square',
+          type: 'Hoodie',
+          price: '$49.99',
+          image: '/logos/logo-square.png',
+          variants: 'Black, Navy · S-2XL'
+        },
+        {
+          name: 'spaceorbust Hoodie - Split',
+          type: 'Hoodie',
+          price: '$49.99',
+          image: '/logos/logo-square-split.png',
+          variants: 'Black, Navy · S-2XL'
+        },
+        {
+          name: 'spaceorbust Cap - Square',
+          type: 'Dad Cap',
+          price: '$24.99',
+          image: '/logos/logo-square.png',
+          variants: 'Black, Navy'
+        },
+        {
+          name: 'spaceorbust Sticker - Square',
+          type: 'Kiss-Cut Sticker',
+          price: '$4.99',
+          image: '/logos/logo-square.png',
+          variants: '3", 4", 5.5"'
+        },
+        {
+          name: 'spaceorbust Sticker - Split',
+          type: 'Kiss-Cut Sticker',
+          price: '$4.99',
+          image: '/logos/logo-square-split.png',
+          variants: '3", 4", 5.5"'
+        },
+        {
+          name: 'spaceorbust Sticker - Circle',
+          type: 'Kiss-Cut Sticker',
+          price: '$4.99',
+          image: '/logos/logo-circle.png',
+          variants: '3", 4", 5.5"'
+        }
+      ];
+
+      const container = document.getElementById('merch-products');
+      container.innerHTML = products.map(p => `
+        <div class="merch-item">
+          <img src="${p.image}" alt="${p.name}" class="merch-image" loading="lazy">
+          <div class="merch-type">${p.type}</div>
+          <div class="merch-title">${p.name}</div>
+          <div class="merch-price">${p.price}</div>
+          <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 0.5rem;">${p.variants}</div>
+          <a href="https://space-or-bust.printful.me" target="_blank" class="merch-btn">Buy Now</a>
+        </div>
+      `).join('');
+    }
+
     // Run on load
     document.addEventListener('DOMContentLoaded', function() {
       fetchStats();
+      loadMerch();
     });
 
     console.log(`
