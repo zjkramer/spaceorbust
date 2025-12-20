@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store - Space or Bust</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+      --accent: #00ff88;
+      --accent-dim: #004422;
+      --fire: #ff6600;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .logo:hover { opacity: 0.8; }
+    nav { display: flex; gap: 1.5rem; }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    nav a:hover { color: var(--accent); }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    .notice {
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .notice a { color: var(--accent); }
+
+    .categories {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .category-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+    .category-btn:hover, .category-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .product:hover { border-color: var(--accent); }
+
+    .product-image {
+      aspect-ratio: 1;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .product-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .product-info {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .product-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+    }
+    .product-type {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .product-variants {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .order-btn {
+      display: block;
+      width: 100%;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.75rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .order-btn:hover {
+      background: #00cc6a;
+    }
+
+    .order-methods {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-top: 3rem;
+      border-radius: 4px;
+    }
+    .order-methods h3 {
+      color: var(--fire);
+      margin-bottom: 1rem;
+    }
+    .order-methods ul {
+      list-style: none;
+    }
+    .order-methods li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-methods li:last-child { border-bottom: none; }
+    .order-methods li::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.75rem;
+    }
+    .order-methods a { color: var(--accent); text-decoration: none; }
+    .order-methods a:hover { text-decoration: underline; }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/" class="logo">SPACE OR BUST</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/dispatch.html">Dispatch</a>
+        <a href="/why.html">Why</a>
+        <a href="https://github.com/zjkramer/spaceorbust">GitHub</a>
+      </nav>
+    </header>
+
+    <h1>Merch Store</h1>
+    <p class="subtitle">Support the mission. Look good doing it. All proceeds fund development.</p>
+
+    <div class="notice">
+      <strong>How to order:</strong> Click any product to send an email with your order. Include size/color preferences. We'll confirm and send a payment link. Ships via Printful (3-5 business days).
+    </div>
+
+    <div class="categories">
+      <button class="category-btn active" data-category="all">All</button>
+      <button class="category-btn" data-category="tshirt">T-Shirts</button>
+      <button class="category-btn" data-category="hoodie">Hoodies</button>
+      <button class="category-btn" data-category="hat">Caps</button>
+      <button class="category-btn" data-category="sticker">Stickers</button>
+    </div>
+
+    <div class="products" id="products">
+      <!-- T-Shirts -->
+      <div class="product" data-category="tshirt">
+        <div class="product-image">
+          <img src="/logos/logo-square.png" alt="Space or Bust Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Tee - Square Logo</div>
+          <div class="product-type">Bella+Canvas 3001 Unisex</div>
+          <div class="product-price">$29.99</div>
+          <div class="product-variants">Sizes: S, M, L, XL, 2XL | Colors: Black, Navy, Dark Grey</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Tee - Square Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Tee - Square Logo%0ASize: [S/M/L/XL/2XL]%0AColor: [Black/Navy/Dark Grey]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="tshirt">
+        <div class="product-image">
+          <img src="/logos/logo-square-split.png" alt="Space or Bust Split Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Tee - Split Logo</div>
+          <div class="product-type">Bella+Canvas 3001 Unisex</div>
+          <div class="product-price">$29.99</div>
+          <div class="product-variants">Sizes: S, M, L, XL, 2XL | Colors: Black, Navy, Dark Grey</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Tee - Split Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Tee - Split Logo%0ASize: [S/M/L/XL/2XL]%0AColor: [Black/Navy/Dark Grey]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="tshirt">
+        <div class="product-image">
+          <img src="/logos/logo-circle.png" alt="Space or Bust Circle Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Tee - Circle Logo</div>
+          <div class="product-type">Bella+Canvas 3001 Unisex</div>
+          <div class="product-price">$29.99</div>
+          <div class="product-variants">Sizes: S, M, L, XL, 2XL | Colors: Black, Navy, Dark Grey</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Tee - Circle Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Tee - Circle Logo%0ASize: [S/M/L/XL/2XL]%0AColor: [Black/Navy/Dark Grey]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <!-- Hoodies -->
+      <div class="product" data-category="hoodie">
+        <div class="product-image">
+          <img src="/logos/logo-square.png" alt="Space or Bust Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Hoodie - Square Logo</div>
+          <div class="product-type">Gildan 18500 Heavy Blend</div>
+          <div class="product-price">$49.99</div>
+          <div class="product-variants">Sizes: S, M, L, XL, 2XL | Colors: Black, Navy</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Hoodie - Square Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Hoodie - Square Logo%0ASize: [S/M/L/XL/2XL]%0AColor: [Black/Navy]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="hoodie">
+        <div class="product-image">
+          <img src="/logos/logo-square-split.png" alt="Space or Bust Split Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Hoodie - Split Logo</div>
+          <div class="product-type">Gildan 18500 Heavy Blend</div>
+          <div class="product-price">$49.99</div>
+          <div class="product-variants">Sizes: S, M, L, XL, 2XL | Colors: Black, Navy</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Hoodie - Split Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Hoodie - Split Logo%0ASize: [S/M/L/XL/2XL]%0AColor: [Black/Navy]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="hoodie">
+        <div class="product-image">
+          <img src="/logos/logo-circle.png" alt="Space or Bust Circle Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Hoodie - Circle Logo</div>
+          <div class="product-type">Gildan 18500 Heavy Blend</div>
+          <div class="product-price">$49.99</div>
+          <div class="product-variants">Sizes: S, M, L, XL, 2XL | Colors: Black, Navy</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Hoodie - Circle Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Hoodie - Circle Logo%0ASize: [S/M/L/XL/2XL]%0AColor: [Black/Navy]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <!-- Caps -->
+      <div class="product" data-category="hat">
+        <div class="product-image">
+          <img src="/logos/logo-square.png" alt="Space or Bust Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Cap - Square Logo</div>
+          <div class="product-type">Dad Hat - Adjustable</div>
+          <div class="product-price">$24.99</div>
+          <div class="product-variants">One Size | Colors: Black, Navy</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Cap - Square Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Cap - Square Logo%0AColor: [Black/Navy]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="hat">
+        <div class="product-image">
+          <img src="/logos/logo-square-split.png" alt="Space or Bust Split Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Cap - Split Logo</div>
+          <div class="product-type">Dad Hat - Adjustable</div>
+          <div class="product-price">$24.99</div>
+          <div class="product-variants">One Size | Colors: Black, Navy</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Cap - Split Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Cap - Split Logo%0AColor: [Black/Navy]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="hat">
+        <div class="product-image">
+          <img src="/logos/logo-circle.png" alt="Space or Bust Circle Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Cap - Circle Logo</div>
+          <div class="product-type">Dad Hat - Adjustable</div>
+          <div class="product-price">$24.99</div>
+          <div class="product-variants">One Size | Colors: Black, Navy</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Cap - Circle Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Cap - Circle Logo%0AColor: [Black/Navy]%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <!-- Stickers -->
+      <div class="product" data-category="sticker">
+        <div class="product-image">
+          <img src="/logos/logo-square.png" alt="Space or Bust Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Sticker - Square Logo</div>
+          <div class="product-type">Kiss-Cut Vinyl Sticker</div>
+          <div class="product-price">$4.99</div>
+          <div class="product-variants">3" x 3" | Weather resistant</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Sticker - Square Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Sticker - Square Logo%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="sticker">
+        <div class="product-image">
+          <img src="/logos/logo-square-split.png" alt="Space or Bust Split Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Sticker - Split Logo</div>
+          <div class="product-type">Kiss-Cut Vinyl Sticker</div>
+          <div class="product-price">$4.99</div>
+          <div class="product-variants">3" x 3" | Weather resistant</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Sticker - Split Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Sticker - Split Logo%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+
+      <div class="product" data-category="sticker">
+        <div class="product-image">
+          <img src="/logos/logo-circle.png" alt="Space or Bust Circle Logo">
+        </div>
+        <div class="product-info">
+          <div class="product-name">spaceorbust Sticker - Circle Logo</div>
+          <div class="product-type">Kiss-Cut Vinyl Sticker</div>
+          <div class="product-price">$4.99</div>
+          <div class="product-variants">3" x 3" | Weather resistant</div>
+          <a href="mailto:orders@spaceorbust.com?subject=Order: spaceorbust Sticker - Circle Logo&body=Hi! I'd like to order:%0A%0AProduct: spaceorbust Sticker - Circle Logo%0AQuantity: 1%0A%0AShipping Address:%0A[Your address here]%0A%0AThanks!" class="order-btn">Order via Email</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-methods">
+      <h3>How Ordering Works</h3>
+      <ul>
+        <li><strong>Email:</strong> Click any product, send us your order details</li>
+        <li><strong>Payment:</strong> We'll send a Venmo/PayPal/Stripe link to confirm</li>
+        <li><strong>Fulfillment:</strong> Printed and shipped via Printful (3-5 business days)</li>
+        <li><strong>Questions?</strong> <a href="mailto:orders@spaceorbust.com">orders@spaceorbust.com</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      <p><a href="/">Space or Bust</a> | <a href="/dispatch.html">Dispatch Protocol</a> | <a href="/why.html">Why We Built This</a></p>
+      <p style="margin-top: 1rem;">All proceeds support open-source space infrastructure development.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Category filtering
+    const buttons = document.querySelectorAll('.category-btn');
+    const products = document.querySelectorAll('.product');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = btn.dataset.category;
+        products.forEach(p => {
+          if (category === 'all' || p.dataset.category === category) {
+            p.style.display = 'block';
+          } else {
+            p.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
