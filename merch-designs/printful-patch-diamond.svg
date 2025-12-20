@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <!-- Diamond Patch - 3x3 inches at 300 DPI (rotated square) -->
+
+  <defs>
+    <linearGradient id="criticalGradDia" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcc00"/>
+      <stop offset="50%" style="stop-color:#ff8800"/>
+      <stop offset="100%" style="stop-color:#ff3333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Diamond shape background -->
+  <polygon points="450,30 870,450 450,870 30,450" fill="#0a0a0a"/>
+
+  <!-- Green border (top-left sides) -->
+  <path d="M 450,50 L 850,450 L 450,850" fill="none" stroke="#00ff88" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Critical path border (bottom-left sides) -->
+  <path d="M 450,850 L 50,450 L 450,50" fill="none" stroke="url(#criticalGradDia)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Logo centered -->
+  <g transform="translate(450, 430)">
+    <text x="0" y="-35" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="68" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="55" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="68" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+
+  <!-- Stars -->
+  <circle cx="450" cy="150" r="6" fill="#ffffff"/>
+  <circle cx="750" cy="450" r="5" fill="#ffffff"/>
+  <circle cx="300" cy="350" r="4" fill="#ffffff"/>
+</svg>
