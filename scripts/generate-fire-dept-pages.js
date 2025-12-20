@@ -1,15 +1,9 @@
 #!/usr/bin/env node
 /**
- * Generate Fire Department SEO Pages
+ * Fire Department Page Generator
  *
- * Creates individual HTML pages for each fire department in the registry.
- * Pages include:
- * - Department info (name, address, type)
- * - NWS fire weather zone data
- * - JSON-LD structured data for Google
- * - Links to dispatch protocol
+ * Creates directory pages for fire departments from registry data.
  *
- * Ghost Army SEO Protocol - spaceorbust.com
  * Created by Zachary Joseph Kramer + Claude
  * December 2025 | Flatland Expeditions LLC
  */
@@ -581,7 +575,7 @@ function generateMainIndex(stateStats) {
 async function main() {
   console.log('╔══════════════════════════════════════════════════════════╗');
   console.log('║  Fire Department SEO Page Generator                      ║');
-  console.log('║  Ghost Army Protocol - spaceorbust.com                   ║');
+  console.log('║  Data Pipeline - spaceorbust.com                   ║');
   console.log('╚══════════════════════════════════════════════════════════╝\n');
 
   // Load data

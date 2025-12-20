@@ -1,15 +1,8 @@
 #!/usr/bin/env node
 /**
- * Create Sample Fire Department Data
+ * Sample Fire Department Data Generator
  *
- * Creates sample data for testing the SEO page generator while the
- * HIFLD services are unavailable. Uses real city/state combinations
- * with realistic fire department naming patterns.
- *
- * For production, download from:
- * - HIFLD: https://hifld-geoplatform.opendata.arcgis.com/datasets/fire-stations
- * - USFA: https://apps.usfa.fema.gov/registry/download
- * - Kaggle: https://www.kaggle.com/datasets/mexwell/us-fire-department-stations
+ * Creates sample data for testing. Replace with production data.
  *
  * Created by Zachary Joseph Kramer + Claude
  * December 2025 | Flatland Expeditions LLC

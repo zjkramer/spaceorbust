@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /**
- * Generate Sitemap for spaceorbust.com
+ * Sitemap Generator
  *
- * Creates sitemap.xml and robots.txt for SEO.
- * Includes all fire department pages for the Ghost Army Protocol.
+ * Creates sitemap.xml and robots.txt for search engines.
  *
  * Created by Zachary Joseph Kramer + Claude
  * December 2025 | Flatland Expeditions LLC
@@ -68,7 +67,7 @@ function generateSitemapIndex(sitemaps) {
  */
 function generateRobotsTxt() {
   return `# robots.txt for spaceorbust.com
-# Ghost Army SEO Protocol
+# Fire Department Directory
 
 User-agent: *
 Allow: /
@@ -84,7 +83,7 @@ Crawl-delay: 1
 
 async function main() {
   console.log('╔══════════════════════════════════════════════════════════╗');
-  console.log('║  Sitemap Generator - Ghost Army SEO Protocol             ║');
+  console.log('║  Sitemap Generator - Fire Department Directory             ║');
   console.log('╚══════════════════════════════════════════════════════════╝\n');
 
   const today = new Date().toISOString().split('T')[0];

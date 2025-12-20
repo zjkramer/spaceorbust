@@ -1,13 +1,8 @@
 #!/usr/bin/env node
 /**
- * Download Fire Department Data from HIFLD (Homeland Infrastructure Foundation-Level Data)
+ * Fire Department Data Downloader
  *
- * This script downloads fire station data from multiple sources:
- * 1. HIFLD ArcGIS Feature Service (primary)
- * 2. Backup: NASA NCCS mirror of HIFLD
- *
- * Data includes: station names, addresses, coordinates, department types, etc.
- * Used for programmatic SEO and fire weather integration.
+ * Downloads fire station data from public federal registries.
  *
  * Created by Zachary Joseph Kramer + Claude
  * December 2025 | Flatland Expeditions LLC
@@ -171,7 +166,7 @@ async function queryFeatures(serviceUrl, offset = 0, batchSize = BATCH_SIZE) {
 async function downloadFireStations() {
   console.log('╔══════════════════════════════════════════════════════════╗');
   console.log('║  HIFLD Fire Stations Data Downloader                     ║');
-  console.log('║  Space or Bust - Ghost Army SEO Protocol                 ║');
+  console.log('║  Space or Bust - Fire Department Directory                 ║');
   console.log('╚══════════════════════════════════════════════════════════╝');
 
   // Find working service
