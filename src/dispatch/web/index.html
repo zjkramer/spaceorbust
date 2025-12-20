@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch Protocol - Fire | Tow | Space</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --bg-hover: #1a1a1a;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #666666;
+      --accent: #00ff88;
+      --accent-dim: #004422;
+      --status-available: #00ff88;
+      --status-dispatched: #ffcc00;
+      --status-on-scene: #ff6600;
+      --status-returning: #00aaff;
+      --status-oos: #ff4444;
+      --priority-critical: #ff0000;
+      --priority-emergency: #ff6600;
+      --priority-urgent: #ffcc00;
+      --priority-routine: #00aaff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .container { max-width: 1600px; margin: 0 auto; padding: 1rem; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .org-name { color: var(--text-dim); font-size: 0.9rem; margin-left: 1rem; }
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-available); }
+    .sync-dot.offline { background: var(--status-oos); }
+
+    /* Dashboard Grid */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 1rem;
+      height: calc(100vh - 120px);
+    }
+    @media (max-width: 1200px) {
+      .dashboard { grid-template-columns: 1fr 1fr; }
+      .panel-incidents { order: -1; grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .dashboard { grid-template-columns: 1fr; }
+      .panel-incidents { grid-column: span 1; }
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-header {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+    }
+    .panel-title { font-size: 0.9rem; font-weight: 600; color: var(--accent); }
+    .panel-count { font-size: 0.8rem; color: var(--text-dim); }
+    .panel-body { flex: 1; overflow-y: auto; padding: 0.5rem; }
+
+    /* Unit Cards */
+    .unit-card {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .unit-card:hover { background: var(--bg-hover); border-color: var(--accent); }
+    .unit-card.selected { border-color: var(--accent); background: var(--accent-dim); }
+    .unit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem; }
+    .unit-callsign { font-weight: 600; }
+    .unit-status {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .unit-status.available { background: var(--status-available); color: #000; }
+    .unit-status.dispatched { background: var(--status-dispatched); color: #000; }
+    .unit-status.on_scene { background: var(--status-on-scene); color: #000; }
+    .unit-status.returning { background: var(--status-returning); color: #000; }
+    .unit-status.out_of_service, .unit-status.maintenance, .unit-status.offline { background: var(--status-oos); color: #fff; }
+    .unit-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 1rem; }
+    .unit-category { text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Incident Cards */
+    .incident-card {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--priority-emergency);
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .incident-card:hover { background: var(--bg-hover); }
+    .incident-card.priority-critical { border-left-color: var(--priority-critical); }
+    .incident-card.priority-emergency { border-left-color: var(--priority-emergency); }
+    .incident-card.priority-urgent { border-left-color: var(--priority-urgent); }
+    .incident-card.priority-routine { border-left-color: var(--priority-routine); }
+    .incident-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+    .incident-title { font-weight: 600; flex: 1; }
+    .incident-status { font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 3px; background: var(--border); }
+    .incident-location { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .incident-units { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+    .incident-unit-tag {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      color: var(--accent);
+    }
+    .incident-time { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.5rem; }
+
+    /* Personnel List */
+    .personnel-item {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .personnel-name { font-size: 0.85rem; }
+    .personnel-role { font-size: 0.75rem; color: var(--text-dim); }
+    .personnel-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--status-available);
+    }
+    .personnel-status.off_duty { background: var(--text-dim); }
+
+    /* Actions Bar */
+    .actions-bar {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 4px;
+    }
+    .btn:hover { background: var(--accent); color: var(--bg); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-danger { border-color: var(--status-oos); color: var(--status-oos); }
+    .btn-danger:hover { background: var(--status-oos); color: #fff; }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title { font-size: 1.1rem; font-weight: 600; color: var(--accent); }
+    .modal-close { background: none; border: none; color: var(--text-dim); font-size: 1.5rem; cursor: pointer; }
+    .modal-body { padding: 1rem; }
+    .modal-footer { padding: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 0.5rem; }
+
+    /* Form Elements */
+    .form-group { margin-bottom: 1rem; }
+    .form-label { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.25rem; }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+    .form-input:focus, .form-select:focus { outline: none; border-color: var(--accent); }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-dim);
+    }
+    .empty-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      gap: 2rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; }
+
+    /* Log Entry */
+    .log-entry {
+      padding: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+    .log-time { color: var(--text-dim); margin-right: 0.5rem; }
+    .log-content { color: var(--text); }
+
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .category-btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+    .category-btn.active, .category-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div style="display: flex; align-items: center;">
+        <span class="logo">DISPATCH</span>
+        <span class="org-name" id="org-name">Demo Fire Department</span>
+      </div>
+      <div class="sync-status">
+        <span class="sync-dot" id="sync-dot"></span>
+        <span id="sync-text">Online</span>
+        <span id="sync-pending"></span>
+      </div>
+    </header>
+
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="stat-units">0</div>
+        <div class="stat-label">Units</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-available">0</div>
+        <div class="stat-label">Available</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-incidents">0</div>
+        <div class="stat-label">Active Incidents</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-personnel">0</div>
+        <div class="stat-label">On Duty</div>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <!-- Units Panel -->
+      <div class="panel panel-units">
+        <div class="panel-header">
+          <span class="panel-title">UNITS</span>
+          <span class="panel-count" id="units-count">0 units</span>
+        </div>
+        <div class="category-filter" id="category-filter">
+          <button class="category-btn active" data-category="all">All</button>
+          <button class="category-btn" data-category="ground">Ground</button>
+          <button class="category-btn" data-category="air">Air</button>
+          <button class="category-btn" data-category="water">Water</button>
+        </div>
+        <div class="panel-body" id="units-list"></div>
+        <div class="actions-bar">
+          <button class="btn" onclick="showDispatchModal()">Dispatch Selected</button>
+          <button class="btn" onclick="changeUnitStatus('available')">Mark Available</button>
+          <button class="btn btn-danger" onclick="changeUnitStatus('out_of_service')">Mark OOS</button>
+        </div>
+      </div>
+
+      <!-- Incidents Panel -->
+      <div class="panel panel-incidents">
+        <div class="panel-header">
+          <span class="panel-title">ACTIVE INCIDENTS</span>
+          <span class="panel-count" id="incidents-count">0 incidents</span>
+        </div>
+        <div class="panel-body" id="incidents-list"></div>
+        <div class="actions-bar">
+          <button class="btn btn-primary" onclick="showNewIncidentModal()">New Incident</button>
+          <button class="btn" onclick="showIncidentDetails()">View Details</button>
+        </div>
+      </div>
+
+      <!-- Personnel Panel -->
+      <div class="panel panel-personnel">
+        <div class="panel-header">
+          <span class="panel-title">PERSONNEL</span>
+          <span class="panel-count" id="personnel-count">0 on duty</span>
+        </div>
+        <div class="panel-body" id="personnel-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Incident Modal -->
+  <div class="modal" id="incident-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title">New Incident</span>
+        <button class="modal-close" onclick="closeModal('incident-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Incident Type</label>
+          <select class="form-select" id="incident-type">
+            <option value="structure_fire">Structure Fire</option>
+            <option value="vehicle_fire">Vehicle Fire</option>
+            <option value="wildland_fire">Wildland Fire</option>
+            <option value="ems_cardiac">EMS - Cardiac</option>
+            <option value="ems_trauma">EMS - Trauma</option>
+            <option value="ems_respiratory">EMS - Respiratory</option>
+            <option value="rescue_vehicle">Vehicle Rescue</option>
+            <option value="rescue_water">Water Rescue</option>
+            <option value="hazmat_spill">Hazmat Spill</option>
+            <option value="alarm_fire">Fire Alarm</option>
+            <option value="public_assist">Public Assist</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Priority</label>
+          <select class="form-select" id="incident-priority">
+            <option value="critical">Critical - Life Threat</option>
+            <option value="emergency" selected>Emergency</option>
+            <option value="urgent">Urgent</option>
+            <option value="routine">Routine</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Address</label>
+          <input type="text" class="form-input" id="incident-address" placeholder="123 Main St">
+        </div>
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input type="text" class="form-input" id="incident-city" value="Austin">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <input type="text" class="form-input" id="incident-notes" placeholder="Additional information...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal('incident-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="createIncident()">Create Incident</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dispatch Modal -->
+  <div class="modal" id="dispatch-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title">Dispatch Unit</span>
+        <button class="modal-close" onclick="closeModal('dispatch-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Select Incident</label>
+          <select class="form-select" id="dispatch-incident"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Assigned Role</label>
+          <input type="text" class="form-input" id="dispatch-role" placeholder="Attack, RIT, EMS, Recon...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal('dispatch-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="dispatchSelectedUnit()">Dispatch</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Dispatch Protocol v0.1.0 | MIT License - Free forever. <a href="https://github.com/zjkramer/spaceorbust">spaceorbust</a>
+  </footer>
+
+  <script>
+    // ============================================
+    // DISPATCH SERVICE (Browser Version)
+    // ============================================
+    
+    const dispatchService = {
+      organization: null,
+      units: new Map(),
+      incidents: new Map(),
+      personnel: new Map(),
+      incidentLogs: new Map(),
+      listeners: new Set(),
+      
+      subscribe(listener) {
+        this.listeners.add(listener);
+        return () => this.listeners.delete(listener);
+      },
+      
+      emit(event) {
+        this.listeners.forEach(l => l(event));
+      },
+      
+      setOrganization(org) { this.organization = org; },
+      getOrganization() { return this.organization; },
+      
+      addUnit(unit) { this.units.set(unit.id, unit); },
+      getUnit(id) { return this.units.get(id); },
+      getAllUnits() { return Array.from(this.units.values()); },
+      getAvailableUnits() { return this.getAllUnits().filter(u => u.status === 'available'); },
+      
+      updateUnitStatus(unitId, newStatus) {
+        const unit = this.units.get(unitId);
+        if (!unit) return null;
+        const previousStatus = unit.status;
+        unit.status = newStatus;
+        unit.lastStatusChange = new Date();
+        if (newStatus === 'available') unit.currentIncidentId = undefined;
+        this.emit({ type: 'UNIT_STATUS_CHANGED', unit, previousStatus });
+        return unit;
+      },
+      
+      createIncident(incident) {
+        incident.receivedAt = new Date();
+        incident.assignedUnitIds = incident.assignedUnitIds || [];
+        this.incidents.set(incident.id, incident);
+        this.incidentLogs.set(incident.id, []);
+        this.addIncidentLog(incident.id, { type: 'created', content: 'Incident created: ' + incident.title });
+        this.emit({ type: 'INCIDENT_CREATED', incident });
+        return incident;
+      },
+      
+      getIncident(id) { return this.incidents.get(id); },
+      getAllIncidents() { return Array.from(this.incidents.values()); },
+      getActiveIncidents() {
+        return this.getAllIncidents().filter(i => 
+          ['pending', 'dispatched', 'on_scene', 'controlled'].includes(i.status)
+        );
+      },
+      
+      updateIncidentStatus(incidentId, newStatus) {
+        const incident = this.incidents.get(incidentId);
+        if (!incident) return null;
+        incident.status = newStatus;
+        if (newStatus === 'dispatched' && !incident.dispatchedAt) incident.dispatchedAt = new Date();
+        if (newStatus === 'on_scene' && !incident.firstOnSceneAt) incident.firstOnSceneAt = new Date();
+        if (newStatus === 'completed' && !incident.completedAt) incident.completedAt = new Date();
+        this.emit({ type: 'INCIDENT_UPDATED', incident });
+        return incident;
+      },
+      
+      dispatchUnit(unitId, incidentId, role) {
+        const unit = this.getUnit(unitId);
+        const incident = this.getIncident(incidentId);
+        if (!unit || !incident) return null;
+        
+        unit.status = 'dispatched';
+        unit.currentIncidentId = incidentId;
+        unit.lastStatusChange = new Date();
+        
+        if (!incident.assignedUnitIds.includes(unitId)) {
+          incident.assignedUnitIds.push(unitId);
+        }
+        if (incident.status === 'pending') {
+          incident.status = 'dispatched';
+          incident.dispatchedAt = new Date();
+        }
+        
+        this.addIncidentLog(incidentId, {
+          type: 'unit_dispatched',
+          content: unit.callsign + ' dispatched' + (role ? ' as ' + role : '')
+        });
+        
+        this.emit({ type: 'UNIT_DISPATCHED', dispatch: { unitId, incidentId } });
+        this.emit({ type: 'INCIDENT_UPDATED', incident });
+        return { unitId, incidentId };
+      },
+      
+      addIncidentLog(incidentId, entry) {
+        const logs = this.incidentLogs.get(incidentId) || [];
+        logs.push({
+          id: 'log-' + Date.now(),
+          incidentId,
+          timestamp: new Date(),
+          ...entry
+        });
+        this.incidentLogs.set(incidentId, logs);
+      },
+      
+      getIncidentLogs(incidentId) { return this.incidentLogs.get(incidentId) || []; },
+      
+      addPersonnel(person) { this.personnel.set(person.id, person); },
+      getPersonnel(id) { return this.personnel.get(id); },
+      getAllPersonnel() { return Array.from(this.personnel.values()); },
+      getOnDutyPersonnel() {
+        return this.getAllPersonnel().filter(p => ['on_duty', 'on_scene', 'on_call'].includes(p.status));
+      },
+      
+      getStats() {
+        return {
+          totalUnits: this.units.size,
+          availableUnits: this.getAvailableUnits().length,
+          activeIncidents: this.getActiveIncidents().length,
+          onDutyPersonnel: this.getOnDutyPersonnel().length,
+        };
+      },
+      
+      loadDemoData() {
+        this.setOrganization({
+          id: 'demo-fd',
+          name: 'Demo Fire Department',
+          shortName: 'Demo FD',
+          type: 'fire_department',
+          tier: 'free',
+          city: 'Austin',
+          state: 'TX',
+          isVolunteer: true,
+        });
+        
+        const units = [
+          { id: 'engine-1', callsign: 'Engine 1', type: 'engine', category: 'ground', status: 'available', capabilities: { waterCapacityLiters: 2800 }, organizationId: 'demo-fd' },
+          { id: 'ladder-1', callsign: 'Ladder 1', type: 'ladder', category: 'ground', status: 'available', capabilities: { ladderHeightMeters: 30 }, organizationId: 'demo-fd' },
+          { id: 'rescue-1', callsign: 'Rescue 1', type: 'rescue', category: 'ground', status: 'available', capabilities: {}, organizationId: 'demo-fd' },
+          { id: 'drone-1', callsign: 'Drone 1', type: 'drone_recon', category: 'air', status: 'available', capabilities: { thermalCamera: true, flightTimeMinutes: 35 }, organizationId: 'demo-fd' },
+          { id: 'medic-1', callsign: 'Medic 1', type: 'medic', category: 'ground', status: 'available', capabilities: { patientCapacity: 2 }, organizationId: 'demo-fd' },
+          { id: 'boat-1', callsign: 'Rescue Boat 1', type: 'rescue_boat', category: 'water', status: 'available', capabilities: {}, organizationId: 'demo-fd' },
+        ];
+        units.forEach(u => this.addUnit({ ...u, lastStatusChange: new Date(), assignedPersonnelIds: [] }));
+        
+        const personnel = [
+          { id: 'chief-1', firstName: 'Sarah', lastName: 'Mitchell', displayName: 'Chief Mitchell', status: 'on_duty', primaryRole: 'fire_chief', organizationId: 'demo-fd' },
+          { id: 'captain-1', firstName: 'Mike', lastName: 'Johnson', displayName: 'Capt. Johnson', status: 'on_duty', primaryRole: 'captain', currentUnitId: 'engine-1', organizationId: 'demo-fd' },
+          { id: 'ff-1', firstName: 'Alex', lastName: 'Chen', displayName: 'FF Chen', status: 'on_duty', primaryRole: 'firefighter_paramedic', currentUnitId: 'engine-1', organizationId: 'demo-fd' },
+          { id: 'drone-pilot-1', firstName: 'Jordan', lastName: 'Torres', displayName: 'FF Torres', status: 'on_duty', primaryRole: 'drone_pilot', currentUnitId: 'drone-1', organizationId: 'demo-fd' },
+          { id: 'emt-1', firstName: 'Sam', lastName: 'Rivera', displayName: 'EMT Rivera', status: 'on_duty', primaryRole: 'emt_basic', currentUnitId: 'medic-1', organizationId: 'demo-fd' },
+        ];
+        personnel.forEach(p => this.addPersonnel(p));
+        
+        console.log('Demo data loaded:', this.getStats());
+      }
+    };
+
+    // ============================================
+    // UI STATE
+    // ============================================
+    
+    let selectedUnitId = null;
+    let selectedIncidentId = null;
+    let categoryFilter = 'all';
+
+    // ============================================
+    // UI RENDERING
+    // ============================================
+    
+    function renderStats() {
+      const stats = dispatchService.getStats();
+      document.getElementById('stat-units').textContent = stats.totalUnits;
+      document.getElementById('stat-available').textContent = stats.availableUnits;
+      document.getElementById('stat-incidents').textContent = stats.activeIncidents;
+      document.getElementById('stat-personnel').textContent = stats.onDutyPersonnel;
+    }
+    
+    function renderUnits() {
+      const units = dispatchService.getAllUnits()
+        .filter(u => categoryFilter === 'all' || u.category === categoryFilter)
+        .sort((a, b) => a.callsign.localeCompare(b.callsign));
+      
+      const container = document.getElementById('units-list');
+      document.getElementById('units-count').textContent = units.length + ' units';
+      
+      if (units.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🚒</div>No units found</div>';
+        return;
+      }
+      
+      container.innerHTML = units.map(u => {
+        const typeLabel = u.type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        return '<div class="unit-card ' + (selectedUnitId === u.id ? 'selected' : '') + '" data-id="' + u.id + '" onclick="selectUnit(\'' + u.id + '\')">' +
+          '<div class="unit-header">' +
+            '<span class="unit-callsign">' + u.callsign + '</span>' +
+            '<span class="unit-status ' + u.status + '">' + u.status.replace(/_/g, ' ') + '</span>' +
+          '</div>' +
+          '<div class="unit-meta">' +
+            '<span class="unit-category">' + u.category + '</span>' +
+            '<span>' + typeLabel + '</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+    
+    function renderIncidents() {
+      const incidents = dispatchService.getActiveIncidents()
+        .sort((a, b) => b.receivedAt - a.receivedAt);
+      
+      const container = document.getElementById('incidents-list');
+      document.getElementById('incidents-count').textContent = incidents.length + ' incidents';
+      
+      if (incidents.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div>No active incidents</div>';
+        return;
+      }
+      
+      container.innerHTML = incidents.map(i => {
+        const units = (i.assignedUnitIds || []).map(id => {
+          const u = dispatchService.getUnit(id);
+          return u ? '<span class="incident-unit-tag">' + u.callsign + '</span>' : '';
+        }).join('');
+        const time = formatTime(i.receivedAt);
+        const typeLabel = i.type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        
+        return '<div class="incident-card priority-' + i.priority + '" data-id="' + i.id + '" onclick="selectIncident(\'' + i.id + '\')">' +
+          '<div class="incident-header">' +
+            '<span class="incident-title">' + typeLabel + '</span>' +
+            '<span class="incident-status">' + i.status + '</span>' +
+          '</div>' +
+          '<div class="incident-location">' + (i.location?.address || 'Unknown location') + '</div>' +
+          '<div class="incident-units">' + (units || '<span style="color: var(--text-dim); font-size: 0.75rem;">No units assigned</span>') + '</div>' +
+          '<div class="incident-time">Received: ' + time + '</div>' +
+        '</div>';
+      }).join('');
+    }
+    
+    function renderPersonnel() {
+      const personnel = dispatchService.getOnDutyPersonnel()
+        .sort((a, b) => a.displayName.localeCompare(b.displayName));
+      
+      const container = document.getElementById('personnel-list');
+      document.getElementById('personnel-count').textContent = personnel.length + ' on duty';
+      
+      if (personnel.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">👤</div>No personnel on duty</div>';
+        return;
+      }
+      
+      container.innerHTML = personnel.map(p => {
+        const roleLabel = (p.primaryRole || '').replace(/_/g, ' ');
+        const unitLabel = p.currentUnitId ? ' (' + (dispatchService.getUnit(p.currentUnitId)?.callsign || '') + ')' : '';
+        
+        return '<div class="personnel-item">' +
+          '<div>' +
+            '<div class="personnel-name">' + p.displayName + '</div>' +
+            '<div class="personnel-role">' + roleLabel + unitLabel + '</div>' +
+          '</div>' +
+          '<div class="personnel-status ' + p.status + '"></div>' +
+        '</div>';
+      }).join('');
+    }
+    
+    function renderAll() {
+      renderStats();
+      renderUnits();
+      renderIncidents();
+      renderPersonnel();
+      
+      const org = dispatchService.getOrganization();
+      if (org) {
+        document.getElementById('org-name').textContent = org.name;
+      }
+    }
+    
+    // ============================================
+    // UI ACTIONS
+    // ============================================
+    
+    function selectUnit(id) {
+      selectedUnitId = selectedUnitId === id ? null : id;
+      renderUnits();
+    }
+    
+    function selectIncident(id) {
+      selectedIncidentId = selectedIncidentId === id ? null : id;
+    }
+    
+    function changeUnitStatus(newStatus) {
+      if (!selectedUnitId) {
+        alert('Please select a unit first');
+        return;
+      }
+      dispatchService.updateUnitStatus(selectedUnitId, newStatus);
+      selectedUnitId = null;
+      renderAll();
+    }
+    
+    function showDispatchModal() {
+      if (!selectedUnitId) {
+        alert('Please select a unit first');
+        return;
+      }
+      const unit = dispatchService.getUnit(selectedUnitId);
+      if (unit.status !== 'available') {
+        alert('Unit must be available to dispatch');
+        return;
+      }
+      
+      const incidents = dispatchService.getActiveIncidents();
+      const select = document.getElementById('dispatch-incident');
+      select.innerHTML = incidents.map(i => 
+        '<option value="' + i.id + '">' + i.type.replace(/_/g, ' ') + ' - ' + (i.location?.address || 'Unknown') + '</option>'
+      ).join('') || '<option value="">No active incidents</option>';
+      
+      document.getElementById('dispatch-modal').classList.add('active');
+    }
+    
+    function dispatchSelectedUnit() {
+      const incidentId = document.getElementById('dispatch-incident').value;
+      const role = document.getElementById('dispatch-role').value;
+      
+      if (!incidentId) {
+        alert('Please select an incident');
+        return;
+      }
+      
+      dispatchService.dispatchUnit(selectedUnitId, incidentId, role);
+      closeModal('dispatch-modal');
+      selectedUnitId = null;
+      renderAll();
+    }
+    
+    function showNewIncidentModal() {
+      document.getElementById('incident-modal').classList.add('active');
+    }
+    
+    function createIncident() {
+      const type = document.getElementById('incident-type').value;
+      const priority = document.getElementById('incident-priority').value;
+      const address = document.getElementById('incident-address').value;
+      const city = document.getElementById('incident-city').value;
+      const notes = document.getElementById('incident-notes').value;
+      
+      if (!address) {
+        alert('Please enter an address');
+        return;
+      }
+      
+      const incident = {
+        id: 'inc-' + Date.now(),
+        type: type,
+        priority: priority,
+        status: 'pending',
+        title: type.replace(/_/g, ' '),
+        location: { address, city },
+        notes: notes,
+        primaryOrgId: dispatchService.getOrganization()?.id || 'demo-fd',
+      };
+      
+      dispatchService.createIncident(incident);
+      closeModal('incident-modal');
+      
+      // Clear form
+      document.getElementById('incident-address').value = '';
+      document.getElementById('incident-notes').value = '';
+      
+      renderAll();
+    }
+    
+    function showIncidentDetails() {
+      // TODO: Implement incident details modal
+      alert('Incident details coming soon!');
+    }
+    
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+    
+    // ============================================
+    // CATEGORY FILTER
+    // ============================================
+    
+    document.getElementById('category-filter').addEventListener('click', (e) => {
+      if (e.target.classList.contains('category-btn')) {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        categoryFilter = e.target.dataset.category;
+        renderUnits();
+      }
+    });
+    
+    // ============================================
+    // UTILITIES
+    // ============================================
+    
+    function formatTime(date) {
+      if (!date) return '';
+      const d = new Date(date);
+      return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+    
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    
+    dispatchService.loadDemoData();
+    dispatchService.subscribe(() => renderAll());
+    renderAll();
+    
+    // Close modals on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+      }
+    });
+    
+    // Simulate sync status
+    setInterval(() => {
+      const online = navigator.onLine;
+      document.getElementById('sync-dot').classList.toggle('offline', !online);
+      document.getElementById('sync-text').textContent = online ? 'Online' : 'Offline';
+    }, 1000);
+    
+    console.log('Dispatch Protocol loaded - Free forever. Fuck predatory private equity.');
+  </script>
+</body>
+</html>
