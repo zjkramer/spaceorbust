@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4200" height="4800" viewBox="0 0 4200 4800">
+  <!-- Printful Hoodie design - 14x16 inches at 300 DPI -->
+  <!-- Transparent background for DTG printing -->
+
+  <!-- spaceorbust / tsubroecaps mirror logo -->
+  <g transform="translate(2100, 2200)">
+    <!-- Top line: spaceorbust -->
+    <text x="0" y="-100" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="280" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+
+    <!-- Bottom line: tsubroecaps (mirrored) -->
+    <text x="0" y="220" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="280" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+</svg>

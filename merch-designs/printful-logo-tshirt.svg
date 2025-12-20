@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4500" height="5400" viewBox="0 0 4500 5400">
+  <!-- Printful T-shirt design - 15x18 inches at 300 DPI -->
+  <!-- Transparent background for DTG printing -->
+
+  <!-- spaceorbust / tsubroecaps mirror logo -->
+  <g transform="translate(2250, 2400)">
+    <!-- Top line: spaceorbust -->
+    <text x="0" y="-100" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="320" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+
+    <!-- Bottom line: tsubroecaps (mirrored) -->
+    <text x="0" y="250" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="320" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+</svg>

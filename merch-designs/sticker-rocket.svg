@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Simple sticker - rocket with spaceorbust -->
+
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#0a0a0a" stroke="#00ff88" stroke-width="2"/>
+
+  <!-- Rocket -->
+  <text x="50" y="45" text-anchor="middle" font-size="35">🚀</text>
+
+  <!-- Brand -->
+  <text x="50" y="72" text-anchor="middle" font-family="Courier New, monospace" font-size="8" font-weight="bold" fill="#00ff88">space</text>
+  <text x="50" y="82" text-anchor="middle" font-family="Courier New, monospace" font-size="8" font-weight="bold" fill="#ffffff">orbust</text>
+</svg>

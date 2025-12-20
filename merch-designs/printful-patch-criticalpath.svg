@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <!-- Printful Embroidered Patch - 3x3 inches at 300 DPI -->
+  <!-- Mission patch with Critical Path indicator (no label - let them figure it out) -->
+
+  <defs>
+    <!-- Critical path gradient: yellow → orange → red -->
+    <linearGradient id="criticalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffcc00"/>
+      <stop offset="50%" style="stop-color:#ff8800"/>
+      <stop offset="100%" style="stop-color:#ff3333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background - centered evenly -->
+  <circle cx="450" cy="450" r="440" fill="#0a0a0a"/>
+
+  <!-- Main green ring (270 degrees - 3/4 of circle) -->
+  <!-- Arc from bottom-left, going clockwise, leaving gap at bottom-right -->
+  <path d="M 450 890 A 420 420 0 1 1 747 747"
+        fill="none" stroke="#00ff88" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Critical Path arc (90 degrees - 1/4 of circle, bottom-right quadrant) -->
+  <!-- The "what if" zone - yellow to orange to red -->
+  <path d="M 747 747 A 420 420 0 0 1 450 890"
+        fill="none" stroke="url(#criticalGrad)" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Inner ring - even spacing -->
+  <circle cx="450" cy="450" r="370" fill="none" stroke="#333333" stroke-width="3"/>
+
+  <!-- Logo centered - larger text with good negative space -->
+  <g transform="translate(450, 450)">
+    <text x="0" y="-35" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="88" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="75" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="88" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+
+  <!-- Small stars -->
+  <circle cx="150" cy="200" r="8" fill="#ffffff"/>
+  <circle cx="750" cy="180" r="6" fill="#ffffff"/>
+  <circle cx="120" cy="700" r="5" fill="#ffffff"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">
+  <!-- "My code powers humanity's journey to the stars" design -->
+
+  <!-- Rocket icon -->
+  <text x="250" y="50" text-anchor="middle" font-size="40">🚀</text>
+
+  <!-- Tagline -->
+  <text x="250" y="100" text-anchor="middle" font-family="Courier New, monospace" font-size="18" fill="#ffffff">MY CODE POWERS</text>
+  <text x="250" y="125" text-anchor="middle" font-family="Courier New, monospace" font-size="18" fill="#ffffff">HUMANITY'S JOURNEY</text>
+  <text x="250" y="150" text-anchor="middle" font-family="Courier New, monospace" font-size="18" fill="#00ff88">TO THE STARS</text>
+
+  <!-- Small branding -->
+  <text x="250" y="185" text-anchor="middle" font-family="Courier New, monospace" font-size="12" fill="#666666">spaceorbust.com</text>
+</svg>

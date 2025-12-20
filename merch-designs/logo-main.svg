@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <!-- spaceorbust main logo - for t-shirts, hoodies -->
+  <defs>
+    <linearGradient id="spaceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88"/>
+      <stop offset="100%" style="stop-color:#00cc66"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main text -->
+  <text x="200" y="55" text-anchor="middle" font-family="Courier New, monospace" font-size="48" font-weight="bold" fill="url(#spaceGrad)">space</text>
+  <text x="200" y="95" text-anchor="middle" font-family="Courier New, monospace" font-size="48" font-weight="bold" fill="#ffffff">orbust</text>
+</svg>

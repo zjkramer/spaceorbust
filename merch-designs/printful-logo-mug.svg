@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2700" height="1050" viewBox="0 0 2700 1050">
+  <!-- Printful Mug wrap design - 9x3.5 inches at 300 DPI -->
+  <!-- For 11oz/15oz mugs - sublimation printing -->
+
+  <!-- Dark background for mug -->
+  <rect width="2700" height="1050" fill="#0a0a0a"/>
+
+  <!-- Left side: spaceorbust -->
+  <g transform="translate(675, 525)">
+    <text x="0" y="-60" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="120" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="80" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="120" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+
+  <!-- Right side: repeat for wrap-around -->
+  <g transform="translate(2025, 525)">
+    <text x="0" y="-60" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="120" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="80" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="120" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+</svg>

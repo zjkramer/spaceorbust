@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <!-- Printful Embroidered Patch - 3x3 inches at 300 DPI -->
+  <!-- Circular mission patch style -->
+
+  <!-- Outer ring -->
+  <circle cx="450" cy="450" r="440" fill="#0a0a0a"/>
+  <circle cx="450" cy="450" r="420" fill="none" stroke="#00ff88" stroke-width="20"/>
+  <circle cx="450" cy="450" r="380" fill="none" stroke="#333333" stroke-width="4"/>
+
+  <!-- Logo centered -->
+  <g transform="translate(450, 450)">
+    <text x="0" y="-30" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="72" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="60" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="72" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+
+  <!-- Small stars -->
+  <circle cx="150" cy="200" r="8" fill="#ffffff"/>
+  <circle cx="750" cy="180" r="6" fill="#ffffff"/>
+  <circle cx="120" cy="700" r="5" fill="#ffffff"/>
+  <circle cx="780" cy="720" r="7" fill="#ffffff"/>
+</svg>

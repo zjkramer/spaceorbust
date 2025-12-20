@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <!-- Printful Hat/Cap embroidery design - 4x2 inches at 300 DPI -->
+  <!-- Simple single-line for embroidery -->
+
+  <g transform="translate(600, 300)">
+    <text x="0" y="20" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="140" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#ffffff">orbust</tspan>
+    </text>
+  </g>
+</svg>

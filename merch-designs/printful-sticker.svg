@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <!-- Printful Kiss-cut sticker - 4x4 inches at 300 DPI -->
+
+  <!-- Dark background circle -->
+  <circle cx="600" cy="600" r="580" fill="#0a0a0a"/>
+  <circle cx="600" cy="600" r="560" fill="none" stroke="#00ff88" stroke-width="8"/>
+
+  <!-- Logo centered -->
+  <g transform="translate(600, 600)">
+    <text x="0" y="-40" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="100" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="80" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="100" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+</svg>
