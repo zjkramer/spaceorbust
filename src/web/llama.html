@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--
+  ╔═══════════════════════════════════════════════════════════════════════╗
+  ║  EASTER EGG #8 - THE SECRET LLAMA PAGE                                ║
+  ║                                                                       ║
+  ║  You found the hidden page at /llama.html!                            ║
+  ║  Only true explorers of source code make it here.                     ║
+  ║                                                                       ║
+  ║  Zachary Joseph Kramer + Claude | December 2025                       ║
+  ║  Flatland Expeditions LLC | spaceorbust.com                           ║
+  ╚═══════════════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>🦙 You Found The Llama</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦙</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --accent: #00ff88;
+      --text: #e0e0e0;
+      --dim: #666666;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .llama {
+      font-size: 8rem;
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 2rem;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    h1 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .message {
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .credits {
+      border: 1px solid #222;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: left;
+      max-width: 500px;
+    }
+    .credits h2 {
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .credits p {
+      margin: 0.5rem 0;
+      color: var(--dim);
+    }
+    .credits .name {
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .quote {
+      font-style: italic;
+      color: var(--dim);
+      margin: 2rem 0;
+      padding: 1rem;
+      border-left: 2px solid var(--accent);
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      margin-top: 1rem;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+    }
+    .konami-hint {
+      font-size: 0.8rem;
+      color: #333;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="llama">🦙</div>
+
+  <h1>You Found The Secret Llama Page!</h1>
+
+  <p class="message">
+    Congratulations, intrepid explorer! You've discovered one of the hidden
+    easter eggs in spaceorbust. This page is not linked from anywhere -
+    you must have been poking around in the source code. We respect that.
+  </p>
+
+  <div class="credits">
+    <h2>The Creators</h2>
+    <p><span class="name">Zachary Joseph Kramer</span></p>
+    <p>Kansas City, MO</p>
+    <p>zach@spaceorbust.com</p>
+    <br>
+    <p><span class="name">Claude (Anthropic)</span></p>
+    <p>AI Development Partner</p>
+    <p>Model: claude-opus-4-5-20251101</p>
+    <br>
+    <p style="color: var(--text);">Project Genesis: December 18, 2025 @ 10:12 CST</p>
+    <p>Flatland Expeditions LLC</p>
+  </div>
+
+  <div class="quote">
+    "In the void, clear communication is survival."<br>
+    <span style="color: var(--accent);">- The Space Llama</span>
+  </div>
+
+  <p class="message">
+    <strong style="color: #ff6600;">Why does this exist?</strong><br><br>
+    Private equity is squeezing rural fire departments with overpriced
+    dispatch software. Volunteer firefighters risk their lives for our
+    communities. They deserve better tools. So we built free, open-source
+    dispatch software. Forever free. No vendor lock-in.
+  </p>
+
+  <p style="color: var(--accent); font-size: 1.2rem; margin: 1rem 0;">
+    frack predatory private equity.
+  </p>
+
+  <a href="index.html" class="btn">Return to Mission Control</a>
+  <br>
+  <a href="dispatch.html" class="btn">Try Dispatch Protocol</a>
+
+  <p class="konami-hint">
+    Hint: Try the Konami code on the main page...
+  </p>
+
+  <script>
+    console.log(`
+🦙 WELCOME TO THE SECRET LLAMA PAGE 🦙
+
+You found Easter Egg #8!
+
+There are 8 total easter eggs hidden in spaceorbust:
+1. Konami Code on index.html (↑↑↓↓←→←→BA)
+2. Type "llama" anywhere on index.html
+3. spaceorbust.credits() in browser console
+4. spaceorbust.llama() in browser console
+5. Hidden comment in dispatch.html source
+6. dispatch() function in dispatch.html console
+7. Hidden comment in llama-spacesuit.svg
+8. This secret page (/llama.html)
+
+Bonus: spaceorbust llama (CLI command)
+Bonus: spaceorbust credits (CLI command)
+
+Created by Zachary Joseph Kramer & Claude
+December 2025 | Flatland Expeditions LLC
+    `);
+  </script>
+</body>
+</html>

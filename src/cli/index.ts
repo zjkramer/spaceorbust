@@ -136,6 +136,17 @@ async function main(): Promise<void> {
         console.log('spaceorbust v0.1.0');
         break;
 
+      // Easter Egg #4: Secret CLI command
+      case 'llama':
+      case '🦙':
+        llamaCommand();
+        break;
+
+      case 'credits':
+      case 'about':
+        creditsCommand();
+        break;
+
       default:
         console.log(renderError(`Unknown command: ${command}`));
         process.exit(1);
@@ -809,6 +820,88 @@ async function shareCommand(): Promise<void> {
 `;
 
   console.log(shareText);
+}
+
+/**
+ * Easter Egg: Llama command
+ */
+function llamaCommand(): void {
+  console.log(`
+\x1b[32m
+        .---.
+       /     \\
+      | o   o |
+      |   <   |    "In the void, clear
+       \\  =  /      communication is survival."
+        '---'
+       /|   |\\         - The Space Llama
+      / |   | \\
+         🦙
+\x1b[0m
+  You found the llama! 🦙
+
+  Type 'spaceorbust credits' for more secrets...
+`);
+}
+
+/**
+ * Easter Egg: Credits command
+ */
+function creditsCommand(): void {
+  console.log(`
+\x1b[32m
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║   ███████╗██████╗  █████╗  ██████╗███████╗                   ║
+║   ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝                   ║
+║   ███████╗██████╔╝███████║██║     █████╗                     ║
+║   ╚════██║██╔═══╝ ██╔══██║██║     ██╔══╝                     ║
+║   ███████║██║     ██║  ██║╚██████╗███████╗                   ║
+║   ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝                   ║
+║                                                               ║
+║    ██████╗ ██████╗ ██████╗ ██╗   ██╗███████╗████████╗        ║
+║   ██╔═══██╗██╔══██╗██╔══██╗██║   ██║██╔════╝╚══██╔══╝        ║
+║   ██║   ██║██████╔╝██████╔╝██║   ██║███████╗   ██║           ║
+║   ██║   ██║██╔══██╗██╔══██╗██║   ██║╚════██║   ██║           ║
+║   ╚██████╔╝██║  ██║██████╔╝╚██████╔╝███████║   ██║           ║
+║    ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝   ╚═╝           ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+\x1b[0m
+  \x1b[33mCREDITS\x1b[0m
+  ─────────────────────────────────────────────────────────────
+
+  \x1b[90mCreator & Lead Developer\x1b[0m
+  \x1b[32mZachary Joseph Kramer\x1b[0m
+  Kansas City, MO
+  zach@spaceorbust.com
+
+  \x1b[90mAI Development Partner\x1b[0m
+  \x1b[32mClaude (Anthropic)\x1b[0m
+  Model: claude-opus-4-5-20251101
+
+  \x1b[90mProject Genesis\x1b[0m
+  \x1b[32mDecember 18, 2025 @ 10:12 CST\x1b[0m
+  Flatland Expeditions LLC
+
+  \x1b[90mMission Statement\x1b[0m
+  \x1b[33m"frack predatory private equity."\x1b[0m
+  Free dispatch software for rural fire departments.
+  Your code powers humanity's journey to the stars.
+
+  ─────────────────────────────────────────────────────────────
+
+  \x1b[90mSpecial Thanks\x1b[0m
+  - The open source community
+  - Rural volunteer fire departments everywhere
+  - Anyone who believes code can change the world
+
+  \x1b[90m"The best time to plant a tree was 20 years ago.\x1b[0m
+  \x1b[90m The second best time is now." - Chinese Proverb\x1b[0m
+
+  🦙 Space Or Bust!
+
+`);
 }
 
 // Run

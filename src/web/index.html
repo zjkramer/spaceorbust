@@ -926,6 +926,113 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
 ║   Your code powers humanity's journey to the stars.      ║
 ╚══════════════════════════════════════════════════════════╝
     `);
+
+    // Easter Egg #1: Konami Code (↑↑↓↓←→←→BA) - Launches llama party mode
+    const konamiCode = [38,38,40,40,37,39,37,39,66,65];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+      if (e.keyCode === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          llamaPartyMode();
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    function llamaPartyMode() {
+      console.log('%c🦙 LLAMA PARTY MODE ACTIVATED 🦙', 'font-size: 24px; color: #00ff88; text-shadow: 2px 2px #ff6600;');
+      console.log('%cBuilt with love by Zachary Joseph Kramer & Claude | December 2025', 'color: #ffcc00;');
+      document.body.style.animation = 'none';
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes party { 0%{filter:hue-rotate(0deg)} 100%{filter:hue-rotate(360deg)} }
+        body { animation: party 2s infinite linear !important; }
+      `;
+      document.head.appendChild(style);
+      // Spawn extra llamas
+      for(let i=0;i<20;i++){
+        const llama=document.createElement('img');
+        llama.src=(window.location.protocol==='file:'?'mascots/':'mascots/')+'llama-spacesuit.svg';
+        llama.style.cssText='position:fixed;width:60px;height:60px;z-index:9999;pointer-events:none;animation:float 3s infinite ease-in-out;';
+        llama.style.left=Math.random()*100+'vw';
+        llama.style.top=Math.random()*100+'vh';
+        document.body.appendChild(llama);
+      }
+      setTimeout(()=>location.reload(),8000);
+    }
+
+    // Easter Egg #2: Type "llama" anywhere
+    let llamaBuffer = '';
+    document.addEventListener('keypress', (e) => {
+      llamaBuffer += e.key.toLowerCase();
+      if (llamaBuffer.includes('llama')) {
+        console.log('%c🦙 You found the llama! 🦙', 'font-size: 16px; color: #00ff88;');
+        console.log('spaceorbust v0.1.0 | Created: Dec 18, 2025 10:12 CST');
+        console.log('Author: Zachary Joseph Kramer <zach@spaceorbust.com>');
+        console.log('AI Pair: Claude (Anthropic) - Opus 4.5');
+        console.log('Mission: frack predatory private equity. Free software for fire departments.');
+        llamaBuffer = '';
+      }
+      if (llamaBuffer.length > 20) llamaBuffer = llamaBuffer.slice(-10);
+    });
+
+    // Easter Egg #3: Secret in console - type spaceorbust.credits()
+    window.spaceorbust = {
+      credits: function() {
+        console.log(`
+%c
+   ███████╗██████╗  █████╗  ██████╗███████╗ ██████╗ ██████╗ ██████╗ ██╗   ██╗███████╗████████╗
+   ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔══██╗██║   ██║██╔════╝╚══██╔══╝
+   ███████╗██████╔╝███████║██║     █████╗  ██║   ██║██████╔╝██████╔╝██║   ██║███████╗   ██║
+   ╚════██║██╔═══╝ ██╔══██║██║     ██╔══╝  ██║   ██║██╔══██╗██╔══██╗██║   ██║╚════██║   ██║
+   ███████║██║     ██║  ██║╚██████╗███████╗╚██████╔╝██║  ██║██████╔╝╚██████╔╝███████║   ██║
+   ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝   ╚═╝
+`, 'color: #00ff88; font-family: monospace;');
+        console.log('%cCREDITS', 'font-size: 20px; font-weight: bold; color: #ffcc00;');
+        console.log('%c─────────────────────────────────────────', 'color: #333;');
+        console.log('%cCreator & Lead Developer', 'color: #888;');
+        console.log('%c  Zachary Joseph Kramer', 'color: #00ff88; font-weight: bold;');
+        console.log('%c  Kansas City, MO', 'color: #666;');
+        console.log('%c  zach@spaceorbust.com', 'color: #666;');
+        console.log('');
+        console.log('%cAI Development Partner', 'color: #888;');
+        console.log('%c  Claude (Anthropic)', 'color: #00ff88; font-weight: bold;');
+        console.log('%c  Model: claude-opus-4-5-20251101', 'color: #666;');
+        console.log('');
+        console.log('%cProject Genesis', 'color: #888;');
+        console.log('%c  December 18, 2025 @ 10:12 CST', 'color: #00ff88;');
+        console.log('%c  Flatland Expeditions LLC', 'color: #666;');
+        console.log('');
+        console.log('%cMission Statement', 'color: #888;');
+        console.log('%c  "frack predatory private equity."', 'color: #ff6600; font-style: italic;');
+        console.log('%c  Free dispatch software for rural fire departments.', 'color: #666;');
+        console.log('%c  Your code powers humanity\'s journey to the stars.', 'color: #666;');
+        console.log('');
+        console.log('%c─────────────────────────────────────────', 'color: #333;');
+        console.log('%cType spaceorbust.llama() for more...', 'color: #444;');
+        return '🦙 Space Or Bust!';
+      },
+      llama: function() {
+        console.log(`
+%c        .---.
+       /     \\
+      | o   o |
+      |   <   |    "In the void, clear
+       \\  =  /      communication is survival."
+        '---'
+       /|   |\\         - The Llama
+      / |   | \\
+`, 'color: #00ff88; font-family: monospace;');
+        return '🦙';
+      },
+      version: '0.1.0',
+      author: 'Zachary Joseph Kramer',
+      aiPartner: 'Claude (Anthropic)',
+      genesis: '2025-12-18T10:12:00-06:00'
+    };
   </script>
 </body>
 </html>

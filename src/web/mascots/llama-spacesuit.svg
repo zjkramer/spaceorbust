@@ -1,5 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" fill="none">
-  <!-- Space Llama in EVA Suit - STENCIL STYLE with llama fur detail -->
+  <!--
+    ╔════════════════════════════════════════════════════════════╗
+    ║  EASTER EGG #7 - You found me in the SVG source!           ║
+    ║                                                            ║
+    ║  Space Llama in EVA Suit - STENCIL STYLE                   ║
+    ║  Created: December 18, 2025                                ║
+    ║  Author: Zachary Joseph Kramer                             ║
+    ║  AI Partner: Claude (Anthropic)                            ║
+    ║                                                            ║
+    ║  "In the void, clear communication is survival."           ║
+    ║                                                            ║
+    ║  This llama believes in free software for fire depts.      ║
+    ║  frack predatory private equity.                           ║
+    ║                                                            ║
+    ║  spaceorbust.com | Flatland Expeditions LLC                ║
+    ╚════════════════════════════════════════════════════════════╝
+  -->
   <style>
     .stroke { stroke: #00ff88; stroke-width: 3; fill: none; }
     .fill { fill: #00ff88; }
