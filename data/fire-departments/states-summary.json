@@ -1,0 +1,208 @@
+{
+  "states": [
+    {
+      "state": "CA",
+      "count": 18
+    },
+    {
+      "state": "TX",
+      "count": 18
+    },
+    {
+      "state": "PA",
+      "count": 16
+    },
+    {
+      "state": "CO",
+      "count": 14
+    },
+    {
+      "state": "MI",
+      "count": 14
+    },
+    {
+      "state": "OH",
+      "count": 14
+    },
+    {
+      "state": "VA",
+      "count": 14
+    },
+    {
+      "state": "CT",
+      "count": 13
+    },
+    {
+      "state": "IL",
+      "count": 13
+    },
+    {
+      "state": "NY",
+      "count": 13
+    },
+    {
+      "state": "NC",
+      "count": 13
+    },
+    {
+      "state": "TN",
+      "count": 13
+    },
+    {
+      "state": "ID",
+      "count": 12
+    },
+    {
+      "state": "KY",
+      "count": 12
+    },
+    {
+      "state": "LA",
+      "count": 12
+    },
+    {
+      "state": "OK",
+      "count": 12
+    },
+    {
+      "state": "OR",
+      "count": 12
+    },
+    {
+      "state": "UT",
+      "count": 12
+    },
+    {
+      "state": "WA",
+      "count": 12
+    },
+    {
+      "state": "FL",
+      "count": 11
+    },
+    {
+      "state": "IN",
+      "count": 11
+    },
+    {
+      "state": "KS",
+      "count": 11
+    },
+    {
+      "state": "ME",
+      "count": 11
+    },
+    {
+      "state": "MD",
+      "count": 11
+    },
+    {
+      "state": "NH",
+      "count": 11
+    },
+    {
+      "state": "NJ",
+      "count": 11
+    },
+    {
+      "state": "SC",
+      "count": 11
+    },
+    {
+      "state": "DE",
+      "count": 10
+    },
+    {
+      "state": "IA",
+      "count": 10
+    },
+    {
+      "state": "MO",
+      "count": 10
+    },
+    {
+      "state": "NM",
+      "count": 10
+    },
+    {
+      "state": "VT",
+      "count": 10
+    },
+    {
+      "state": "WV",
+      "count": 10
+    },
+    {
+      "state": "AL",
+      "count": 9
+    },
+    {
+      "state": "AK",
+      "count": 9
+    },
+    {
+      "state": "AZ",
+      "count": 9
+    },
+    {
+      "state": "MT",
+      "count": 9
+    },
+    {
+      "state": "NE",
+      "count": 9
+    },
+    {
+      "state": "NV",
+      "count": 9
+    },
+    {
+      "state": "ND",
+      "count": 9
+    },
+    {
+      "state": "SD",
+      "count": 9
+    },
+    {
+      "state": "WI",
+      "count": 9
+    },
+    {
+      "state": "WY",
+      "count": 9
+    },
+    {
+      "state": "AR",
+      "count": 8
+    },
+    {
+      "state": "HI",
+      "count": 8
+    },
+    {
+      "state": "MN",
+      "count": 8
+    },
+    {
+      "state": "MS",
+      "count": 8
+    },
+    {
+      "state": "RI",
+      "count": 8
+    },
+    {
+      "state": "MA",
+      "count": 7
+    },
+    {
+      "state": "GA",
+      "count": 6
+    },
+    {
+      "state": "DC",
+      "count": 1
+    }
+  ]
+}

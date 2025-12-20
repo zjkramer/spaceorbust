@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebraska Fire Departments | Free Dispatch Software | Space or Bust</title>
+  <meta name="description" content="Free dispatch and CAD software for 9 fire departments in Nebraska. Open-source, no vendor lock-in.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚒</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+      --accent: #00ff88;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 1.2rem; color: var(--accent); text-decoration: none; font-weight: bold; }
+    .nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+    .nav a:hover { color: var(--accent); }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .breadcrumb { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--text-dim); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .count { color: var(--accent); margin-bottom: 2rem; }
+    .city-section { margin-bottom: 2rem; }
+    .city-section h3 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .city-section ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.5rem; }
+    .city-section li { padding: 0.25rem 0; }
+    .city-section a { color: var(--text); text-decoration: none; }
+    .city-section a:hover { color: var(--accent); }
+    .footer { text-align: center; padding: 2rem; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 3rem; }
+    .footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="/" class="logo">🚀 Space or Bust</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/dispatch.html">Dispatch Protocol</a>
+      <a href="/store.html">Store</a>
+    </nav>
+  </header>
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> &gt;
+      <a href="/fire-departments/">Fire Departments</a> &gt;
+      Nebraska
+    </div>
+    <h1>🚒 Nebraska Fire Departments</h1>
+    <p class="count">9 departments registered</p>
+    
+        <div class="city-section">
+          <h3>Bellevue</h3>
+          <ul>
+            <li><a href="bellevue-fire-district.html">Bellevue Fire District</a></li>
+            <li><a href="bellevue-fire-department-station-2.html">Bellevue Fire Department - Station 2</a></li>
+          </ul>
+        </div>
+
+        <div class="city-section">
+          <h3>Grand Island</h3>
+          <ul>
+            <li><a href="grand-island-fire-protection-district.html">Grand Island Fire Protection District</a></li>
+          </ul>
+        </div>
+
+        <div class="city-section">
+          <h3>Kearney</h3>
+          <ul>
+            <li><a href="kearney-volunteer-fire-department.html">Kearney Volunteer Fire Department</a></li>
+            <li><a href="kearney-fire-rescue-station-2.html">Kearney Fire-Rescue - Station 2</a></li>
+            <li><a href="kearney-fire-protection-district-station-3.html">Kearney Fire Protection District - Station 3</a></li>
+          </ul>
+        </div>
+
+        <div class="city-section">
+          <h3>Lincoln</h3>
+          <ul>
+            <li><a href="lincoln-fire-protection-district.html">Lincoln Fire Protection District</a></li>
+          </ul>
+        </div>
+
+        <div class="city-section">
+          <h3>Omaha</h3>
+          <ul>
+            <li><a href="omaha-fire-district.html">Omaha Fire District</a></li>
+            <li><a href="omaha-fire-department-station-2.html">Omaha Fire Department - Station 2</a></li>
+          </ul>
+        </div>
+  </main>
+  <footer class="footer">
+    <p>© 2025 <a href="/">Space or Bust</a> | <a href="https://flatlandexpeditions.com">Flatland Expeditions LLC</a></p>
+  </footer>
+</body>
+</html>

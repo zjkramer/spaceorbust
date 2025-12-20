@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clarksville Fire District - Station 2 - Clarksville, TN | Free Dispatch Software | Space or Bust</title>
+  <meta name="description" content="Clarksville Fire District - Station 2 in Clarksville, Tennessee. Free, open-source dispatch and CAD software for fire departments. No vendor lock-in.">
+  <meta name="keywords" content="Clarksville Fire District - Station 2, Clarksville fire department, Tennessee fire department, dispatch software, CAD software, free fire department software">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Clarksville Fire District - Station 2 - Clarksville, TN">
+  <meta property="og:description" content="Free dispatch and CAD software for Clarksville Fire District - Station 2. Open-source, forever free.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spaceorbust.com/fire-departments/tn/clarksville-fire-district-station-2.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚒</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FireStation",
+  "name": "Clarksville Fire District - Station 2",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2307 Main Street",
+    "addressLocality": "Clarksville",
+    "addressRegion": "TN",
+    "postalCode": "11995",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 35.423382,
+    "longitude": -86.739414
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Clarksville County County, Tennessee"
+  },
+  "parentOrganization": {
+    "@type": "GovernmentOrganization",
+    "name": "Clarksville County County"
+  }
+}
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+      --accent: #00ff88;
+      --fire: #ff6600;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .header {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.2rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-left: 1.5rem;
+    }
+    .nav a:hover { color: var(--accent); }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .breadcrumb {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a { color: var(--text-dim); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    h1 {
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .location {
+      color: var(--fire);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      color: var(--accent);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .info-row {
+      display: flex;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label {
+      color: var(--text-dim);
+      width: 120px;
+      flex-shrink: 0;
+    }
+    .info-value { color: var(--text); }
+    .cta {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(255,102,0,0.1));
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .cta h2 {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .cta p {
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      margin: 0.25rem;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+    .weather-zone {
+      padding: 1rem;
+      background: rgba(255,102,0,0.1);
+      border-left: 3px solid var(--fire);
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      .info-row { flex-direction: column; }
+      .info-label { width: auto; margin-bottom: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="/" class="logo">🚀 Space or Bust</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/dispatch.html">Dispatch Protocol</a>
+      <a href="/store.html">Store</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> &gt;
+      <a href="/fire-departments/">Fire Departments</a> &gt;
+      <a href="/fire-departments/tn/">Tennessee</a> &gt;
+      Clarksville Fire District - Station 2
+    </div>
+
+    <h1>Clarksville Fire District - Station 2</h1>
+    <p class="location">📍 Clarksville, Tennessee (Clarksville County County)</p>
+
+    <div class="card">
+      <h2>Station Information</h2>
+      <div class="info-row">
+        <span class="info-label">Address</span>
+        <span class="info-value">2307 Main Street</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">City</span>
+        <span class="info-value">Clarksville</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">State</span>
+        <span class="info-value">Tennessee</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">ZIP Code</span>
+        <span class="info-value">11995</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">County</span>
+        <span class="info-value">Clarksville County</span>
+      </div>
+      
+      <div class="info-row">
+        <span class="info-label">Type</span>
+        <span class="info-value">Paid</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Fire Weather Integration</h2>
+      <p style="color:var(--text-dim);margin-bottom:1rem;">
+        Our dispatch software integrates with the National Weather Service to provide
+        real-time fire weather alerts for your area.
+      </p>
+      <div class="weather-zone">
+        <strong style="color:var(--fire);">🔥 Fire Weather Zone</strong><br>
+        <span style="color:var(--text-dim);">
+          Coordinates: 35.4234, -86.7394<br>
+          Red Flag Warnings and Fire Weather Watches are automatically displayed.
+        </span>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h2>Free Dispatch Software for Clarksville Fire District - Station 2</h2>
+      <p>
+        Open-source, forever free. No vendor lock-in, no predatory pricing.
+        Built by firefighters, for firefighters.
+      </p>
+      <a href="/dispatch.html" class="btn">Try Dispatch Protocol</a>
+      <a href="https://github.com/zjkramer/spaceorbust" class="btn btn-outline">View on GitHub</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Data source: <a href="https://hifld-geoplatform.opendata.arcgis.com/">HIFLD Open Data</a> |
+      <a href="https://www.usfa.fema.gov/">U.S. Fire Administration</a>
+    </p>
+    <p style="margin-top:0.5rem;">
+      © 2025 <a href="/">Space or Bust</a> |
+      <a href="https://flatlandexpeditions.com">Flatland Expeditions LLC</a>
+    </p>
+  </footer>
+</body>
+</html>

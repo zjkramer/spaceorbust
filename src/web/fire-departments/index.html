@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire Departments Directory | Free Dispatch Software | Space or Bust</title>
+  <meta name="description" content="Free dispatch and CAD software for 549 fire departments across all 50 states. Open-source, forever free.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚒</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+      --accent: #00ff88;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 1.2rem; color: var(--accent); text-decoration: none; font-weight: bold; }
+    .nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+    .nav a:hover { color: var(--accent); }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--accent); font-size: 1.2rem; margin-bottom: 2rem; }
+    .states-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .state-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .state-link:hover { border-color: var(--accent); }
+    .state-count { color: var(--accent); }
+    .footer { text-align: center; padding: 2rem; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 3rem; }
+    .footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="/" class="logo">🚀 Space or Bust</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/dispatch.html">Dispatch Protocol</a>
+      <a href="/store.html">Store</a>
+    </nav>
+  </header>
+  <main class="container">
+    <h1>🚒 Fire Departments Directory</h1>
+    <p class="subtitle">549 departments across 51 states</p>
+    <div class="states-grid">
+      <a href="ak/" class="state-link">
+        <span class="state-name">Alaska</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="al/" class="state-link">
+        <span class="state-name">Alabama</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="ar/" class="state-link">
+        <span class="state-name">Arkansas</span>
+        <span class="state-count">8</span>
+      </a>
+      <a href="az/" class="state-link">
+        <span class="state-name">Arizona</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="ca/" class="state-link">
+        <span class="state-name">California</span>
+        <span class="state-count">18</span>
+      </a>
+      <a href="co/" class="state-link">
+        <span class="state-name">Colorado</span>
+        <span class="state-count">14</span>
+      </a>
+      <a href="ct/" class="state-link">
+        <span class="state-name">Connecticut</span>
+        <span class="state-count">13</span>
+      </a>
+      <a href="dc/" class="state-link">
+        <span class="state-name">District of Columbia</span>
+        <span class="state-count">1</span>
+      </a>
+      <a href="de/" class="state-link">
+        <span class="state-name">Delaware</span>
+        <span class="state-count">10</span>
+      </a>
+      <a href="fl/" class="state-link">
+        <span class="state-name">Florida</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="ga/" class="state-link">
+        <span class="state-name">Georgia</span>
+        <span class="state-count">6</span>
+      </a>
+      <a href="hi/" class="state-link">
+        <span class="state-name">Hawaii</span>
+        <span class="state-count">8</span>
+      </a>
+      <a href="ia/" class="state-link">
+        <span class="state-name">Iowa</span>
+        <span class="state-count">10</span>
+      </a>
+      <a href="id/" class="state-link">
+        <span class="state-name">Idaho</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="il/" class="state-link">
+        <span class="state-name">Illinois</span>
+        <span class="state-count">13</span>
+      </a>
+      <a href="in/" class="state-link">
+        <span class="state-name">Indiana</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="ks/" class="state-link">
+        <span class="state-name">Kansas</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="ky/" class="state-link">
+        <span class="state-name">Kentucky</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="la/" class="state-link">
+        <span class="state-name">Louisiana</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="ma/" class="state-link">
+        <span class="state-name">Massachusetts</span>
+        <span class="state-count">7</span>
+      </a>
+      <a href="md/" class="state-link">
+        <span class="state-name">Maryland</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="me/" class="state-link">
+        <span class="state-name">Maine</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="mi/" class="state-link">
+        <span class="state-name">Michigan</span>
+        <span class="state-count">14</span>
+      </a>
+      <a href="mn/" class="state-link">
+        <span class="state-name">Minnesota</span>
+        <span class="state-count">8</span>
+      </a>
+      <a href="mo/" class="state-link">
+        <span class="state-name">Missouri</span>
+        <span class="state-count">10</span>
+      </a>
+      <a href="ms/" class="state-link">
+        <span class="state-name">Mississippi</span>
+        <span class="state-count">8</span>
+      </a>
+      <a href="mt/" class="state-link">
+        <span class="state-name">Montana</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="nc/" class="state-link">
+        <span class="state-name">North Carolina</span>
+        <span class="state-count">13</span>
+      </a>
+      <a href="nd/" class="state-link">
+        <span class="state-name">North Dakota</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="ne/" class="state-link">
+        <span class="state-name">Nebraska</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="nh/" class="state-link">
+        <span class="state-name">New Hampshire</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="nj/" class="state-link">
+        <span class="state-name">New Jersey</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="nm/" class="state-link">
+        <span class="state-name">New Mexico</span>
+        <span class="state-count">10</span>
+      </a>
+      <a href="nv/" class="state-link">
+        <span class="state-name">Nevada</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="ny/" class="state-link">
+        <span class="state-name">New York</span>
+        <span class="state-count">13</span>
+      </a>
+      <a href="oh/" class="state-link">
+        <span class="state-name">Ohio</span>
+        <span class="state-count">14</span>
+      </a>
+      <a href="ok/" class="state-link">
+        <span class="state-name">Oklahoma</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="or/" class="state-link">
+        <span class="state-name">Oregon</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="pa/" class="state-link">
+        <span class="state-name">Pennsylvania</span>
+        <span class="state-count">16</span>
+      </a>
+      <a href="ri/" class="state-link">
+        <span class="state-name">Rhode Island</span>
+        <span class="state-count">8</span>
+      </a>
+      <a href="sc/" class="state-link">
+        <span class="state-name">South Carolina</span>
+        <span class="state-count">11</span>
+      </a>
+      <a href="sd/" class="state-link">
+        <span class="state-name">South Dakota</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="tn/" class="state-link">
+        <span class="state-name">Tennessee</span>
+        <span class="state-count">13</span>
+      </a>
+      <a href="tx/" class="state-link">
+        <span class="state-name">Texas</span>
+        <span class="state-count">18</span>
+      </a>
+      <a href="ut/" class="state-link">
+        <span class="state-name">Utah</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="va/" class="state-link">
+        <span class="state-name">Virginia</span>
+        <span class="state-count">14</span>
+      </a>
+      <a href="vt/" class="state-link">
+        <span class="state-name">Vermont</span>
+        <span class="state-count">10</span>
+      </a>
+      <a href="wa/" class="state-link">
+        <span class="state-name">Washington</span>
+        <span class="state-count">12</span>
+      </a>
+      <a href="wi/" class="state-link">
+        <span class="state-name">Wisconsin</span>
+        <span class="state-count">9</span>
+      </a>
+      <a href="wv/" class="state-link">
+        <span class="state-name">West Virginia</span>
+        <span class="state-count">10</span>
+      </a>
+      <a href="wy/" class="state-link">
+        <span class="state-name">Wyoming</span>
+        <span class="state-count">9</span>
+      </a>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>Data source: <a href="https://hifld-geoplatform.opendata.arcgis.com/">HIFLD Open Data</a></p>
+    <p>© 2025 <a href="/">Space or Bust</a> | <a href="https://flatlandexpeditions.com">Flatland Expeditions LLC</a></p>
+  </footer>
+</body>
+</html>

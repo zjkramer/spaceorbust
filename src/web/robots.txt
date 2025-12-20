@@ -1,0 +1,12 @@
+# robots.txt for spaceorbust.com
+# Ghost Army SEO Protocol
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://spaceorbust.com/sitemap.xml
+Sitemap: https://spaceorbust.com/sitemap-fire-departments.xml
+
+# Crawl-delay (be nice to the server)
+Crawl-delay: 1
