@@ -454,6 +454,28 @@
       .logo { display: none; }
       body { font-size: 14px; }
     }
+
+    /* Floating mascots */
+    .mascot {
+      position: absolute;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .mascot-small { width: 60px; height: 60px; }
+    .mascot-medium { width: 100px; height: 100px; }
+    .mascot-large { width: 150px; height: 150px; }
+
+    section, header, footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .mascot { opacity: 0.08; }
+      .mascot-large { width: 80px; height: 80px; }
+      .mascot-medium { width: 50px; height: 50px; }
+    }
   </style>
 </head>
 <body>
@@ -468,6 +490,8 @@
 
   <main id="main-content">
   <header>
+    <img src="/mascots/rocket.svg" alt="" class="mascot mascot-large" style="top: 20px; right: 5%;">
+    <img src="/mascots/llama-spacesuit.svg" alt="" class="mascot mascot-medium" style="bottom: 30px; left: 3%;">
     <div class="logo">╔══════════════════════════════════════════════════════════╗
 ║   Your code powers humanity's journey to the stars.      ║
 ╚══════════════════════════════════════════════════════════╝</div>
@@ -511,6 +535,7 @@
   </div>
 
   <section>
+    <img src="/mascots/spacecraft.svg" alt="" class="mascot mascot-small" style="top: 20px; right: 8%;">
     <h2>Terminal Demo</h2>
     <div class="terminal">
       <div class="terminal-header">
@@ -541,6 +566,8 @@
   </section>
 
   <section>
+    <img src="/mascots/orbiter.svg" alt="" class="mascot mascot-medium" style="bottom: 40px; left: 2%;">
+    <img src="/mascots/drones.svg" alt="" class="mascot mascot-small" style="top: 30px; right: 3%;">
     <h2>Core Features</h2>
     <div class="features">
       <div class="feature">
@@ -571,6 +598,7 @@
   </section>
 
   <section>
+    <img src="/mascots/miner.svg" alt="" class="mascot mascot-medium" style="top: 50px; right: 5%;">
     <h2>Active Hackathons</h2>
     <div class="hackathon-list">
       <div class="hackathon">
@@ -669,6 +697,8 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
   </section>
 
   <section id="merch">
+    <img src="/mascots/llama-spacesuit.svg" alt="" class="mascot mascot-large" style="top: 30px; right: 3%;">
+    <img src="/mascots/rocket.svg" alt="" class="mascot mascot-small" style="bottom: 50px; left: 5%;">
     <h2>Gear Up for the Mission</h2>
     <p style="color: var(--text-dim); margin-bottom: 2rem;">Fund the journey. Rep the crew. All merch sales support spaceorbust development.</p>
     <div class="merch-grid" id="merch-products">
