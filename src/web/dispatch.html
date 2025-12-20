@@ -507,6 +507,7 @@
         <div class="lang-switcher" role="group" aria-label="Language selection">
           <button class="lang-btn active" onclick="setLang('en')" aria-pressed="true" lang="en">EN</button>
           <button class="lang-btn" onclick="setLang('es')" aria-pressed="false" lang="es">ES</button>
+          <button class="lang-btn" onclick="setLang('fr')" aria-pressed="false" lang="fr">FR</button>
         </div>
       </div>
       <div class="sync-status" role="status" aria-live="polite" aria-label="Connection status">
@@ -540,7 +541,7 @@
       <!-- GPS/Location Panel -->
       <div class="env-panel" id="gps-panel">
         <div class="env-panel-header">
-          <span class="env-panel-title">GPS/Location</span>
+          <span class="env-panel-title" data-i18n="gpsLocation">GPS/Location</span>
           <span class="env-panel-status" id="gps-status">Acquiring</span>
         </div>
         <div class="env-row">
@@ -564,7 +565,7 @@
       <!-- Weather Panel -->
       <div class="env-panel" id="weather-panel">
         <div class="env-panel-header">
-          <span class="env-panel-title">Weather</span>
+          <span class="env-panel-title" data-i18n="weather">Weather</span>
           <span class="env-panel-status" id="weather-status">Loading</span>
         </div>
         <div class="env-row">
@@ -588,7 +589,7 @@
       <!-- Fire Weather Panel -->
       <div class="env-panel" id="fire-panel">
         <div class="env-panel-header">
-          <span class="env-panel-title">Fire Weather</span>
+          <span class="env-panel-title" data-i18n="fireWeather">Fire Weather</span>
           <span class="env-panel-status" id="fire-status">--</span>
         </div>
         <div class="env-row">
@@ -612,7 +613,7 @@
       <!-- Radio/Comms Panel -->
       <div class="env-panel" id="radio-panel">
         <div class="env-panel-header">
-          <span class="env-panel-title">Radio/Comms</span>
+          <span class="env-panel-title" data-i18n="radioComms">Radio/Comms</span>
           <span class="env-panel-status" id="radio-status">Scanning</span>
         </div>
         <div class="env-row">
@@ -636,7 +637,7 @@
       <!-- Time/Alerts Panel -->
       <div class="env-panel" id="time-panel">
         <div class="env-panel-header">
-          <span class="env-panel-title">Time/Alerts</span>
+          <span class="env-panel-title" data-i18n="timeAlerts">Time/Alerts</span>
           <span class="env-panel-status" id="alerts-count">0 Active</span>
         </div>
         <div class="env-row">
@@ -1530,7 +1531,9 @@
         alarmFire: 'Fire Alarm', publicAssist: 'Public Assist',
         priorityCritical: 'Critical - Life Threat', priorityEmergency: 'Emergency',
         priorityUrgent: 'Urgent', priorityRoutine: 'Routine',
-        dispatchUnit: 'Dispatch Unit', selectIncident: 'Select Incident', assignedRole: 'Assigned Role'
+        dispatchUnit: 'Dispatch Unit', selectIncident: 'Select Incident', assignedRole: 'Assigned Role',
+        gpsLocation: 'GPS/Location', weather: 'Weather', fireWeather: 'Fire Weather',
+        radioComms: 'Radio/Comms', timeAlerts: 'Time/Alerts', broadcast: 'BROADCAST'
       },
       es: {
         online: 'En línea', offline: 'Sin conexión', units: 'Unidades', available: 'Disponible',
@@ -1549,7 +1552,30 @@
         alarmFire: 'Alarma de Incendio', publicAssist: 'Asistencia Pública',
         priorityCritical: 'Crítico - Amenaza de Vida', priorityEmergency: 'Emergencia',
         priorityUrgent: 'Urgente', priorityRoutine: 'Rutina',
-        dispatchUnit: 'Despachar Unidad', selectIncident: 'Seleccionar Incidente', assignedRole: 'Rol Asignado'
+        dispatchUnit: 'Despachar Unidad', selectIncident: 'Seleccionar Incidente', assignedRole: 'Rol Asignado',
+        gpsLocation: 'GPS/Ubicación', weather: 'Clima', fireWeather: 'Clima de Incendios',
+        radioComms: 'Radio/Comunicaciones', timeAlerts: 'Hora/Alertas', broadcast: 'TRANSMITIR'
+      },
+      fr: {
+        online: 'En ligne', offline: 'Hors ligne', units: 'Unités', available: 'Disponible',
+        activeIncidents: 'Incidents Actifs', onDuty: 'En service', panelUnits: 'UNITÉS',
+        panelIncidents: 'INCIDENTS ACTIFS', panelPersonnel: 'PERSONNEL', all: 'Tous',
+        ground: 'Terre', air: 'Air', water: 'Eau', dispatchSelected: 'Envoyer la Sélection',
+        markAvailable: 'Marquer Disponible', markOOS: 'Hors Service', newIncident: 'Nouvel Incident',
+        viewDetails: 'Voir Détails', cancel: 'Annuler', dispatch: 'Envoyer',
+        createIncident: 'Créer Incident', freeForever: 'GRATUIT POUR TOUJOURS | POURQUOI?',
+        incidentType: "Type d'Incident", priority: 'Priorité', address: 'Adresse',
+        city: 'Ville', notes: 'Notes', structureFire: 'Incendie de Structure',
+        vehicleFire: 'Incendie de Véhicule', wildlandFire: 'Feu de Forêt',
+        emsCardiac: 'Urgence - Cardiaque', emsTrauma: 'Urgence - Trauma',
+        emsRespiratory: 'Urgence - Respiratoire', rescueVehicle: 'Sauvetage Véhicule',
+        rescueWater: 'Sauvetage Aquatique', hazmatSpill: 'Déversement de Matières Dangereuses',
+        alarmFire: "Alarme d'Incendie", publicAssist: 'Assistance Publique',
+        priorityCritical: 'Critique - Danger de Mort', priorityEmergency: 'Urgence',
+        priorityUrgent: 'Urgent', priorityRoutine: 'Routine',
+        dispatchUnit: 'Envoyer Unité', selectIncident: 'Sélectionner Incident', assignedRole: 'Rôle Assigné',
+        gpsLocation: 'GPS/Localisation', weather: 'Météo', fireWeather: 'Météo Incendie',
+        radioComms: 'Radio/Communications', timeAlerts: 'Heure/Alertes', broadcast: 'DIFFUSER'
       }
     };
 
