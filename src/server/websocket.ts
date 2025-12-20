@@ -7,6 +7,7 @@
  */
 
 import { WebSocketServer, WebSocket } from 'ws';
+import { Server as HttpServer } from 'http';
 import { AuthService, AuthToken } from './auth';
 import { DispatchDatabase } from './database';
 
@@ -31,12 +32,18 @@ export class DispatchWebSocketServer {
   private db: DispatchDatabase;
   private clients: Map<string, AuthenticatedSocket[]> = new Map(); // departmentId -> sockets
 
-  constructor(port: number, auth: AuthService, db: DispatchDatabase) {
+  // Can be constructed with a port OR an HTTP server (for single-port deployments like Railway)
+  constructor(portOrServer: number | HttpServer, auth: AuthService, db: DispatchDatabase) {
     this.auth = auth;
     this.db = db;
 
-    this.wss = new WebSocketServer({ port });
-    console.log(`[WS] WebSocket server running on port ${port}`);
+    if (typeof portOrServer === 'number') {
+      this.wss = new WebSocketServer({ port: portOrServer });
+      console.log(`[WS] WebSocket server running on port ${portOrServer}`);
+    } else {
+      this.wss = new WebSocketServer({ server: portOrServer });
+      console.log(`[WS] WebSocket server attached to HTTP server`);
+    }
 
     this.wss.on('connection', (ws: AuthenticatedSocket, req) => {
       this.handleConnection(ws, req);

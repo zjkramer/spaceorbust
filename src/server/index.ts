@@ -12,6 +12,7 @@
  */
 
 import crypto from 'crypto';
+import http from 'http';
 import { DispatchDatabase } from './database';
 import { AuthService } from './auth';
 import { DispatchWebSocketServer } from './websocket';
@@ -28,9 +29,8 @@ function generateSecurePassword(length = 24): string {
   return password;
 }
 
-// Railway uses PORT, others use HTTP_PORT
+// Railway uses PORT env var - single port for both HTTP and WebSocket
 const HTTP_PORT = parseInt(process.env.PORT || process.env.HTTP_PORT || '3000');
-const WS_PORT = parseInt(process.env.WS_PORT || '3001');
 const DB_PATH = process.env.DB_PATH || undefined;
 
 async function main() {
@@ -47,16 +47,20 @@ async function main() {
   // Initialize auth service
   const auth = new AuthService(db);
 
-  // Initialize WebSocket server
-  console.log(`[WS] Starting WebSocket server on port ${WS_PORT}...`);
-  const wss = new DispatchWebSocketServer(WS_PORT, auth, db);
-
   // Initialize REST API
-  console.log(`[API] Starting REST API on port ${HTTP_PORT}...`);
-  const app = createAPI(db, auth, wss);
+  console.log(`[API] Creating REST API...`);
+  const app = createAPI(db, auth, null as any); // wss will be set after server creation
 
-  app.listen(HTTP_PORT, () => {
+  // Create HTTP server
+  const server = http.createServer(app);
+
+  // Attach WebSocket to the same HTTP server (single port for Railway/Heroku)
+  console.log(`[WS] Attaching WebSocket to HTTP server...`);
+  const wss = new DispatchWebSocketServer(server, auth, db);
+
+  server.listen(HTTP_PORT, () => {
     console.log(`[API] REST API ready at http://localhost:${HTTP_PORT}`);
+    console.log(`[WS] WebSocket ready at ws://localhost:${HTTP_PORT}`);
     console.log('\n═══════════════════════════════════════════════════════════');
     console.log('  Server running. Press Ctrl+C to stop.');
     console.log('═══════════════════════════════════════════════════════════\n');
@@ -102,6 +106,7 @@ async function main() {
   process.on('SIGINT', () => {
     console.log('\n[SHUTDOWN] Shutting down...');
     wss.close();
+    server.close();
     db.close();
     console.log('[SHUTDOWN] Goodbye!');
     process.exit(0);
