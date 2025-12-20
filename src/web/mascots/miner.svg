@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" fill="none">
+  <!-- Space Miner - monotone style matching llama mascots -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+  </style>
+
+  <!-- Main hull - industrial/boxy -->
+  <path class="stroke" d="
+    M120 120
+    L280 120
+    L300 150
+    L300 320
+    L280 350
+    L120 350
+    L100 320
+    L100 150
+    Z
+  "/>
+
+  <!-- Hull panel lines -->
+  <path class="dim" d="M100 180 L300 180"/>
+  <path class="dim" d="M100 240 L300 240"/>
+  <path class="dim" d="M100 300 L300 300"/>
+  <path class="dim" d="M200 120 L200 350"/>
+
+  <!-- Cockpit/command module on top -->
+  <path class="stroke" d="
+    M160 120
+    L160 80
+    Q160 60 180 60
+    L220 60
+    Q240 60 240 80
+    L240 120
+  "/>
+
+  <!-- Cockpit viewport -->
+  <rect class="stroke" x="170" y="70" width="60" height="35" rx="4"/>
+  <rect class="dim" x="178" y="78" width="44" height="20" rx="2"/>
+  <path class="dim" d="M182 82 L190 82"/>
+
+  <!-- Mining drill arm - left -->
+  <path class="stroke" d="
+    M100 200
+    L60 200
+    L60 180
+    L40 180
+    L40 220
+    L60 220
+    L60 200
+  "/>
+  <!-- Drill bit -->
+  <path class="stroke" d="M40 185 L15 200 L40 215"/>
+  <path class="dim" d="M35 190 L20 200 L35 210"/>
+  <path class="glow" d="M30 195 L22 200 L30 205"/>
+
+  <!-- Mining drill arm - right -->
+  <path class="stroke" d="
+    M300 200
+    L340 200
+    L340 180
+    L360 180
+    L360 220
+    L340 220
+    L340 200
+  "/>
+  <!-- Drill bit -->
+  <path class="stroke" d="M360 185 L385 200 L360 215"/>
+  <path class="dim" d="M365 190 L380 200 L365 210"/>
+  <path class="glow" d="M370 195 L378 200 L370 205"/>
+
+  <!-- Cargo hold doors -->
+  <rect class="stroke" x="130" y="260" width="60" height="70" rx="3"/>
+  <path class="dim" d="M160 260 L160 330"/>
+  <circle class="fill" cx="150" cy="295" r="3"/>
+  <circle class="fill" cx="170" cy="295" r="3"/>
+
+  <rect class="stroke" x="210" y="260" width="60" height="70" rx="3"/>
+  <path class="dim" d="M240 260 L240 330"/>
+  <circle class="fill" cx="230" cy="295" r="3"/>
+  <circle class="fill" cx="250" cy="295" r="3"/>
+
+  <!-- Ore processor unit -->
+  <rect class="stroke" x="150" y="190" width="100" height="50" rx="4"/>
+  <path class="dim" d="M160 200 L240 200"/>
+  <path class="dim" d="M160 220 L240 220"/>
+  <text x="200" y="215" text-anchor="middle" class="fill" font-family="monospace" font-size="10">ORE</text>
+
+  <!-- SOB logo -->
+  <rect class="stroke" x="170" y="135" width="60" height="30" rx="3"/>
+  <text x="200" y="156" text-anchor="middle" class="fill" font-family="monospace" font-size="14">SOB</text>
+
+  <!-- Thrusters on bottom -->
+  <rect class="stroke" x="115" y="350" width="30" height="40" rx="2"/>
+  <path class="dim" d="M120 360 L140 360"/>
+  <path class="dim" d="M120 375 L140 375"/>
+  <path class="stroke" d="M120 390 Q130 410 140 390"/>
+
+  <rect class="stroke" x="185" y="350" width="30" height="40" rx="2"/>
+  <path class="dim" d="M190 360 L210 360"/>
+  <path class="dim" d="M190 375 L210 375"/>
+  <path class="stroke" d="M190 390 Q200 410 210 390"/>
+
+  <rect class="stroke" x="255" y="350" width="30" height="40" rx="2"/>
+  <path class="dim" d="M260 360 L280 360"/>
+  <path class="dim" d="M260 375 L280 375"/>
+  <path class="stroke" d="M260 390 Q270 410 280 390"/>
+
+  <!-- Sensor array on top -->
+  <line class="stroke" x1="200" y1="60" x2="200" y2="35"/>
+  <circle class="stroke" cx="200" cy="28" r="8"/>
+  <circle class="fill" cx="200" cy="28" r="3"/>
+
+  <!-- Side lights -->
+  <circle class="fill" cx="105" cy="160" r="4"/>
+  <circle class="fill" cx="295" cy="160" r="4"/>
+  <circle class="fill" cx="105" cy="280" r="4"/>
+  <circle class="fill" cx="295" cy="280" r="4"/>
+
+  <!-- Asteroids/rocks floating nearby -->
+  <path class="dim" d="M30 80 L50 70 L60 85 L55 100 L35 95 Z"/>
+  <path class="dim" d="M350 100 L365 90 L380 100 L375 115 L355 110 Z"/>
+  <circle class="dim" cx="370" cy="320" r="12"/>
+  <circle class="dim" cx="25" cy="350" r="8"/>
+
+  <!-- Stars -->
+  <circle class="fill" cx="50" cy="40" r="1.5"/>
+  <circle class="fill" cx="380" cy="60" r="1.5"/>
+  <circle class="fill" cx="20" cy="200" r="1"/>
+  <circle class="fill" cx="390" cy="250" r="1"/>
+</svg>

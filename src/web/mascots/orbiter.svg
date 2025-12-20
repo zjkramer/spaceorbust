@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Round Space Orbiter (hula hoop style) - monotone style -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+  </style>
+
+  <!-- Outer ring (hula hoop orbital ring) -->
+  <circle class="stroke" cx="200" cy="200" r="160"/>
+  <circle class="dim" cx="200" cy="200" r="150"/>
+  <circle class="dim" cx="200" cy="200" r="170"/>
+
+  <!-- Ring segment details -->
+  <path class="dim" d="M200 40 L200 50"/>
+  <path class="dim" d="M200 350 L200 360"/>
+  <path class="dim" d="M40 200 L50 200"/>
+  <path class="dim" d="M350 200 L360 200"/>
+
+  <!-- Diagonal markers on ring -->
+  <circle class="fill" cx="313" cy="87" r="4"/>
+  <circle class="fill" cx="87" cy="313" r="4"/>
+  <circle class="fill" cx="313" cy="313" r="4"/>
+  <circle class="fill" cx="87" cy="87" r="4"/>
+
+  <!-- Central spherical module -->
+  <circle class="stroke" cx="200" cy="200" r="60"/>
+
+  <!-- Module panel lines (like a beach ball) -->
+  <path class="dim" d="M200 140 Q240 200 200 260"/>
+  <path class="dim" d="M200 140 Q160 200 200 260"/>
+  <ellipse class="dim" cx="200" cy="200" rx="60" ry="20"/>
+
+  <!-- Main viewport -->
+  <circle class="stroke" cx="200" cy="185" r="18"/>
+  <circle class="dim" cx="200" cy="185" r="12"/>
+  <path class="dim" d="M192 180 Q200 176 208 180"/>
+
+  <!-- Secondary viewports around module -->
+  <circle class="stroke" cx="165" cy="210" r="8"/>
+  <circle class="stroke" cx="235" cy="210" r="8"/>
+
+  <!-- SOB logo -->
+  <text x="200" y="245" text-anchor="middle" class="fill" font-family="monospace" font-size="11">SOB</text>
+
+  <!-- Thruster pods on ring (4 positions) -->
+  <!-- Top -->
+  <rect class="stroke" x="190" y="32" width="20" height="16" rx="2"/>
+  <path class="dim" d="M195 32 L195 48 M205 32 L205 48"/>
+
+  <!-- Bottom -->
+  <rect class="stroke" x="190" y="352" width="20" height="16" rx="2"/>
+  <path class="dim" d="M195 352 L195 368 M205 352 L205 368"/>
+
+  <!-- Left -->
+  <rect class="stroke" x="32" y="190" width="16" height="20" rx="2"/>
+  <path class="dim" d="M32 195 L48 195 M32 205 L48 205"/>
+
+  <!-- Right -->
+  <rect class="stroke" x="352" y="190" width="16" height="20" rx="2"/>
+  <path class="dim" d="M352 195 L368 195 M352 205 L368 205"/>
+
+  <!-- Docking ports (small circles on ring) -->
+  <circle class="stroke" cx="270" cy="70" r="10"/>
+  <circle class="fill" cx="270" cy="70" r="4"/>
+
+  <circle class="stroke" cx="130" cy="330" r="10"/>
+  <circle class="fill" cx="130" cy="330" r="4"/>
+
+  <!-- Solar panel arrays (extending from module) -->
+  <rect class="stroke" x="100" y="195" width="35" height="10" rx="1"/>
+  <path class="dim" d="M105 195 L105 205 M115 195 L115 205 M125 195 L125 205"/>
+
+  <rect class="stroke" x="265" y="195" width="35" height="10" rx="1"/>
+  <path class="dim" d="M275 195 L275 205 M285 195 L285 205 M295 195 L295 205"/>
+
+  <!-- Antenna on top of module -->
+  <line class="stroke" x1="200" y1="140" x2="200" y2="120"/>
+  <circle class="fill" cx="200" cy="116" r="4"/>
+
+  <!-- Stars -->
+  <circle class="fill" cx="30" cy="30" r="1.5"/>
+  <circle class="fill" cx="370" cy="50" r="1.5"/>
+  <circle class="fill" cx="25" cy="370" r="1"/>
+  <circle class="fill" cx="375" cy="350" r="1"/>
+  <circle class="fill" cx="60" cy="150" r="1"/>
+  <circle class="fill" cx="340" cy="280" r="1"/>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Spacecraft - monotone style matching llama mascots -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+  </style>
+
+  <!-- Main hull - capsule shape -->
+  <path class="stroke" d="
+    M200 60
+    Q260 80 280 140
+    L290 220
+    Q290 260 260 280
+    L260 300
+    L140 300
+    L140 280
+    Q110 260 110 220
+    L120 140
+    Q140 80 200 60
+    Z
+  "/>
+
+  <!-- Window/viewport - circular -->
+  <circle class="stroke" cx="200" cy="150" r="35"/>
+  <circle class="dim" cx="200" cy="150" r="28"/>
+
+  <!-- Window reflection -->
+  <path class="dim" d="M180 135 Q190 130 200 135"/>
+
+  <!-- Hull panel lines -->
+  <path class="dim" d="M140 180 L260 180"/>
+  <path class="dim" d="M135 220 L265 220"/>
+  <path class="dim" d="M145 260 L255 260"/>
+
+  <!-- Side thrusters - left -->
+  <rect class="stroke" x="95" y="200" width="25" height="50" rx="3"/>
+  <path class="dim" d="M95 210 L120 210"/>
+  <path class="dim" d="M95 230 L120 230"/>
+
+  <!-- Side thrusters - right -->
+  <rect class="stroke" x="280" y="200" width="25" height="50" rx="3"/>
+  <path class="dim" d="M280 210 L305 210"/>
+  <path class="dim" d="M280 230 L305 230"/>
+
+  <!-- Main engine bell -->
+  <path class="stroke" d="
+    M160 300
+    L150 340
+    Q150 360 170 370
+    L230 370
+    Q250 360 250 340
+    L240 300
+  "/>
+
+  <!-- Engine nozzle interior -->
+  <ellipse class="dim" cx="200" cy="345" rx="35" ry="12"/>
+
+  <!-- Engine exhaust/flame -->
+  <path class="stroke" d="M170 370 Q180 400 200 420 Q220 400 230 370"/>
+  <path class="dim" d="M180 370 Q190 390 200 405 Q210 390 220 370"/>
+  <path class="glow" d="M190 370 Q195 385 200 395 Q205 385 210 370"/>
+
+  <!-- Antenna -->
+  <line class="stroke" x1="200" y1="60" x2="200" y2="30"/>
+  <circle class="fill" cx="200" cy="25" r="5"/>
+
+  <!-- Landing legs - retracted -->
+  <path class="dim" d="M150 290 L130 310 L135 320"/>
+  <path class="dim" d="M250 290 L270 310 L265 320"/>
+
+  <!-- Hull rivets/details -->
+  <circle class="fill" cx="160" cy="200" r="3"/>
+  <circle class="fill" cx="240" cy="200" r="3"/>
+  <circle class="fill" cx="160" cy="240" r="3"/>
+  <circle class="fill" cx="240" cy="240" r="3"/>
+
+  <!-- SOB logo on hull -->
+  <rect class="stroke" x="175" y="250" width="50" height="25" rx="3"/>
+  <text x="200" y="268" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SOB</text>
+
+  <!-- Stars around spacecraft -->
+  <circle class="fill" cx="50" cy="80" r="2"/>
+  <circle class="fill" cx="350" cy="100" r="2"/>
+  <circle class="fill" cx="70" cy="300" r="1.5"/>
+  <circle class="fill" cx="330" cy="280" r="1.5"/>
+  <circle class="fill" cx="40" cy="180" r="1"/>
+  <circle class="fill" cx="360" cy="200" r="1"/>
+  <circle class="fill" cx="80" cy="50" r="1"/>
+  <circle class="fill" cx="320" cy="60" r="1"/>
+</svg>

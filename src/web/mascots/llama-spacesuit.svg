@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" fill="none">
+  <!-- Space Llama in Personal Spacesuit - monotone style -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+  </style>
+
+  <!-- Helmet - bubble style -->
+  <ellipse class="stroke" cx="200" cy="120" rx="75" ry="85"/>
+
+  <!-- Helmet visor reflection -->
+  <path class="dim" d="M140 100 Q160 80 200 80 Q240 80 260 100"/>
+  <path class="glow" d="M150 90 Q180 75 210 85"/>
+
+  <!-- Helmet ring/seal -->
+  <ellipse class="stroke" cx="200" cy="190" rx="65" ry="15"/>
+  <ellipse class="dim" cx="200" cy="190" rx="55" ry="10"/>
+
+  <!-- Llama face inside helmet -->
+  <!-- Head shape -->
+  <ellipse class="dim" cx="200" cy="130" rx="45" ry="55"/>
+
+  <!-- Ears (tall llama ears inside helmet) -->
+  <path class="stroke" d="M165 95 L158 55 L175 75 L175 95"/>
+  <path class="stroke" d="M235 95 L242 55 L225 75 L225 95"/>
+
+  <!-- Inner ears -->
+  <path class="dim" d="M163 82 L161 65 L170 78"/>
+  <path class="dim" d="M237 82 L239 65 L230 78"/>
+
+  <!-- Eyes -->
+  <circle class="fill" cx="180" cy="115" r="5"/>
+  <circle class="fill" cx="220" cy="115" r="5"/>
+
+  <!-- Snout -->
+  <ellipse class="dim" cx="200" cy="145" rx="20" ry="15"/>
+
+  <!-- Nose -->
+  <ellipse class="fill" cx="200" cy="142" rx="6" ry="4"/>
+
+  <!-- Mouth/smile -->
+  <path class="dim" d="M188 155 Q200 162 212 155"/>
+
+  <!-- Spacesuit body -->
+  <path class="stroke" d="
+    M135 205
+    L125 250
+    L120 320
+    L115 400
+    L145 410
+    L155 350
+    L200 360
+    L245 350
+    L255 410
+    L285 400
+    L280 320
+    L275 250
+    L265 205
+    Q250 195 200 195
+    Q150 195 135 205
+    Z
+  "/>
+
+  <!-- Suit chest panel -->
+  <rect class="stroke" x="160" y="230" width="80" height="60" rx="5"/>
+  <path class="dim" d="M170 245 L230 245"/>
+  <path class="dim" d="M170 265 L230 265"/>
+
+  <!-- Life support indicators -->
+  <circle class="fill" cx="180" cy="255" r="4"/>
+  <circle class="stroke" cx="200" cy="255" r="4"/>
+  <circle class="fill" cx="220" cy="255" r="4"/>
+
+  <!-- SOB patch on chest -->
+  <rect class="stroke" x="175" y="300" width="50" height="25" rx="3"/>
+  <text x="200" y="318" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SOB</text>
+
+  <!-- Backpack/life support unit -->
+  <rect class="stroke" x="145" y="220" width="15" height="80" rx="3"/>
+  <rect class="stroke" x="240" y="220" width="15" height="80" rx="3"/>
+  <path class="dim" d="M145 240 L160 240"/>
+  <path class="dim" d="M145 270 L160 270"/>
+  <path class="dim" d="M240 240 L255 240"/>
+  <path class="dim" d="M240 270 L255 270"/>
+
+  <!-- Arms -->
+  <!-- Left arm -->
+  <path class="stroke" d="
+    M125 250
+    L95 280
+    L80 320
+    L75 350
+  "/>
+  <!-- Left glove -->
+  <ellipse class="stroke" cx="72" cy="360" rx="18" ry="22"/>
+  <path class="dim" d="M60 350 L60 370"/>
+  <path class="dim" d="M70 345 L70 375"/>
+  <path class="dim" d="M80 348 L80 372"/>
+
+  <!-- Right arm -->
+  <path class="stroke" d="
+    M275 250
+    L305 280
+    L320 320
+    L325 350
+  "/>
+  <!-- Right glove -->
+  <ellipse class="stroke" cx="328" cy="360" rx="18" ry="22"/>
+  <path class="dim" d="M340 350 L340 370"/>
+  <path class="dim" d="M330 345 L330 375"/>
+  <path class="dim" d="M320 348 L320 372"/>
+
+  <!-- Arm joints -->
+  <circle class="stroke" cx="95" cy="280" r="8"/>
+  <circle class="stroke" cx="305" cy="280" r="8"/>
+
+  <!-- Legs -->
+  <!-- Left leg -->
+  <path class="stroke" d="
+    M155 400
+    L150 450
+    L145 480
+  "/>
+  <!-- Left boot -->
+  <path class="stroke" d="
+    M130 480
+    L125 500
+    L165 500
+    L160 480
+    Z
+  "/>
+  <path class="dim" d="M130 490 L160 490"/>
+
+  <!-- Right leg -->
+  <path class="stroke" d="
+    M245 400
+    L250 450
+    L255 480
+  "/>
+  <!-- Right boot -->
+  <path class="stroke" d="
+    M240 480
+    L235 500
+    L275 500
+    L270 480
+    Z
+  "/>
+  <path class="dim" d="M240 490 L270 490"/>
+
+  <!-- Knee joints -->
+  <circle class="stroke" cx="150" cy="450" r="6"/>
+  <circle class="stroke" cx="250" cy="450" r="6"/>
+
+  <!-- Tether attachment point -->
+  <circle class="stroke" cx="200" cy="220" r="8"/>
+  <circle class="fill" cx="200" cy="220" r="4"/>
+
+  <!-- Floating tether -->
+  <path class="dim" d="M208 220 Q240 200 260 180 Q280 160 290 170"/>
+
+  <!-- Helmet light -->
+  <circle class="fill" cx="265" cy="100" r="5"/>
+  <path class="glow" d="M270 100 L285 95 M270 105 L285 110"/>
+
+  <!-- Stars -->
+  <circle class="fill" cx="40" cy="60" r="2"/>
+  <circle class="fill" cx="360" cy="80" r="2"/>
+  <circle class="fill" cx="30" cy="300" r="1.5"/>
+  <circle class="fill" cx="370" cy="250" r="1.5"/>
+  <circle class="fill" cx="50" cy="450" r="1"/>
+  <circle class="fill" cx="350" cy="420" r="1"/>
+</svg>

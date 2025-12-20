@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350" fill="none">
+  <!-- Three Drone Thrust Helpers - monotone style -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+  </style>
+
+  <!-- DRONE 1 - Leader (center, slightly forward) -->
+  <g transform="translate(200, 100)">
+    <!-- Main body - hexagonal -->
+    <path class="stroke" d="
+      M0 -30
+      L26 -15
+      L26 15
+      L0 30
+      L-26 15
+      L-26 -15
+      Z
+    "/>
+
+    <!-- Inner structure -->
+    <circle class="dim" cx="0" cy="0" r="15"/>
+
+    <!-- Central eye/sensor -->
+    <circle class="stroke" cx="0" cy="0" r="8"/>
+    <circle class="fill" cx="0" cy="0" r="4"/>
+
+    <!-- Thruster pods (4 corners) -->
+    <circle class="stroke" cx="-35" cy="-20" r="10"/>
+    <path class="stroke" d="M-35 -30 Q-35 -45 -35 -40"/>
+    <path class="dim" d="M-38 -32 L-32 -32"/>
+
+    <circle class="stroke" cx="35" cy="-20" r="10"/>
+    <path class="stroke" d="M35 -30 Q35 -45 35 -40"/>
+    <path class="dim" d="M32 -32 L38 -32"/>
+
+    <circle class="stroke" cx="-35" cy="20" r="10"/>
+    <path class="stroke" d="M-35 30 Q-35 45 -35 40"/>
+    <path class="dim" d="M-38 32 L-32 32"/>
+
+    <circle class="stroke" cx="35" cy="20" r="10"/>
+    <path class="stroke" d="M35 30 Q35 45 35 40"/>
+    <path class="dim" d="M32 32 L38 32"/>
+
+    <!-- Arm struts to thrusters -->
+    <line class="dim" x1="-20" y1="-12" x2="-28" y2="-16"/>
+    <line class="dim" x1="20" y1="-12" x2="28" y2="-16"/>
+    <line class="dim" x1="-20" y1="12" x2="-28" y2="16"/>
+    <line class="dim" x1="20" y1="12" x2="28" y2="16"/>
+
+    <!-- ID marker -->
+    <text x="0" y="50" text-anchor="middle" class="fill" font-family="monospace" font-size="8">D-01</text>
+  </g>
+
+  <!-- DRONE 2 - Left wingman -->
+  <g transform="translate(80, 180)">
+    <!-- Main body - hexagonal -->
+    <path class="stroke" d="
+      M0 -25
+      L22 -12
+      L22 12
+      L0 25
+      L-22 12
+      L-22 -12
+      Z
+    "/>
+
+    <!-- Inner structure -->
+    <circle class="dim" cx="0" cy="0" r="12"/>
+
+    <!-- Central eye/sensor -->
+    <circle class="stroke" cx="0" cy="0" r="6"/>
+    <circle class="fill" cx="0" cy="0" r="3"/>
+
+    <!-- Thruster pods (4 corners) -->
+    <circle class="stroke" cx="-30" cy="-16" r="8"/>
+    <path class="stroke" d="M-30 -24 Q-30 -36 -30 -32"/>
+    <path class="dim" d="M-33 -26 L-27 -26"/>
+
+    <circle class="stroke" cx="30" cy="-16" r="8"/>
+    <path class="stroke" d="M30 -24 Q30 -36 30 -32"/>
+    <path class="dim" d="M27 -26 L33 -26"/>
+
+    <circle class="stroke" cx="-30" cy="16" r="8"/>
+    <path class="stroke" d="M-30 24 Q-30 36 -30 32"/>
+    <path class="dim" d="M-33 26 L-27 26"/>
+
+    <circle class="stroke" cx="30" cy="16" r="8"/>
+    <path class="stroke" d="M30 24 Q30 36 30 32"/>
+    <path class="dim" d="M27 26 L33 26"/>
+
+    <!-- Arm struts -->
+    <line class="dim" x1="-16" y1="-10" x2="-24" y2="-13"/>
+    <line class="dim" x1="16" y1="-10" x2="24" y2="-13"/>
+    <line class="dim" x1="-16" y1="10" x2="-24" y2="13"/>
+    <line class="dim" x1="16" y1="10" x2="24" y2="13"/>
+
+    <!-- ID marker -->
+    <text x="0" y="45" text-anchor="middle" class="fill" font-family="monospace" font-size="8">D-02</text>
+  </g>
+
+  <!-- DRONE 3 - Right wingman -->
+  <g transform="translate(320, 180)">
+    <!-- Main body - hexagonal -->
+    <path class="stroke" d="
+      M0 -25
+      L22 -12
+      L22 12
+      L0 25
+      L-22 12
+      L-22 -12
+      Z
+    "/>
+
+    <!-- Inner structure -->
+    <circle class="dim" cx="0" cy="0" r="12"/>
+
+    <!-- Central eye/sensor -->
+    <circle class="stroke" cx="0" cy="0" r="6"/>
+    <circle class="fill" cx="0" cy="0" r="3"/>
+
+    <!-- Thruster pods (4 corners) -->
+    <circle class="stroke" cx="-30" cy="-16" r="8"/>
+    <path class="stroke" d="M-30 -24 Q-30 -36 -30 -32"/>
+    <path class="dim" d="M-33 -26 L-27 -26"/>
+
+    <circle class="stroke" cx="30" cy="-16" r="8"/>
+    <path class="stroke" d="M30 -24 Q30 -36 30 -32"/>
+    <path class="dim" d="M27 -26 L33 -26"/>
+
+    <circle class="stroke" cx="-30" cy="16" r="8"/>
+    <path class="stroke" d="M-30 24 Q-30 36 -30 32"/>
+    <path class="dim" d="M-33 26 L-27 26"/>
+
+    <circle class="stroke" cx="30" cy="16" r="8"/>
+    <path class="stroke" d="M30 24 Q30 36 30 32"/>
+    <path class="dim" d="M27 26 L33 26"/>
+
+    <!-- Arm struts -->
+    <line class="dim" x1="-16" y1="-10" x2="-24" y2="-13"/>
+    <line class="dim" x1="16" y1="-10" x2="24" y2="-13"/>
+    <line class="dim" x1="-16" y1="10" x2="-24" y2="13"/>
+    <line class="dim" x1="16" y1="10" x2="24" y2="13"/>
+
+    <!-- ID marker -->
+    <text x="0" y="45" text-anchor="middle" class="fill" font-family="monospace" font-size="8">D-03</text>
+  </g>
+
+  <!-- Formation lines connecting drones -->
+  <path class="glow" d="M170 115 L110 165"/>
+  <path class="glow" d="M230 115 L290 165"/>
+  <path class="glow" d="M115 195 L285 195"/>
+
+  <!-- SOB squad identifier -->
+  <text x="200" y="290" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SOB DRONE SQUAD</text>
+
+  <!-- Stars -->
+  <circle class="fill" cx="30" cy="40" r="1.5"/>
+  <circle class="fill" cx="370" cy="50" r="1.5"/>
+  <circle class="fill" cx="20" cy="280" r="1"/>
+  <circle class="fill" cx="380" cy="300" r="1"/>
+  <circle class="fill" cx="200" cy="30" r="1"/>
+  <circle class="fill" cx="50" cy="140" r="1"/>
+  <circle class="fill" cx="350" cy="120" r="1"/>
+</svg>

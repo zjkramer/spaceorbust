@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <!-- Rocket - monotone style matching llama mascots -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+  </style>
+
+  <!-- Nose cone -->
+  <path class="stroke" d="
+    M200 40
+    Q220 60 230 100
+    L235 140
+    L165 140
+    L170 100
+    Q180 60 200 40
+    Z
+  "/>
+
+  <!-- Nose cone detail lines -->
+  <path class="dim" d="M185 70 Q200 60 215 70"/>
+  <path class="dim" d="M175 100 L225 100"/>
+
+  <!-- Main body tube -->
+  <rect class="stroke" x="165" y="140" width="70" height="200" rx="2"/>
+
+  <!-- Body panel lines -->
+  <path class="dim" d="M165 180 L235 180"/>
+  <path class="dim" d="M165 220 L235 220"/>
+  <path class="dim" d="M165 260 L235 260"/>
+  <path class="dim" d="M165 300 L235 300"/>
+
+  <!-- Viewport/window -->
+  <circle class="stroke" cx="200" cy="200" r="20"/>
+  <circle class="dim" cx="200" cy="200" r="14"/>
+  <path class="dim" d="M190 192 Q198 188 206 192"/>
+
+  <!-- SOB logo panel -->
+  <rect class="stroke" x="175" y="270" width="50" height="25" rx="3"/>
+  <text x="200" y="288" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SOB</text>
+
+  <!-- Left fin -->
+  <path class="stroke" d="
+    M165 280
+    L100 380
+    L100 400
+    L130 400
+    L165 340
+  "/>
+  <path class="dim" d="M120 380 L150 320"/>
+
+  <!-- Right fin -->
+  <path class="stroke" d="
+    M235 280
+    L300 380
+    L300 400
+    L270 400
+    L235 340
+  "/>
+  <path class="dim" d="M280 380 L250 320"/>
+
+  <!-- Engine section -->
+  <path class="stroke" d="
+    M165 340
+    L160 360
+    L155 380
+    L155 400
+    L245 400
+    L245 380
+    L240 360
+    L235 340
+  "/>
+
+  <!-- Engine nozzles (3 bells) -->
+  <path class="stroke" d="M165 400 L160 440 Q170 450 180 440 L175 400"/>
+  <path class="stroke" d="M190 400 L185 450 Q200 465 215 450 L210 400"/>
+  <path class="stroke" d="M225 400 L220 440 Q230 450 240 440 L235 400"/>
+
+  <!-- Engine exhaust flames -->
+  <path class="stroke" d="M168 445 Q170 470 172 445"/>
+  <path class="dim" d="M170 450 L170 460"/>
+
+  <path class="stroke" d="M195 455 Q200 490 205 455"/>
+  <path class="dim" d="M200 460 Q200 480 200 475"/>
+  <path class="glow" d="M198 465 Q200 475 202 465"/>
+
+  <path class="stroke" d="M228 445 Q230 470 232 445"/>
+  <path class="dim" d="M230 450 L230 460"/>
+
+  <!-- Rivets/details on body -->
+  <circle class="fill" cx="175" cy="160" r="2"/>
+  <circle class="fill" cx="225" cy="160" r="2"/>
+  <circle class="fill" cx="175" cy="240" r="2"/>
+  <circle class="fill" cx="225" cy="240" r="2"/>
+  <circle class="fill" cx="175" cy="320" r="2"/>
+  <circle class="fill" cx="225" cy="320" r="2"/>
+
+  <!-- Stars -->
+  <circle class="fill" cx="50" cy="100" r="2"/>
+  <circle class="fill" cx="350" cy="80" r="2"/>
+  <circle class="fill" cx="60" cy="250" r="1.5"/>
+  <circle class="fill" cx="340" cy="220" r="1.5"/>
+  <circle class="fill" cx="45" cy="400" r="1"/>
+  <circle class="fill" cx="355" cy="380" r="1"/>
+</svg>
