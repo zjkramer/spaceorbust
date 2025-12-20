@@ -1,174 +1,217 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" fill="none">
-  <!-- Space Llama in Personal Spacesuit - monotone style -->
+  <!-- Space Llama in EVA Suit - STENCIL STYLE with llama fur detail -->
   <style>
-    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .stroke { stroke: #00ff88; stroke-width: 3; fill: none; }
     .fill { fill: #00ff88; }
-    .dim { stroke: #004422; stroke-width: 1; fill: none; }
-    .glow { stroke: #00ff88; stroke-width: 1; fill: none; opacity: 0.5; }
+    .bold { stroke: #00ff88; stroke-width: 4; fill: none; }
+    .solid { fill: #00ff88; stroke: none; }
+    .fur { stroke: #888888; stroke-width: 1.5; fill: none; }
+    .fur-light { stroke: #cccccc; stroke-width: 1; fill: none; }
+    .fur-dim { stroke: #555555; stroke-width: 1; fill: none; }
   </style>
 
-  <!-- Helmet - bubble style -->
-  <ellipse class="stroke" cx="200" cy="120" rx="75" ry="85"/>
+  <!-- Helmet - bold bubble -->
+  <ellipse class="bold" cx="200" cy="120" rx="78" ry="88"/>
 
-  <!-- Helmet visor reflection -->
-  <path class="dim" d="M140 100 Q160 80 200 80 Q240 80 260 100"/>
-  <path class="glow" d="M150 90 Q180 75 210 85"/>
+  <!-- Helmet visor shine -->
+  <path class="stroke" d="M135 95 Q165 65 200 65 Q235 65 265 95"/>
 
-  <!-- Helmet ring/seal -->
-  <ellipse class="stroke" cx="200" cy="190" rx="65" ry="15"/>
-  <ellipse class="dim" cx="200" cy="190" rx="55" ry="10"/>
+  <!-- Helmet ring/seal - solid band -->
+  <ellipse class="solid" cx="200" cy="195" rx="68" ry="18"/>
+  <ellipse style="fill:#0a0a0a" cx="200" cy="195" rx="55" ry="12"/>
 
-  <!-- Llama face inside helmet -->
-  <!-- Head shape -->
-  <ellipse class="dim" cx="200" cy="130" rx="45" ry="55"/>
+  <!-- LLAMA FACE - stencil style, bold shapes -->
 
-  <!-- Ears (tall llama ears inside helmet) -->
-  <path class="stroke" d="M165 95 L158 55 L175 75 L175 95"/>
-  <path class="stroke" d="M235 95 L242 55 L225 75 L225 95"/>
+  <!-- Ears - sharp angular stencil -->
+  <path class="solid" d="M160 90 L150 35 L175 70 L175 90 Z"/>
+  <path class="solid" d="M240 90 L250 35 L225 70 L225 90 Z"/>
 
-  <!-- Inner ears -->
-  <path class="dim" d="M163 82 L161 65 L170 78"/>
-  <path class="dim" d="M237 82 L239 65 L230 78"/>
+  <!-- Inner ear cuts (negative space) -->
+  <path style="fill:#0a0a0a" d="M158 75 L155 50 L168 70 Z"/>
+  <path style="fill:#0a0a0a" d="M242 75 L245 50 L232 70 Z"/>
 
-  <!-- Eyes -->
-  <circle class="fill" cx="180" cy="115" r="5"/>
-  <circle class="fill" cx="220" cy="115" r="5"/>
+  <!-- Inner ear fur detail - white/grey lines -->
+  <path class="fur-light" d="M156 68 L154 55"/>
+  <path class="fur" d="M160 72 L157 58"/>
+  <path class="fur-light" d="M244 68 L246 55"/>
+  <path class="fur" d="M240 72 L243 58"/>
 
-  <!-- Snout -->
-  <ellipse class="dim" cx="200" cy="145" rx="20" ry="15"/>
+  <!-- Head silhouette -->
+  <ellipse class="solid" cx="200" cy="130" rx="48" ry="58"/>
 
-  <!-- Nose -->
-  <ellipse class="fill" cx="200" cy="142" rx="6" ry="4"/>
+  <!-- Face cutout (negative space for features) -->
+  <ellipse style="fill:#0a0a0a" cx="200" cy="135" rx="38" ry="48"/>
 
-  <!-- Mouth/smile -->
-  <path class="dim" d="M188 155 Q200 162 212 155"/>
+  <!-- LLAMA FACE FUR DETAILS - white and grey lines in the black area -->
+  <!-- Forehead fur -->
+  <path class="fur-light" d="M185 95 Q190 100 188 108"/>
+  <path class="fur" d="M195 93 Q198 100 196 110"/>
+  <path class="fur-light" d="M205 93 Q202 100 204 110"/>
+  <path class="fur" d="M215 95 Q210 100 212 108"/>
 
-  <!-- Spacesuit body -->
-  <path class="stroke" d="
-    M135 205
-    L125 250
-    L120 320
-    L115 400
-    L145 410
-    L155 350
-    L200 360
-    L245 350
-    L255 410
-    L285 400
-    L280 320
-    L275 250
-    L265 205
-    Q250 195 200 195
-    Q150 195 135 205
+  <!-- Cheek fur - left -->
+  <path class="fur" d="M168 120 Q172 130 170 142"/>
+  <path class="fur-dim" d="M172 118 Q175 128 173 138"/>
+  <path class="fur-light" d="M165 125 Q168 135 166 145"/>
+
+  <!-- Cheek fur - right -->
+  <path class="fur" d="M232 120 Q228 130 230 142"/>
+  <path class="fur-dim" d="M228 118 Q225 128 227 138"/>
+  <path class="fur-light" d="M235 125 Q232 135 234 145"/>
+
+  <!-- Muzzle fur lines -->
+  <path class="fur-light" d="M178 155 Q182 160 180 168"/>
+  <path class="fur" d="M185 158 Q188 163 186 170"/>
+  <path class="fur" d="M215 158 Q212 163 214 170"/>
+  <path class="fur-light" d="M222 155 Q218 160 220 168"/>
+
+  <!-- Under chin fur -->
+  <path class="fur-dim" d="M188 172 L190 180"/>
+  <path class="fur" d="M200 175 L200 183"/>
+  <path class="fur-dim" d="M212 172 L210 180"/>
+
+  <!-- Eyes - intense stencil dots -->
+  <circle class="solid" cx="178" cy="115" r="8"/>
+  <circle class="solid" cx="222" cy="115" r="8"/>
+
+  <!-- Eye glints (negative space) -->
+  <circle style="fill:#0a0a0a" cx="175" cy="112" r="2"/>
+  <circle style="fill:#0a0a0a" cx="219" cy="112" r="2"/>
+
+  <!-- Eyebrow fur hints -->
+  <path class="fur-light" d="M168 105 L175 107"/>
+  <path class="fur-light" d="M232 105 L225 107"/>
+
+  <!-- Snout - bold shape -->
+  <ellipse class="solid" cx="200" cy="150" rx="25" ry="18"/>
+  <ellipse style="fill:#0a0a0a" cx="200" cy="152" rx="18" ry="12"/>
+
+  <!-- Snout fur texture -->
+  <path class="fur-light" d="M188 148 Q190 152 189 156"/>
+  <path class="fur" d="M193 146 Q194 150 193 154"/>
+  <path class="fur" d="M207 146 Q206 150 207 154"/>
+  <path class="fur-light" d="M212 148 Q210 152 211 156"/>
+
+  <!-- Nose - solid block -->
+  <ellipse class="solid" cx="200" cy="145" r="8"/>
+
+  <!-- Mouth/expression - confident smirk -->
+  <path class="stroke" d="M182 165 Q200 175 218 165" stroke-width="3"/>
+
+  <!-- SPACESUIT BODY - bold stencil -->
+  <path class="bold" d="
+    M130 210
+    L118 260
+    L112 330
+    L108 410
+    L145 422
+    L158 355
+    L200 365
+    L242 355
+    L255 422
+    L292 410
+    L288 330
+    L282 260
+    L270 210
+    Q248 198 200 198
+    Q152 198 130 210
     Z
   "/>
 
-  <!-- Suit chest panel -->
-  <rect class="stroke" x="160" y="230" width="80" height="60" rx="5"/>
-  <path class="dim" d="M170 245 L230 245"/>
-  <path class="dim" d="M170 265 L230 265"/>
+  <!-- Chest panel - solid block -->
+  <rect class="solid" x="155" y="228" width="90" height="70" rx="5"/>
+  <rect style="fill:#0a0a0a" x="165" y="238" width="70" height="50" rx="3"/>
 
-  <!-- Life support indicators -->
-  <circle class="fill" cx="180" cy="255" r="4"/>
-  <circle class="stroke" cx="200" cy="255" r="4"/>
-  <circle class="fill" cx="220" cy="255" r="4"/>
+  <!-- Life support lights - bold -->
+  <circle class="solid" cx="180" cy="258" r="6"/>
+  <circle class="solid" cx="200" cy="258" r="6"/>
+  <circle class="solid" cx="220" cy="258" r="6"/>
 
-  <!-- SOB patch on chest -->
-  <rect class="stroke" x="175" y="300" width="50" height="25" rx="3"/>
-  <text x="200" y="318" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SOB</text>
+  <!-- SOB patch - stencil block -->
+  <rect class="solid" x="170" y="300" width="60" height="30" rx="3"/>
+  <text x="200" y="322" text-anchor="middle" style="fill:#0a0a0a" font-family="monospace" font-size="16" font-weight="bold">SOB</text>
 
-  <!-- Backpack/life support unit -->
-  <rect class="stroke" x="145" y="220" width="15" height="80" rx="3"/>
-  <rect class="stroke" x="240" y="220" width="15" height="80" rx="3"/>
-  <path class="dim" d="M145 240 L160 240"/>
-  <path class="dim" d="M145 270 L160 270"/>
-  <path class="dim" d="M240 240 L255 240"/>
-  <path class="dim" d="M240 270 L255 270"/>
+  <!-- Backpack units - solid blocks -->
+  <rect class="solid" x="140" y="220" width="18" height="90" rx="3"/>
+  <rect class="solid" x="242" y="220" width="18" height="90" rx="3"/>
 
-  <!-- Arms -->
+  <!-- Backpack vents (cuts) -->
+  <rect style="fill:#0a0a0a" x="144" y="235" width="10" height="4"/>
+  <rect style="fill:#0a0a0a" x="144" y="260" width="10" height="4"/>
+  <rect style="fill:#0a0a0a" x="144" y="285" width="10" height="4"/>
+  <rect style="fill:#0a0a0a" x="246" y="235" width="10" height="4"/>
+  <rect style="fill:#0a0a0a" x="246" y="260" width="10" height="4"/>
+  <rect style="fill:#0a0a0a" x="246" y="285" width="10" height="4"/>
+
+  <!-- ARMS - bold strokes -->
   <!-- Left arm -->
-  <path class="stroke" d="
-    M125 250
-    L95 280
-    L80 320
-    L75 350
-  "/>
-  <!-- Left glove -->
-  <ellipse class="stroke" cx="72" cy="360" rx="18" ry="22"/>
-  <path class="dim" d="M60 350 L60 370"/>
-  <path class="dim" d="M70 345 L70 375"/>
-  <path class="dim" d="M80 348 L80 372"/>
+  <path class="bold" d="M118 260 L85 295 L68 345 L62 380"/>
+
+  <!-- Left glove - solid -->
+  <ellipse class="solid" cx="58" cy="395" rx="22" ry="28"/>
+  <!-- Finger cuts -->
+  <rect style="fill:#0a0a0a" x="42" y="380" width="4" height="25" rx="2"/>
+  <rect style="fill:#0a0a0a" x="52" y="375" width="4" height="35" rx="2"/>
+  <rect style="fill:#0a0a0a" x="62" y="378" width="4" height="30" rx="2"/>
+  <rect style="fill:#0a0a0a" x="72" y="382" width="4" height="22" rx="2"/>
 
   <!-- Right arm -->
-  <path class="stroke" d="
-    M275 250
-    L305 280
-    L320 320
-    L325 350
-  "/>
-  <!-- Right glove -->
-  <ellipse class="stroke" cx="328" cy="360" rx="18" ry="22"/>
-  <path class="dim" d="M340 350 L340 370"/>
-  <path class="dim" d="M330 345 L330 375"/>
-  <path class="dim" d="M320 348 L320 372"/>
+  <path class="bold" d="M282 260 L315 295 L332 345 L338 380"/>
 
-  <!-- Arm joints -->
-  <circle class="stroke" cx="95" cy="280" r="8"/>
-  <circle class="stroke" cx="305" cy="280" r="8"/>
+  <!-- Right glove - solid -->
+  <ellipse class="solid" cx="342" cy="395" rx="22" ry="28"/>
+  <!-- Finger cuts -->
+  <rect style="fill:#0a0a0a" x="354" y="380" width="4" height="25" rx="2"/>
+  <rect style="fill:#0a0a0a" x="344" y="375" width="4" height="35" rx="2"/>
+  <rect style="fill:#0a0a0a" x="334" y="378" width="4" height="30" rx="2"/>
+  <rect style="fill:#0a0a0a" x="324" y="382" width="4" height="22" rx="2"/>
 
-  <!-- Legs -->
+  <!-- Arm joints - bold circles -->
+  <circle class="solid" cx="85" cy="295" r="12"/>
+  <circle style="fill:#0a0a0a" cx="85" cy="295" r="5"/>
+  <circle class="solid" cx="315" cy="295" r="12"/>
+  <circle style="fill:#0a0a0a" cx="315" cy="295" r="5"/>
+
+  <!-- LEGS - bold strokes -->
   <!-- Left leg -->
-  <path class="stroke" d="
-    M155 400
-    L150 450
-    L145 480
-  "/>
-  <!-- Left boot -->
-  <path class="stroke" d="
-    M130 480
-    L125 500
-    L165 500
-    L160 480
-    Z
-  "/>
-  <path class="dim" d="M130 490 L160 490"/>
+  <path class="bold" d="M155 420 L148 465 L142 495"/>
+
+  <!-- Left boot - solid block -->
+  <path class="solid" d="M122 495 L115 518 L175 518 L168 495 Z"/>
+  <rect style="fill:#0a0a0a" x="125" y="505" width="40" height="5"/>
 
   <!-- Right leg -->
-  <path class="stroke" d="
-    M245 400
-    L250 450
-    L255 480
-  "/>
-  <!-- Right boot -->
-  <path class="stroke" d="
-    M240 480
-    L235 500
-    L275 500
-    L270 480
-    Z
-  "/>
-  <path class="dim" d="M240 490 L270 490"/>
+  <path class="bold" d="M245 420 L252 465 L258 495"/>
+
+  <!-- Right boot - solid block -->
+  <path class="solid" d="M232 495 L225 518 L285 518 L278 495 Z"/>
+  <rect style="fill:#0a0a0a" x="235" y="505" width="40" height="5"/>
 
   <!-- Knee joints -->
-  <circle class="stroke" cx="150" cy="450" r="6"/>
-  <circle class="stroke" cx="250" cy="450" r="6"/>
+  <circle class="solid" cx="148" cy="465" r="10"/>
+  <circle style="fill:#0a0a0a" cx="148" cy="465" r="4"/>
+  <circle class="solid" cx="252" cy="465" r="10"/>
+  <circle style="fill:#0a0a0a" cx="252" cy="465" r="4"/>
 
-  <!-- Tether attachment point -->
-  <circle class="stroke" cx="200" cy="220" r="8"/>
-  <circle class="fill" cx="200" cy="220" r="4"/>
+  <!-- Tether attachment - bold -->
+  <circle class="solid" cx="200" cy="218" r="12"/>
+  <circle style="fill:#0a0a0a" cx="200" cy="218" r="5"/>
 
-  <!-- Floating tether -->
-  <path class="dim" d="M208 220 Q240 200 260 180 Q280 160 290 170"/>
+  <!-- Tether line -->
+  <path class="stroke" d="M212 218 Q250 195 275 170 Q300 145 315 155" stroke-width="3"/>
+  <circle class="solid" cx="315" cy="155" r="6"/>
 
-  <!-- Helmet light -->
-  <circle class="fill" cx="265" cy="100" r="5"/>
-  <path class="glow" d="M270 100 L285 95 M270 105 L285 110"/>
+  <!-- Helmet light - bold -->
+  <circle class="solid" cx="270" cy="95" r="8"/>
+  <!-- Light rays -->
+  <path class="stroke" d="M278 92 L295 85" stroke-width="3"/>
+  <path class="stroke" d="M278 98 L295 105" stroke-width="3"/>
 
-  <!-- Stars -->
-  <circle class="fill" cx="40" cy="60" r="2"/>
-  <circle class="fill" cx="360" cy="80" r="2"/>
-  <circle class="fill" cx="30" cy="300" r="1.5"/>
-  <circle class="fill" cx="370" cy="250" r="1.5"/>
-  <circle class="fill" cx="50" cy="450" r="1"/>
-  <circle class="fill" cx="350" cy="420" r="1"/>
+  <!-- Stars - bold -->
+  <circle class="solid" cx="35" cy="55" r="4"/>
+  <circle class="solid" cx="365" cy="75" r="4"/>
+  <circle class="solid" cx="25" cy="320" r="3"/>
+  <circle class="solid" cx="375" cy="260" r="3"/>
+  <circle class="solid" cx="45" cy="470" r="2"/>
+  <circle class="solid" cx="355" cy="440" r="2"/>
 </svg>
