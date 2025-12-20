@@ -38,7 +38,7 @@ export type ChallengeDomain =
   | 'communications'    // Layer 7: Staying connected
   | 'medicine'          // Layer 8: Staying healthy
   | 'manufacturing'     // Layer 4: Building things
-  | 'software'          // alotofllamasOS
+  | 'software'          // alotallamasOS
   | 'simulation'        // Orbital mechanics, physics
   | 'hardware'          // Physical prototypes
   | 'community';        // Docs, onboarding, events
