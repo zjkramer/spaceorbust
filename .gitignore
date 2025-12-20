@@ -30,3 +30,5 @@ coverage/
 # Cache
 .cache/
 .parcel-cache/
+.vercel
+.env*.local
