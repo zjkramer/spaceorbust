@@ -201,6 +201,8 @@ A free, open-source CAD/dispatch system for fire departments and EMS. **No vendo
 
 **Live Demo**: [spaceorbust.com/dispatch](https://spaceorbust.com/dispatch.html)
 
+**Live API**: [spaceorbust-production.up.railway.app](https://spaceorbust-production.up.railway.app/api/health)
+
 ### Features
 
 - **Web-based SaaS** - Works in any browser, any device
@@ -322,7 +324,7 @@ No Discord. No Twitter. Signal over noise.
 
 **Code:** MIT License - Because space belongs to everyone. And so should public safety software.
 
-**Brand:** Space Or Bust™ and the llama mascots are trademarks of Zachary Kramer. See [TRADEMARK.md](TRADEMARK.md) for brand usage guidelines.
+**Brand:** Space Or Bust™ and the llama mascots are trademarks of Flatland Expeditions LLC. See [TRADEMARK.md](TRADEMARK.md) for brand usage guidelines.
 
 **Free forever. frack predatory private equity.**
 
