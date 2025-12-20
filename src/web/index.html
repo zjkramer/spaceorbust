@@ -458,13 +458,13 @@
     /* Floating mascots */
     .mascot {
       position: absolute;
-      opacity: 0.15;
+      opacity: 0.35;
       pointer-events: none;
       z-index: 0;
     }
-    .mascot-small { width: 60px; height: 60px; }
-    .mascot-medium { width: 100px; height: 100px; }
-    .mascot-large { width: 150px; height: 150px; }
+    .mascot-small { width: 80px; height: 80px; }
+    .mascot-medium { width: 120px; height: 120px; }
+    .mascot-large { width: 180px; height: 180px; }
 
     section, header, footer {
       position: relative;
@@ -472,9 +472,9 @@
     }
 
     @media (max-width: 600px) {
-      .mascot { opacity: 0.08; }
-      .mascot-large { width: 80px; height: 80px; }
-      .mascot-medium { width: 50px; height: 50px; }
+      .mascot { opacity: 0.2; }
+      .mascot-large { width: 100px; height: 100px; }
+      .mascot-medium { width: 70px; height: 70px; }
     }
   </style>
 </head>
@@ -641,6 +641,14 @@
         </div>
         <div class="hackathon-reward">2000⚡ + $500</div>
       </div>
+      <div class="hackathon">
+        <span class="hackathon-tier tier-intermediate">Intermediate</span>
+        <div class="hackathon-info">
+          <h4>Dispatch Protocol</h4>
+          <p>Build features for free fire dept dispatch software</p>
+        </div>
+        <div class="hackathon-reward">500⚡ + Merch</div>
+      </div>
     </div>
   </section>
 
@@ -755,17 +763,17 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
         const data = await response.json();
 
         // Animate to actual values
-        animateValue('stat-commits', 0, 46, 1000);
+        animateValue('stat-commits', 0, 50, 1000);
         animateValue('stat-contributors', 0, 1, 500);
-        animateValue('stat-techs', 0, 32, 800);
-        animateValue('stat-challenges', 0, 5, 600);
+        animateValue('stat-techs', 0, 35, 800);
+        animateValue('stat-challenges', 0, 6, 600);
       } catch (e) {
         console.log('Could not fetch GitHub stats');
         // Still animate with default values
-        animateValue('stat-commits', 0, 46, 1000);
+        animateValue('stat-commits', 0, 50, 1000);
         animateValue('stat-contributors', 0, 1, 500);
-        animateValue('stat-techs', 0, 32, 800);
-        animateValue('stat-challenges', 0, 5, 600);
+        animateValue('stat-techs', 0, 35, 800);
+        animateValue('stat-challenges', 0, 6, 600);
       }
     }
 
