@@ -115,6 +115,58 @@ Build a delta-v calculator for common space maneuvers.
 
 ---
 
+### Dispatch Protocol Features
+
+**ID**: `challenge-dispatch-protocol`
+
+Build features for the free fire department dispatch software.
+
+**Requirements**:
+- Pick a feature from the Dispatch Protocol roadmap
+- Implement with full i18n support (EN/ES/FR)
+- ADA-compliant accessibility
+- Works offline (PWA compatible)
+- Tests for critical paths
+
+**Suggested Features**:
+- Real-time GPS tracking for units
+- CAD integration (Computer-Aided Dispatch)
+- Radio PTT integration
+- Incident reports export (PDF/CSV)
+- Multi-agency mutual aid coordination
+- Voice-to-text dispatch notes
+- Mobile companion app
+
+**Constraints**:
+- TypeScript
+- No vendor lock-in (open standards)
+- Must work for rural volunteer departments
+- Privacy-first (no unnecessary data collection)
+
+**Resources**:
+- `/src/web/dispatch.html` - Current demo
+- `/src/dispatch/` - Backend services
+- NFPA dispatch standards
+- [why.html](/why.html) - Project mission
+
+**Rewards**:
+- 500⚡ Energy
+- 400 kg Materials
+- 300 TB Data
+- `first_responder` badge
+- `public_service` badge
+- Merch (t-shirt of choice)
+
+**Judging**:
+- Usefulness (35%): Will fire departments actually use this?
+- Accessibility (25%): Works for all users?
+- Reliability (25%): Battle-tested quality?
+- Documentation (15%): Easy to maintain?
+
+**Timeline**: Rolling - submit anytime
+
+---
+
 ## Advanced Tier
 
 ### Meshtastic Integration
