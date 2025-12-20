@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why We Built This - Dispatch Protocol</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+      --accent: #00ff88;
+      --accent-dim: #004422;
+      --fire: #ff6600;
+      --alert: #ff4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    .date {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    h2 {
+      color: var(--fire);
+      font-size: 1.3rem;
+      margin: 2.5rem 0 1rem 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+
+    p { margin-bottom: 1.5rem; }
+
+    .highlight {
+      background: var(--bg-card);
+      border-left: 3px solid var(--fire);
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+    }
+    .highlight .price {
+      font-size: 1.5rem;
+      color: var(--alert);
+      font-weight: 700;
+    }
+    .highlight .arrow {
+      color: var(--text-dim);
+      margin: 0 0.5rem;
+    }
+    .highlight .note {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .quote {
+      font-style: italic;
+      color: var(--text-dim);
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .tech-list {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    .tech-list ul {
+      list-style: none;
+      padding: 0;
+    }
+    .tech-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tech-list li:last-child { border-bottom: none; }
+    .tech-list li::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.75rem;
+    }
+
+    .cta {
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      padding: 2rem;
+      margin: 3rem 0;
+      text-align: center;
+      border-radius: 4px;
+    }
+    .cta h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .cta a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .cta a:hover { text-decoration: underline; }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .links a {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .links a.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .links a.primary:hover {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    .mit {
+      background: var(--bg-card);
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Why We Built This</h1>
+      <p class="subtitle">A call to arms for open-source emergency services software</p>
+      <p class="date">December 20, 2025 | Built at sunrise with Claude Code</p>
+    </header>
+
+    <h2>The Problem</h2>
+
+    <p>On December 14, 2025, the New York Times published an article about private equity's takeover of fire department software. We read it. Then we did something about it.</p>
+
+    <div class="highlight">
+      <p><span class="price">$795/year</span><span class="arrow">→</span><span class="price">$5,000+/year</span></p>
+      <p class="note">What happens when private equity acquires your software vendor</p>
+    </div>
+
+    <p>ESO Solutions, backed by Vista Equity Partners and Accel-KKR, has systematically acquired fire department software companies: FIREHOUSE Software (11,000 departments), Emergency Reporting (7,500 departments), and others. When they buy the competition, they raise prices. When departments try to switch, they buy that vendor too.</p>
+
+    <p>The three major vendors&mdash;ESO, ImageTrend, and First Due&mdash;are all private equity backed. There is no escape within the commercial market.</p>
+
+    <div class="quote">
+      "A company backed by private equity investors had acquired one platform and planned to shut it down. The alternative software it was offering would raise the community's costs from $795 per year to more than $5,000."
+    </div>
+
+    <h2>Our Response</h2>
+
+    <p>We are building <a href="/">Space or Bust</a>&mdash;a project to develop open-source infrastructure for space colonization. We need dispatch systems that work everywhere: on Earth, on the Moon, on Mars. Systems that fail over gracefully from Internet to Starlink to LoRa mesh to ham radio to QR codes.</p>
+
+    <p>So we built one. In about three hours. While watching the sun rise. Using Claude Code.</p>
+
+    <p>And we're giving it away. Forever. MIT License.</p>
+
+    <div class="tech-list">
+      <ul>
+        <li>50+ unit types including 8 drone variants</li>
+        <li>Multi-transport failover (Internet → Starlink → LoRa → Ham → QR)</li>
+        <li>NFIRS-compatible data structures for fire reporting</li>
+        <li>Offline-first with automatic sync when connectivity returns</li>
+        <li>Tow truck dispatch (because rural departments do that too)</li>
+        <li>Space mission dispatch (because we're going there)</li>
+        <li>TypeScript, event-driven architecture, no vendor lock-in</li>
+      </ul>
+    </div>
+
+    <h2>The Math</h2>
+
+    <p>There are approximately 30,000 fire departments in the United States. About 70% are volunteer departments in rural and suburban communities&mdash;the ones least able to afford $5,000/year software fees and most dependent on mutual aid coordination.</p>
+
+    <p>Private equity sees 30,000 potential contracts. We see 30,000 communities that deserve better.</p>
+
+    <p>Every dollar extracted from a volunteer fire department is a dollar not spent on equipment, training, or personnel. Every price increase is a tax on communities already stretched thin.</p>
+
+    <h2>A Message to Private Equity</h2>
+
+    <p>You can spend billions acquiring software companies. You can consolidate markets and raise prices. You can extract value from nonprofits and public services.</p>
+
+    <p>But maybe there's a workaround for the people you're extracting from.</p>
+
+    <p>We can do this in any industry. In any vertical. On Earth or in space. The tools exist. The knowledge exists. The will exists.</p>
+
+    <p>Every acquisition you make, every price you raise, every community you squeeze&mdash;you're making the case for open source. You're demonstrating why critical infrastructure should never be controlled by entities whose legal obligation is to maximize returns for investors.</p>
+
+    <p>Consider how this might affect your future financial valuations.</p>
+
+    <h2>What We Need</h2>
+
+    <p>This is version 0.1. A foundation. Built in hours, not months. It needs:</p>
+
+    <div class="tech-list">
+      <ul>
+        <li>Real-world testing by actual fire departments</li>
+        <li>NFIRS export implementation</li>
+        <li>CAD integration protocols</li>
+        <li>Mobile app for field personnel</li>
+        <li>LoRa mesh networking implementation</li>
+        <li>Self-hosted deployment documentation</li>
+        <li>Training materials</li>
+        <li>Your contribution</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <h3>Get Involved</h3>
+      <p>Code, documentation, testing, funding, spreading the word&mdash;it all matters.</p>
+      <div class="links">
+        <a href="https://github.com/zjkramer/spaceorbust" class="primary">View on GitHub</a>
+        <a href="/dispatch.html">See the Demo</a>
+        <a href="mailto:dispatch@spaceorbust.com">Contact Us</a>
+      </div>
+    </div>
+
+    <h2>The Bigger Picture</h2>
+
+    <p>Dispatch Protocol is one component of a larger vision. We're building <strong>alotofllamasOS</strong>&mdash;an open-source navigation and coordination system designed for environments where connectivity is intermittent and stakes are high. Mars. The Moon. Rural Montana. A structure fire in a dead zone.</p>
+
+    <p>The same infrastructure that coordinates rovers on Mars can coordinate engines in rural Nebraska. The same failover logic that handles Earth-Moon communication delays can handle the gap between a fireground and the nearest cell tower.</p>
+
+    <p>We're building for space because we're going there. But we're building for Earth first because people need it now.</p>
+
+    <footer>
+      <p><a href="/">Space or Bust</a> | <a href="/dispatch.html">Dispatch Protocol</a> | <a href="https://github.com/zjkramer/spaceorbust">GitHub</a></p>
+      <div class="mit">
+        MIT License. Free forever. Because fuck predatory private equity.
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
