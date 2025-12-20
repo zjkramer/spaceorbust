@@ -2,7 +2,7 @@
 
 ## Space Or Bust™ Brand Guidelines
 
-The **Space Or Bust** name, **spaceorbust** wordmark, **spaceorbust.com** domain, logos, llama mascots, and associated visual identity are trademarks of Zachary Kramer.
+The **Space Or Bust** name, **spaceorbust** wordmark, **spaceorbust.com** domain, logos, llama mascots, and associated visual identity are trademarks of Flatland Expeditions LLC.
 
 ### What IS allowed (Code - MIT License):
 - Use, modify, and distribute the Dispatch Protocol software
@@ -30,10 +30,11 @@ The brand is **protected** so we can fund development through official merchandi
 ### Contact
 
 For trademark licensing, brand partnerships, or questions:
+- Email: [ops@flatlandexpeditions.com](mailto:ops@flatlandexpeditions.com)
 - GitHub: [@zjkramer](https://github.com/zjkramer)
 - Website: [spaceorbust.com](https://spaceorbust.com)
 
 ---
 
-Space Or Bust™ and the llama mascot are trademarks of Zachary Kramer.
+Space Or Bust™ and the llama mascots are trademarks of Flatland Expeditions LLC.
 The Dispatch Protocol software is released under the MIT License.
