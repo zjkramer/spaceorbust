@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <!-- Circle design - spaceorbust/tsubroecaps mirror logo only -->
+
+  <defs>
+    <linearGradient id="criticalGradC" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffcc00"/>
+      <stop offset="50%" style="stop-color:#ff8800"/>
+      <stop offset="100%" style="stop-color:#ff3333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <circle cx="450" cy="450" r="440" fill="#0a0a0a"/>
+
+  <!-- Green ring (270 degrees) -->
+  <path d="M 450 890 A 420 420 0 1 1 747 747"
+        fill="none" stroke="#00ff88" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Critical path arc (90 degrees) -->
+  <path d="M 747 747 A 420 420 0 0 1 450 890"
+        fill="none" stroke="url(#criticalGradC)" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Inner ring -->
+  <circle cx="450" cy="450" r="370" fill="none" stroke="#333333" stroke-width="3"/>
+
+  <!-- Logo centered - NO rocket, just text -->
+  <g transform="translate(450, 450)">
+    <text x="0" y="-35" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="88" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="75" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="88" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+
+  <!-- Small stars -->
+  <circle cx="150" cy="200" r="8" fill="#ffffff"/>
+  <circle cx="750" cy="180" r="6" fill="#ffffff"/>
+  <circle cx="120" cy="700" r="5" fill="#ffffff"/>
+</svg>

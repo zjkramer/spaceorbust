@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <!-- Square with critical path square in upper right corner (1/4 size) -->
+
+  <defs>
+    <linearGradient id="criticalGradSS" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcc00"/>
+      <stop offset="50%" style="stop-color:#ff8800"/>
+      <stop offset="100%" style="stop-color:#ff3333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect x="10" y="10" width="880" height="880" rx="30" fill="#0a0a0a"/>
+
+  <!-- Main square - green border -->
+  <rect x="10" y="10" width="880" height="880" rx="30" fill="none" stroke="#00ff88" stroke-width="12"/>
+
+  <!-- Critical path square - upper right (1/4 = 220px), full border in critical path colors -->
+  <rect x="670" y="10" width="220" height="220" rx="20" fill="#0a0a0a" stroke="url(#criticalGradSS)" stroke-width="12"/>
+
+  <!-- Logo centered -->
+  <g transform="translate(450, 500)">
+    <text x="0" y="-35" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="88" font-weight="bold">
+      <tspan fill="#00ff88">space</tspan><tspan fill="#e0e0e0">orbust</tspan>
+    </text>
+    <text x="0" y="75" text-anchor="middle" font-family="'Courier New', 'Monaco', monospace" font-size="88" font-weight="bold">
+      <tspan fill="#a0a0a0">tsubro</tspan><tspan fill="#00ff88">ecaps</tspan>
+    </text>
+  </g>
+
+  <!-- Stars -->
+  <circle cx="120" cy="120" r="6" fill="#ffffff"/>
+  <circle cx="150" cy="750" r="5" fill="#ffffff"/>
+  <circle cx="750" cy="780" r="4" fill="#ffffff"/>
+</svg>
