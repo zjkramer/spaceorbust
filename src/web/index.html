@@ -459,6 +459,11 @@
   <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; top: 0; padding: 1rem; background: var(--accent); color: var(--bg); z-index: 1000;">Skip to main content</a>
 
   <div id="content">
+  <!-- Urgent Fire Dept Banner -->
+  <a href="/why.html" style="display: block; background: #ffcc00; color: #000; padding: 0.75rem 1rem; text-align: center; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+    NEW: Free dispatch software for rural fire departments. Private equity is squeezing volunteer FDs. We're fighting back. <span style="text-decoration: underline;">Read why →</span>
+  </a>
+
   <main id="main-content">
   <header>
     <div class="logo">╔══════════════════════════════════════════════════════════╗
@@ -486,7 +491,7 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-value" id="stat-commits">127</div>
+      <div class="stat-value" id="stat-commits">46</div>
       <div class="stat-label">Total Commits</div>
     </div>
     <div class="stat">
@@ -528,7 +533,7 @@
   FORGE CONNECTION
   ────────────────────────────────────────────────────────
   ✓ Connected: zjkramer (GitHub)
-  Commits tracked: 127</span></pre>
+  Commits tracked: 46</span></pre>
       </div>
     </div>
   </section>
@@ -684,7 +689,12 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
     </p>
     <p class="footer-quote">"In the void, clear communication is survival."</p>
     <p style="margin-top: 1rem;">Origin: 2025-12-18 10:12 CST</p>
-    <p style="margin-top: 0.5rem;">MIT License · Built by humans (and AI) for humans</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+      <strong>Code:</strong> <a href="https://github.com/zjkramer/spaceorbust/blob/main/LICENSE">MIT License</a> · Free forever. frack predatory private equity.
+    </p>
+    <p style="margin-top: 0.25rem; font-size: 0.75rem; color: var(--text-dim);">
+      Space Or Bust™, spaceorbust™, spaceorbust.com, and the llama mascots are trademarks of Zachary Kramer. <a href="https://github.com/zjkramer/spaceorbust/blob/main/TRADEMARK.md">Brand guidelines</a>
+    </p>
   </footer>
   </div><!-- end #content -->
 
@@ -713,14 +723,14 @@ node dist/cli/index.js mission plan leo mars_orbit</pre>
         const data = await response.json();
 
         // Animate to actual values
-        animateValue('stat-commits', 0, 127, 1000);
+        animateValue('stat-commits', 0, 46, 1000);
         animateValue('stat-contributors', 0, 1, 500);
         animateValue('stat-techs', 0, 32, 800);
         animateValue('stat-challenges', 0, 5, 600);
       } catch (e) {
         console.log('Could not fetch GitHub stats');
         // Still animate with default values
-        animateValue('stat-commits', 0, 127, 1000);
+        animateValue('stat-commits', 0, 46, 1000);
         animateValue('stat-contributors', 0, 1, 500);
         animateValue('stat-techs', 0, 32, 800);
         animateValue('stat-challenges', 0, 5, 600);

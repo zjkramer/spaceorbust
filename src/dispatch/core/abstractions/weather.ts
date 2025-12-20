@@ -4,7 +4,7 @@
  * Fire weather, general weather, air quality
  * Works Earth → Moon → Mars
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 import { Position } from './types';

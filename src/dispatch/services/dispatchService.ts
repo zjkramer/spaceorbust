@@ -4,7 +4,7 @@
  * Handles incident creation, unit dispatch, status management
  * Works offline with sync queue
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 import {

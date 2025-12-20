@@ -5,7 +5,7 @@
  * Tow: Driver, Dispatcher, Manager
  * Space: Astronaut, Flight Director, CAPCOM
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 import { Position, PersonnelId, OrganizationId, UnitId } from './types';

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You! - Space or Bust</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --border: #222222;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+      --accent: #00ff88;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    p {
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .order-info {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .order-info h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .order-info ul {
+      list-style: none;
+    }
+    .order-info li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-info li:last-child { border-bottom: none; }
+    .order-info li::before {
+      content: ">";
+      color: var(--accent);
+      margin-right: 0.75rem;
+    }
+    .links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .links a {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .links a.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Thank You!</h1>
+    <p>Your order has been received. You're now officially part of the mission.</p>
+
+    <div class="order-info">
+      <h3>What happens next</h3>
+      <ul>
+        <li>You'll receive a confirmation email from Stripe</li>
+        <li>We'll process your order and send it to Printful</li>
+        <li>Printful prints and ships (3-5 business days)</li>
+        <li>You'll get tracking info when it ships</li>
+      </ul>
+    </div>
+
+    <p>Questions? Email us at <a href="mailto:orders@spaceorbust.com" style="color: var(--accent);">orders@spaceorbust.com</a></p>
+
+    <div class="links">
+      <a href="/" class="primary">Back to Home</a>
+      <a href="/store.html">Buy More</a>
+      <a href="https://github.com/zjkramer/spaceorbust">Star on GitHub</a>
+    </div>
+  </div>
+</body>
+</html>

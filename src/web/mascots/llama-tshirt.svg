@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <!-- Llama wearing spaceorbust t-shirt - monotone style -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Body/T-shirt -->
+  <path class="stroke" d="
+    M140 220
+    L130 280
+    L120 380
+    L150 390
+    L160 320
+    L200 330
+    L240 320
+    L250 390
+    L280 380
+    L270 280
+    L260 220
+    Z
+  "/>
+
+  <!-- T-shirt neckline -->
+  <path class="stroke" d="M160 220 Q200 240 240 220"/>
+
+  <!-- T-shirt sleeves -->
+  <path class="stroke" d="M130 240 L100 280 L120 290 L140 260"/>
+  <path class="stroke" d="M270 240 L300 280 L280 290 L260 260"/>
+
+  <!-- Logo on shirt (simplified square) -->
+  <rect class="stroke" x="170" y="260" width="60" height="60" rx="4"/>
+  <text x="200" y="300" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SOB</text>
+
+  <!-- Neck -->
+  <path class="stroke" d="M175 220 L175 180 M225 220 L225 180"/>
+
+  <!-- Head - llama face -->
+  <ellipse class="stroke" cx="200" cy="130" rx="60" ry="70"/>
+
+  <!-- Ears (tall llama ears) -->
+  <path class="stroke" d="M150 100 L140 40 L160 70 L160 100"/>
+  <path class="stroke" d="M250 100 L260 40 L240 70 L240 100"/>
+
+  <!-- Inner ears -->
+  <path class="dim" d="M148 85 L145 55 L155 75"/>
+  <path class="dim" d="M252 85 L255 55 L245 75"/>
+
+  <!-- Eyes -->
+  <circle class="fill" cx="175" cy="120" r="6"/>
+  <circle class="fill" cx="225" cy="120" r="6"/>
+
+  <!-- Snout -->
+  <ellipse class="stroke" cx="200" cy="160" rx="25" ry="20"/>
+
+  <!-- Nose -->
+  <ellipse class="fill" cx="200" cy="155" rx="8" ry="5"/>
+
+  <!-- Mouth -->
+  <path class="stroke" d="M185 170 Q200 180 215 170"/>
+
+  <!-- Fluffy chest tuft -->
+  <path class="dim" d="M180 195 Q200 210 220 195"/>
+  <path class="dim" d="M175 200 Q200 220 225 200"/>
+
+  <!-- Legs -->
+  <path class="stroke" d="M160 380 L155 460 L175 460 L175 390"/>
+  <path class="stroke" d="M240 380 L245 460 L225 460 L225 390"/>
+
+  <!-- Hooves -->
+  <ellipse class="stroke" cx="165" cy="465" rx="12" ry="8"/>
+  <ellipse class="stroke" cx="235" cy="465" rx="12" ry="8"/>
+
+  <!-- Tail (fluffy) -->
+  <path class="stroke" d="M280 350 Q320 340 310 380 Q300 400 280 380"/>
+
+  <!-- Tagline -->
+  <text x="200" y="495" text-anchor="middle" class="fill" font-family="monospace" font-size="10">SPACEORBUST</text>
+</svg>

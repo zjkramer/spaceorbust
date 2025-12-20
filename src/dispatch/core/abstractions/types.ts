@@ -4,7 +4,7 @@
  * Shared types for multi-transport, multi-environment dispatch
  * Fire → Tow → Space → Any field service
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 // ============================================

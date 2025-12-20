@@ -5,7 +5,7 @@
  * Tow: Flatbed, Wrecker, Heavy, Service Truck
  * Space: Rover, Lander, EVA Team, Rescue Pod
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 import {

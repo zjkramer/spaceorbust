@@ -5,7 +5,7 @@
  * Tow: Towing Company
  * Space: Space Agency, Mission Control
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 import { OrganizationId, Zone, CommChannel } from './types';

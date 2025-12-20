@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <!-- Llama wearing spaceorbust hoodie - monotone style -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Hoodie body -->
+  <path class="stroke" d="
+    M130 200
+    L115 280
+    L105 400
+    L145 410
+    L160 320
+    L200 330
+    L240 320
+    L255 410
+    L295 400
+    L285 280
+    L270 200
+    Z
+  "/>
+
+  <!-- Hood (up, framing face) -->
+  <path class="stroke" d="
+    M130 200
+    Q100 180 110 130
+    Q120 80 160 60
+    Q200 45 240 60
+    Q280 80 290 130
+    Q300 180 270 200
+  "/>
+
+  <!-- Hood inner line -->
+  <path class="dim" d="
+    M145 190
+    Q120 170 130 130
+    Q140 90 175 75
+    Q200 65 225 75
+    Q260 90 270 130
+    Q280 170 255 190
+  "/>
+
+  <!-- Hoodie pocket -->
+  <path class="stroke" d="M155 330 L155 370 Q200 380 245 370 L245 330"/>
+  <path class="dim" d="M155 350 Q200 360 245 350"/>
+
+  <!-- Hoodie strings -->
+  <path class="stroke" d="M175 200 L175 260"/>
+  <path class="stroke" d="M225 200 L225 260"/>
+  <circle class="fill" cx="175" cy="265" r="4"/>
+  <circle class="fill" cx="225" cy="265" r="4"/>
+
+  <!-- Logo on hoodie -->
+  <circle class="stroke" cx="200" cy="290" r="25"/>
+  <text x="200" y="295" text-anchor="middle" class="fill" font-family="monospace" font-size="10">SOB</text>
+
+  <!-- Sleeves (hoodie style) -->
+  <path class="stroke" d="M115 230 L80 300 L105 315 L135 265"/>
+  <path class="stroke" d="M285 230 L320 300 L295 315 L265 265"/>
+
+  <!-- Llama head (inside hood) -->
+  <ellipse class="stroke" cx="200" cy="130" rx="45" ry="55"/>
+
+  <!-- Ears poking out of hood -->
+  <path class="stroke" d="M155 90 L145 50 L165 70"/>
+  <path class="stroke" d="M245 90 L255 50 L235 70"/>
+
+  <!-- Eyes -->
+  <circle class="fill" cx="180" cy="120" r="5"/>
+  <circle class="fill" cx="220" cy="120" r="5"/>
+
+  <!-- Snout -->
+  <ellipse class="stroke" cx="200" cy="155" rx="20" ry="15"/>
+
+  <!-- Nose -->
+  <ellipse class="fill" cx="200" cy="150" rx="6" ry="4"/>
+
+  <!-- Mouth -->
+  <path class="stroke" d="M190 165 Q200 172 210 165"/>
+
+  <!-- Legs -->
+  <path class="stroke" d="M155 400 L150 470 L170 470 L175 405"/>
+  <path class="stroke" d="M245 400 L250 470 L230 470 L225 405"/>
+
+  <!-- Hooves -->
+  <ellipse class="stroke" cx="160" cy="475" rx="12" ry="8"/>
+  <ellipse class="stroke" cx="240" cy="475" rx="12" ry="8"/>
+
+  <!-- Tagline -->
+  <text x="200" y="495" text-anchor="middle" class="fill" font-family="monospace" font-size="10">SPACEORBUST</text>
+</svg>

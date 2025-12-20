@@ -6,6 +6,12 @@
 ╚══════════════════════════════════════════════════════════╝
 ```
 
+> **This is real software, not just a game.**
+>
+> Space Or Bust includes a **production-ready dispatch system for fire departments and EMS** - free, open-source, no vendor lock-in. The "game" layer gamifies open-source contribution, but the tools underneath are built to save lives.
+>
+> [Try the Dispatch Demo](https://spaceorbust.com/dispatch.html) | [Read about the Dispatch Protocol](#dispatch-protocol-fireems-cad)
+
 A terminal-based RPG where your GitHub commits fuel civilization's expansion into space. Real orbital mechanics. Multi-transport sync. Kaizen hackathons that solve actual spacefaring challenges.
 
 ## Demo
@@ -189,6 +195,56 @@ Sync via:
 - **QR Code** - Sneakernet, works anywhere
 - **NFC/USB** - Tap-to-sync, offline transfer
 
+## Dispatch Protocol (Fire/EMS CAD)
+
+A free, open-source CAD/dispatch system for fire departments and EMS. **No vendor lock-in. No per-seat licensing. Forever.**
+
+**Live Demo**: [spaceorbust.com/dispatch](https://spaceorbust.com/dispatch.html)
+
+### Features
+
+- **Web-based SaaS** - Works in any browser, any device
+- **Offline-first** - Keep dispatching when internet fails
+- **Multi-language** - English & Spanish built-in
+- **ADA accessible** - Screen readers, keyboard navigation, high contrast
+- **Real-time sync** - Multiple dispatchers, WebSocket updates
+- **NFIRS export** - Federal fire reporting compliance
+- **Multi-transport** - Internet, Cellular, Starlink, LoRa mesh, Ham radio
+
+### Quick Start (Dispatch)
+
+```bash
+# Docker (recommended for production)
+docker-compose up -d
+
+# Or run locally
+cd src/server
+npm install
+npm run dev
+```
+
+### Transport Fallbacks
+
+When internet fails, the system cascades through available transports:
+
+| Priority | Transport | Range | License Required |
+|----------|-----------|-------|------------------|
+| 1 | Ethernet/WiFi | Local | No |
+| 2 | Cellular | Varies | No |
+| 3 | Starlink | Global | No |
+| 4 | LoRa Mesh | ~10km | No |
+| 5 | Ham/APRS | Unlimited | Yes (Technician) |
+| 6 | QR Sync | Sneakernet | No |
+
+### Fire Weather Integration
+
+Real-time NWS data with fire danger indices:
+- Fire Weather Index (FWI)
+- Red Flag warnings
+- Haines Index
+- Burning Index
+- Spread Component
+
 ## Architecture
 
 ```
@@ -212,7 +268,22 @@ src/
 ├── forge/         # Git forge integration
 │   ├── github.ts  # GitHub client
 │   └── gitea.ts   # Gitea/Forgejo client
-└── web/           # Dashboard (planned)
+├── server/        # Dispatch backend
+│   ├── database.ts # SQLite offline-first
+│   ├── auth.ts    # JWT authentication
+│   ├── websocket.ts # Real-time sync
+│   ├── nfirs.ts   # Federal reporting
+│   └── api.ts     # REST endpoints
+├── dispatch/      # Dispatch core
+│   └── core/      # Abstractions
+└── web/           # Web applications
+    ├── app/       # Dispatch frontend
+    │   ├── i18n.js      # Translations
+    │   ├── connection.js # Multi-transport
+    │   ├── weather.js   # NWS integration
+    │   ├── radio.js     # Ham/APRS/LoRa
+    │   └── sw.js        # Service worker
+    └── mascots/   # Llama graphics
 ```
 
 ## Contributing
@@ -230,11 +301,14 @@ Your contributions become in-game resources. Meta.
 
 Fund the mission. No pay-to-win.
 
-- T-shirts, hoodies, hats
+**Shop**: [spaceorbust.com/store](https://spaceorbust.com/store.html)
+
+- T-shirts, hoodies, caps
+- Space Or Bust branding with terminal aesthetic
 - Achievement patches (requires unlocking)
 - Contributor exclusives
 
-Coming soon at spaceorbust.com
+100% of proceeds fund development. frack predatory private equity.
 
 ## Community
 
@@ -246,7 +320,11 @@ No Discord. No Twitter. Signal over noise.
 
 ## License
 
-MIT - Because space belongs to everyone.
+**Code:** MIT License - Because space belongs to everyone. And so should public safety software.
+
+**Brand:** Space Or Bust™ and the llama mascots are trademarks of Zachary Kramer. See [TRADEMARK.md](TRADEMARK.md) for brand usage guidelines.
+
+**Free forever. frack predatory private equity.**
 
 ---
 
@@ -254,3 +332,10 @@ MIT - Because space belongs to everyone.
 "In the void, clear communication is survival."
                                     - SpaceOrBust Lexicon
 ```
+
+## Links
+
+- **Website**: [spaceorbust.com](https://spaceorbust.com)
+- **Dispatch Demo**: [spaceorbust.com/dispatch](https://spaceorbust.com/dispatch.html)
+- **Store**: [spaceorbust.com/store](https://spaceorbust.com/store.html)
+- **GitHub**: [github.com/zjkramer/spaceorbust](https://github.com/zjkramer/spaceorbust)

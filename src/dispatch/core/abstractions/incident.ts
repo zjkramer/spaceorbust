@@ -5,7 +5,7 @@
  * Tow: Breakdown, accident, impound, transport
  * Space: EVA, equipment failure, rescue
  *
- * MIT License - Free forever. Fuck predatory private equity.
+ * MIT License - Free forever. frack predatory private equity.
  */
 
 import { Position, IncidentId, UnitId, PersonnelId, OrganizationId, Zone } from './types';

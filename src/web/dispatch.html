@@ -3,11 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free, open-source fire department and EMS dispatch software. No vendor lock-in, forever free.">
   <title>Dispatch Protocol - Fire | Tow | Space</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚒</text></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* Skip Link for Keyboard Navigation */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10000;
+      font-weight: 700;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* High Contrast Focus Styles */
+    :focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* High Contrast Mode Support */
+    @media (prefers-contrast: high) {
+      :root {
+        --bg: #000000;
+        --bg-card: #000000;
+        --border: #ffffff;
+        --text: #ffffff;
+        --accent: #00ff00;
+      }
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: 1rem;
+    }
+    .lang-btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.7rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
     :root {
       --bg: #0a0a0a;
       --bg-card: #111111;
@@ -310,160 +380,408 @@
       margin-top: 1rem;
     }
     footer a { color: var(--accent); text-decoration: none; }
+
+    /* Environment Status Bar */
+    .env-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+    }
+    .env-panel {
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+    }
+    .env-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .env-panel-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .env-panel-status {
+      font-size: 0.65rem;
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+    .env-panel-status.warning { background: #332200; color: #ffcc00; }
+    .env-panel-status.danger { background: #330000; color: #ff4444; }
+    .env-panel-status.offline { background: #333; color: #888; }
+    .env-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+    .env-label { color: var(--text-dim); }
+    .env-value { color: var(--text); font-weight: 500; }
+    .env-value.danger { color: #ff4444; }
+    .env-value.warning { color: #ffcc00; }
+    .fire-danger-low { color: #228B22; }
+    .fire-danger-moderate { color: #FFD700; }
+    .fire-danger-high { color: #FF8C00; }
+    .fire-danger-very_high { color: #FF4500; }
+    .fire-danger-extreme { color: #8B0000; font-weight: 700; }
+
+    /* Alerts Banner */
+    .alerts-banner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(90deg, #330000, #660000, #330000);
+      border: 1px solid #ff4444;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      animation: alertPulse 2s infinite;
+    }
+    @keyframes alertPulse {
+      0%, 100% { border-color: #ff4444; }
+      50% { border-color: #ff8888; }
+    }
+    .alerts-scroll {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .alerts-scroll-inner {
+      display: inline-block;
+      animation: scrollAlerts 20s linear infinite;
+    }
+    @keyframes scrollAlerts {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .alert-item {
+      display: inline-block;
+      padding: 0 2rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .alert-item.extreme { color: #ff0000; }
+    .alert-item.severe { color: #ff6600; }
+    .alert-item.moderate { color: #ffcc00; }
+    .alerts-broadcast-btn {
+      padding: 0.5rem 1rem;
+      background: #ff4444;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      animation: broadcastPulse 1s infinite;
+    }
+    @keyframes broadcastPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .alerts-broadcast-btn:hover { background: #ff6666; }
   </style>
 </head>
 <body>
+  <!-- Skip Link for Screen Readers -->
+  <a href="#main-dashboard" class="skip-link">Skip to main content</a>
+
   <div class="container">
-    <header>
+    <header role="banner">
       <div style="display: flex; align-items: center;">
-        <a href="/why.html" style="text-decoration: none;"><span class="logo">DISPATCH</span></a>
-        <span class="org-name" id="org-name">Demo Fire Department</span>
-        <a href="/why.html" style="color: #ff6600; font-size: 0.75rem; margin-left: 1rem; text-decoration: none;">FREE FOREVER | WHY?</a>
+        <a href="/why.html" style="text-decoration: none;" aria-label="Dispatch Protocol - Learn why it's free"><span class="logo">DISPATCH</span></a>
+        <span class="org-name" id="org-name" aria-live="polite">Demo Fire Department</span>
+        <a href="/why.html" style="color: #ff6600; font-size: 0.75rem; margin-left: 1rem; text-decoration: none;" data-i18n="freeForever">FREE FOREVER | WHY?</a>
+        <div class="lang-switcher" role="group" aria-label="Language selection">
+          <button class="lang-btn active" onclick="setLang('en')" aria-pressed="true" lang="en">EN</button>
+          <button class="lang-btn" onclick="setLang('es')" aria-pressed="false" lang="es">ES</button>
+        </div>
       </div>
-      <div class="sync-status">
-        <span class="sync-dot" id="sync-dot"></span>
-        <span id="sync-text">Online</span>
-        <span id="sync-pending"></span>
+      <div class="sync-status" role="status" aria-live="polite" aria-label="Connection status">
+        <span class="sync-dot" id="sync-dot" aria-hidden="true"></span>
+        <span id="sync-text" data-i18n="online">Online</span>
+        <span id="sync-pending" aria-live="polite"></span>
       </div>
     </header>
 
-    <div class="stats-bar" id="stats-bar">
+    <div class="stats-bar" id="stats-bar" role="region" aria-label="Department statistics">
       <div class="stat">
-        <div class="stat-value" id="stat-units">0</div>
-        <div class="stat-label">Units</div>
+        <div class="stat-value" id="stat-units" aria-describedby="label-units">0</div>
+        <div class="stat-label" id="label-units" data-i18n="units">Units</div>
       </div>
       <div class="stat">
-        <div class="stat-value" id="stat-available">0</div>
-        <div class="stat-label">Available</div>
+        <div class="stat-value" id="stat-available" aria-describedby="label-available">0</div>
+        <div class="stat-label" id="label-available" data-i18n="available">Available</div>
       </div>
       <div class="stat">
-        <div class="stat-value" id="stat-incidents">0</div>
-        <div class="stat-label">Active Incidents</div>
+        <div class="stat-value" id="stat-incidents" aria-describedby="label-incidents">0</div>
+        <div class="stat-label" id="label-incidents" data-i18n="activeIncidents">Active Incidents</div>
       </div>
       <div class="stat">
-        <div class="stat-value" id="stat-personnel">0</div>
-        <div class="stat-label">On Duty</div>
+        <div class="stat-value" id="stat-personnel" aria-describedby="label-personnel">0</div>
+        <div class="stat-label" id="label-personnel" data-i18n="onDuty">On Duty</div>
       </div>
     </div>
 
-    <div class="dashboard">
-      <!-- Units Panel -->
-      <div class="panel panel-units">
-        <div class="panel-header">
-          <span class="panel-title">UNITS</span>
-          <span class="panel-count" id="units-count">0 units</span>
+    <!-- Environment Status Bar: GPS, Weather, Radio, Time -->
+    <div class="env-bar" role="region" aria-label="Environmental conditions">
+      <!-- GPS/Location Panel -->
+      <div class="env-panel" id="gps-panel">
+        <div class="env-panel-header">
+          <span class="env-panel-title">GPS/Location</span>
+          <span class="env-panel-status" id="gps-status">Acquiring</span>
         </div>
-        <div class="category-filter" id="category-filter">
-          <button class="category-btn active" data-category="all">All</button>
-          <button class="category-btn" data-category="ground">Ground</button>
-          <button class="category-btn" data-category="air">Air</button>
-          <button class="category-btn" data-category="water">Water</button>
+        <div class="env-row">
+          <span class="env-label">Lat:</span>
+          <span class="env-value" id="gps-lat">--</span>
         </div>
-        <div class="panel-body" id="units-list"></div>
-        <div class="actions-bar">
-          <button class="btn" onclick="showDispatchModal()">Dispatch Selected</button>
-          <button class="btn" onclick="changeUnitStatus('available')">Mark Available</button>
-          <button class="btn btn-danger" onclick="changeUnitStatus('out_of_service')">Mark OOS</button>
+        <div class="env-row">
+          <span class="env-label">Lon:</span>
+          <span class="env-value" id="gps-lon">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Elev:</span>
+          <span class="env-value" id="gps-elev">-- ft</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Accuracy:</span>
+          <span class="env-value" id="gps-accuracy">-- m</span>
         </div>
       </div>
+
+      <!-- Weather Panel -->
+      <div class="env-panel" id="weather-panel">
+        <div class="env-panel-header">
+          <span class="env-panel-title">Weather</span>
+          <span class="env-panel-status" id="weather-status">Loading</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Temp:</span>
+          <span class="env-value" id="weather-temp">--°F</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Humidity:</span>
+          <span class="env-value" id="weather-humidity">--%</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Wind:</span>
+          <span class="env-value" id="weather-wind">-- mph</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Conditions:</span>
+          <span class="env-value" id="weather-desc">--</span>
+        </div>
+      </div>
+
+      <!-- Fire Weather Panel -->
+      <div class="env-panel" id="fire-panel">
+        <div class="env-panel-header">
+          <span class="env-panel-title">Fire Weather</span>
+          <span class="env-panel-status" id="fire-status">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Danger:</span>
+          <span class="env-value" id="fire-danger">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">FWI:</span>
+          <span class="env-value" id="fire-fwi">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Red Flag:</span>
+          <span class="env-value" id="fire-redflag">No</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Spread:</span>
+          <span class="env-value" id="fire-spread">--</span>
+        </div>
+      </div>
+
+      <!-- Radio/Comms Panel -->
+      <div class="env-panel" id="radio-panel">
+        <div class="env-panel-header">
+          <span class="env-panel-title">Radio/Comms</span>
+          <span class="env-panel-status" id="radio-status">Scanning</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Internet:</span>
+          <span class="env-value" id="radio-internet">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">LoRa Mesh:</span>
+          <span class="env-value" id="radio-lora">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">APRS:</span>
+          <span class="env-value" id="radio-aprs">--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Fallback:</span>
+          <span class="env-value" id="radio-fallback">QR Sync</span>
+        </div>
+      </div>
+
+      <!-- Time/Alerts Panel -->
+      <div class="env-panel" id="time-panel">
+        <div class="env-panel-header">
+          <span class="env-panel-title">Time/Alerts</span>
+          <span class="env-panel-status" id="alerts-count">0 Active</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Local:</span>
+          <span class="env-value" id="time-local">--:--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">UTC:</span>
+          <span class="env-value" id="time-utc">--:--Z</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Sunrise:</span>
+          <span class="env-value" id="time-sunrise">--:--</span>
+        </div>
+        <div class="env-row">
+          <span class="env-label">Sunset:</span>
+          <span class="env-value" id="time-sunset">--:--</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Alerts Banner -->
+    <div class="alerts-banner" id="alerts-banner" role="alert" aria-live="assertive" hidden>
+      <div class="alerts-scroll" id="alerts-scroll"></div>
+      <button class="alerts-broadcast-btn" onclick="showBroadcastModal()" aria-label="Broadcast alert to all units">BROADCAST</button>
+    </div>
+
+    <main id="main-dashboard" class="dashboard" role="main">
+      <!-- Units Panel -->
+      <section class="panel panel-units" aria-labelledby="units-title">
+        <div class="panel-header">
+          <h2 class="panel-title" id="units-title" data-i18n="panelUnits">UNITS</h2>
+          <span class="panel-count" id="units-count" aria-live="polite">0 units</span>
+        </div>
+        <div class="category-filter" id="category-filter" role="group" aria-label="Filter units by category">
+          <button class="category-btn active" data-category="all" aria-pressed="true" data-i18n="all">All</button>
+          <button class="category-btn" data-category="ground" aria-pressed="false" data-i18n="ground">Ground</button>
+          <button class="category-btn" data-category="air" aria-pressed="false" data-i18n="air">Air</button>
+          <button class="category-btn" data-category="water" aria-pressed="false" data-i18n="water">Water</button>
+        </div>
+        <div class="panel-body" id="units-list" role="list" aria-label="Units list"></div>
+        <div class="actions-bar" role="toolbar" aria-label="Unit actions">
+          <button class="btn" onclick="showDispatchModal()" data-i18n="dispatchSelected">Dispatch Selected</button>
+          <button class="btn" onclick="changeUnitStatus('available')" data-i18n="markAvailable">Mark Available</button>
+          <button class="btn btn-danger" onclick="changeUnitStatus('out_of_service')" data-i18n="markOOS">Mark OOS</button>
+        </div>
+      </section>
 
       <!-- Incidents Panel -->
-      <div class="panel panel-incidents">
+      <section class="panel panel-incidents" aria-labelledby="incidents-title">
         <div class="panel-header">
-          <span class="panel-title">ACTIVE INCIDENTS</span>
-          <span class="panel-count" id="incidents-count">0 incidents</span>
+          <h2 class="panel-title" id="incidents-title" data-i18n="panelIncidents">ACTIVE INCIDENTS</h2>
+          <span class="panel-count" id="incidents-count" aria-live="polite">0 incidents</span>
         </div>
-        <div class="panel-body" id="incidents-list"></div>
-        <div class="actions-bar">
-          <button class="btn btn-primary" onclick="showNewIncidentModal()">New Incident</button>
-          <button class="btn" onclick="showIncidentDetails()">View Details</button>
+        <div class="panel-body" id="incidents-list" role="list" aria-label="Active incidents list"></div>
+        <div class="actions-bar" role="toolbar" aria-label="Incident actions">
+          <button class="btn btn-primary" onclick="showNewIncidentModal()" data-i18n="newIncident">New Incident</button>
+          <button class="btn" onclick="showIncidentDetails()" data-i18n="viewDetails">View Details</button>
         </div>
-      </div>
+      </section>
 
       <!-- Personnel Panel -->
-      <div class="panel panel-personnel">
+      <section class="panel panel-personnel" aria-labelledby="personnel-title">
         <div class="panel-header">
-          <span class="panel-title">PERSONNEL</span>
-          <span class="panel-count" id="personnel-count">0 on duty</span>
+          <h2 class="panel-title" id="personnel-title" data-i18n="panelPersonnel">PERSONNEL</h2>
+          <span class="panel-count" id="personnel-count" aria-live="polite">0 on duty</span>
         </div>
-        <div class="panel-body" id="personnel-list"></div>
-      </div>
-    </div>
+        <div class="panel-body" id="personnel-list" role="list" aria-label="On-duty personnel list"></div>
+      </section>
+    </main>
   </div>
 
   <!-- New Incident Modal -->
-  <div class="modal" id="incident-modal">
+  <div class="modal" id="incident-modal" role="dialog" aria-modal="true" aria-labelledby="incident-modal-title">
     <div class="modal-content">
       <div class="modal-header">
-        <span class="modal-title">New Incident</span>
-        <button class="modal-close" onclick="closeModal('incident-modal')">&times;</button>
+        <h3 class="modal-title" id="incident-modal-title" data-i18n="newIncident">New Incident</h3>
+        <button class="modal-close" onclick="closeModal('incident-modal')" aria-label="Close dialog">&times;</button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">Incident Type</label>
-          <select class="form-select" id="incident-type">
-            <option value="structure_fire">Structure Fire</option>
-            <option value="vehicle_fire">Vehicle Fire</option>
-            <option value="wildland_fire">Wildland Fire</option>
-            <option value="ems_cardiac">EMS - Cardiac</option>
-            <option value="ems_trauma">EMS - Trauma</option>
-            <option value="ems_respiratory">EMS - Respiratory</option>
-            <option value="rescue_vehicle">Vehicle Rescue</option>
-            <option value="rescue_water">Water Rescue</option>
-            <option value="hazmat_spill">Hazmat Spill</option>
-            <option value="alarm_fire">Fire Alarm</option>
-            <option value="public_assist">Public Assist</option>
+          <label class="form-label" for="incident-type" data-i18n="incidentType">Incident Type</label>
+          <select class="form-select" id="incident-type" aria-required="true">
+            <option value="structure_fire" data-i18n="structureFire">Structure Fire</option>
+            <option value="vehicle_fire" data-i18n="vehicleFire">Vehicle Fire</option>
+            <option value="wildland_fire" data-i18n="wildlandFire">Wildland Fire</option>
+            <option value="ems_cardiac" data-i18n="emsCardiac">EMS - Cardiac</option>
+            <option value="ems_trauma" data-i18n="emsTrauma">EMS - Trauma</option>
+            <option value="ems_respiratory" data-i18n="emsRespiratory">EMS - Respiratory</option>
+            <option value="rescue_vehicle" data-i18n="rescueVehicle">Vehicle Rescue</option>
+            <option value="rescue_water" data-i18n="rescueWater">Water Rescue</option>
+            <option value="hazmat_spill" data-i18n="hazmatSpill">Hazmat Spill</option>
+            <option value="alarm_fire" data-i18n="alarmFire">Fire Alarm</option>
+            <option value="public_assist" data-i18n="publicAssist">Public Assist</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Priority</label>
-          <select class="form-select" id="incident-priority">
-            <option value="critical">Critical - Life Threat</option>
-            <option value="emergency" selected>Emergency</option>
-            <option value="urgent">Urgent</option>
-            <option value="routine">Routine</option>
+          <label class="form-label" for="incident-priority" data-i18n="priority">Priority</label>
+          <select class="form-select" id="incident-priority" aria-required="true">
+            <option value="critical" data-i18n="priorityCritical">Critical - Life Threat</option>
+            <option value="emergency" selected data-i18n="priorityEmergency">Emergency</option>
+            <option value="urgent" data-i18n="priorityUrgent">Urgent</option>
+            <option value="routine" data-i18n="priorityRoutine">Routine</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Address</label>
-          <input type="text" class="form-input" id="incident-address" placeholder="123 Main St">
+          <label class="form-label" for="incident-address" data-i18n="address">Address</label>
+          <input type="text" class="form-input" id="incident-address" placeholder="123 Main St" aria-required="true" autocomplete="street-address">
         </div>
         <div class="form-group">
-          <label class="form-label">City</label>
-          <input type="text" class="form-input" id="incident-city" value="Austin">
+          <label class="form-label" for="incident-city" data-i18n="city">City</label>
+          <input type="text" class="form-input" id="incident-city" value="Austin" autocomplete="address-level2">
         </div>
         <div class="form-group">
-          <label class="form-label">Notes</label>
+          <label class="form-label" for="incident-notes" data-i18n="notes">Notes</label>
           <input type="text" class="form-input" id="incident-notes" placeholder="Additional information...">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn" onclick="closeModal('incident-modal')">Cancel</button>
-        <button class="btn btn-primary" onclick="createIncident()">Create Incident</button>
+        <button class="btn" onclick="closeModal('incident-modal')" data-i18n="cancel">Cancel</button>
+        <button class="btn btn-primary" onclick="createIncident()" data-i18n="createIncident">Create Incident</button>
       </div>
     </div>
   </div>
 
   <!-- Dispatch Modal -->
-  <div class="modal" id="dispatch-modal">
+  <div class="modal" id="dispatch-modal" role="dialog" aria-modal="true" aria-labelledby="dispatch-modal-title">
     <div class="modal-content">
       <div class="modal-header">
-        <span class="modal-title">Dispatch Unit</span>
-        <button class="modal-close" onclick="closeModal('dispatch-modal')">&times;</button>
+        <h3 class="modal-title" id="dispatch-modal-title" data-i18n="dispatchUnit">Dispatch Unit</h3>
+        <button class="modal-close" onclick="closeModal('dispatch-modal')" aria-label="Close dialog">&times;</button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">Select Incident</label>
-          <select class="form-select" id="dispatch-incident"></select>
+          <label class="form-label" for="dispatch-incident" data-i18n="selectIncident">Select Incident</label>
+          <select class="form-select" id="dispatch-incident" aria-required="true"></select>
         </div>
         <div class="form-group">
-          <label class="form-label">Assigned Role</label>
+          <label class="form-label" for="dispatch-role" data-i18n="assignedRole">Assigned Role</label>
           <input type="text" class="form-input" id="dispatch-role" placeholder="Attack, RIT, EMS, Recon...">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn" onclick="closeModal('dispatch-modal')">Cancel</button>
-        <button class="btn btn-primary" onclick="dispatchSelectedUnit()">Dispatch</button>
+        <button class="btn" onclick="closeModal('dispatch-modal')" data-i18n="cancel">Cancel</button>
+        <button class="btn btn-primary" onclick="dispatchSelectedUnit()" data-i18n="dispatch">Dispatch</button>
       </div>
     </div>
   </div>
@@ -899,8 +1217,380 @@
       document.getElementById('sync-dot').classList.toggle('offline', !online);
       document.getElementById('sync-text').textContent = online ? 'Online' : 'Offline';
     }, 1000);
-    
-    console.log('Dispatch Protocol loaded - Free forever. Fuck predatory private equity.');
+
+    // ============================================
+    // ENVIRONMENT MONITORING SYSTEM
+    // ============================================
+
+    const envState = {
+      gps: { lat: null, lon: null, elev: null, accuracy: null },
+      weather: { temp: null, humidity: null, wind: null, desc: null },
+      fireWeather: { danger: null, fwi: null, redFlag: false, spread: null },
+      radio: { internet: false, lora: false, aprs: false },
+      alerts: [],
+      sunrise: null,
+      sunset: null
+    };
+
+    // GPS/Geolocation
+    function initGPS() {
+      if (!navigator.geolocation) {
+        document.getElementById('gps-status').textContent = 'N/A';
+        document.getElementById('gps-status').classList.add('offline');
+        return;
+      }
+
+      navigator.geolocation.watchPosition(
+        (pos) => {
+          envState.gps.lat = pos.coords.latitude;
+          envState.gps.lon = pos.coords.longitude;
+          envState.gps.elev = pos.coords.altitude;
+          envState.gps.accuracy = pos.coords.accuracy;
+          updateGPSDisplay();
+          // Fetch weather for this location
+          fetchWeather(pos.coords.latitude, pos.coords.longitude);
+        },
+        (err) => {
+          console.warn('GPS error:', err);
+          document.getElementById('gps-status').textContent = 'Error';
+          document.getElementById('gps-status').classList.add('warning');
+        },
+        { enableHighAccuracy: true, maximumAge: 30000, timeout: 10000 }
+      );
+    }
+
+    function updateGPSDisplay() {
+      const { lat, lon, elev, accuracy } = envState.gps;
+      document.getElementById('gps-lat').textContent = lat ? lat.toFixed(5) + '°' : '--';
+      document.getElementById('gps-lon').textContent = lon ? lon.toFixed(5) + '°' : '--';
+      document.getElementById('gps-elev').textContent = elev ? Math.round(elev * 3.281) + ' ft' : '-- ft';
+      document.getElementById('gps-accuracy').textContent = accuracy ? Math.round(accuracy) + ' m' : '-- m';
+      document.getElementById('gps-status').textContent = accuracy < 10 ? 'High' : accuracy < 50 ? 'Good' : 'Low';
+      document.getElementById('gps-status').className = 'env-panel-status' + (accuracy > 100 ? ' warning' : '');
+    }
+
+    // Weather from NWS (Free API, no key needed!)
+    async function fetchWeather(lat, lon) {
+      try {
+        // Get NWS grid point
+        const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`, {
+          headers: { 'User-Agent': 'DispatchProtocol/1.0 (dispatch@spaceorbust.com)' }
+        });
+        if (!pointRes.ok) throw new Error('NWS point failed');
+        const point = await pointRes.json();
+
+        // Get current observation
+        const stationsRes = await fetch(point.properties.observationStations, {
+          headers: { 'User-Agent': 'DispatchProtocol/1.0' }
+        });
+        const stations = await stationsRes.json();
+        const stationId = stations.features[0]?.properties?.stationIdentifier;
+
+        if (stationId) {
+          const obsRes = await fetch(`https://api.weather.gov/stations/${stationId}/observations/latest`, {
+            headers: { 'User-Agent': 'DispatchProtocol/1.0' }
+          });
+          const obs = await obsRes.json();
+          const props = obs.properties;
+
+          envState.weather.temp = props.temperature?.value ? Math.round(props.temperature.value * 9/5 + 32) : null;
+          envState.weather.humidity = props.relativeHumidity?.value ? Math.round(props.relativeHumidity.value) : null;
+          envState.weather.wind = props.windSpeed?.value ? Math.round(props.windSpeed.value * 0.621371) : null;
+          envState.weather.desc = props.textDescription || '--';
+          updateWeatherDisplay();
+          calculateFireWeather();
+        }
+
+        // Get alerts
+        fetchAlerts(lat, lon);
+      } catch (err) {
+        console.warn('Weather fetch error:', err);
+        document.getElementById('weather-status').textContent = 'Error';
+        document.getElementById('weather-status').classList.add('warning');
+      }
+    }
+
+    function updateWeatherDisplay() {
+      const { temp, humidity, wind, desc } = envState.weather;
+      document.getElementById('weather-temp').textContent = temp !== null ? temp + '°F' : '--°F';
+      document.getElementById('weather-humidity').textContent = humidity !== null ? humidity + '%' : '--%';
+      document.getElementById('weather-wind').textContent = wind !== null ? wind + ' mph' : '-- mph';
+      document.getElementById('weather-desc').textContent = desc || '--';
+      document.getElementById('weather-status').textContent = 'Live';
+      document.getElementById('weather-status').className = 'env-panel-status';
+    }
+
+    function calculateFireWeather() {
+      const { temp, humidity, wind } = envState.weather;
+      if (temp === null || humidity === null) return;
+
+      // Fire Weather Index (simplified)
+      const tempFactor = Math.max(0, (temp - 50) / 50);
+      const rhFactor = Math.max(0, (100 - humidity) / 100);
+      const windFactor = Math.min(1, (wind || 0) / 30);
+      const fwi = Math.round((tempFactor * 0.3 + rhFactor * 0.4 + windFactor * 0.3) * 100);
+
+      // Danger level
+      let score = 0;
+      if (temp > 70) score += 1; if (temp > 80) score += 1; if (temp > 90) score += 2;
+      if (humidity < 50) score += 1; if (humidity < 30) score += 1; if (humidity < 20) score += 2;
+      if (wind > 10) score += 1; if (wind > 20) score += 1; if (wind > 30) score += 2;
+
+      let danger = 'LOW';
+      let dangerClass = 'fire-danger-low';
+      if (score >= 10) { danger = 'EXTREME'; dangerClass = 'fire-danger-extreme'; }
+      else if (score >= 7) { danger = 'VERY HIGH'; dangerClass = 'fire-danger-very_high'; }
+      else if (score >= 5) { danger = 'HIGH'; dangerClass = 'fire-danger-high'; }
+      else if (score >= 3) { danger = 'MODERATE'; dangerClass = 'fire-danger-moderate'; }
+
+      const redFlag = humidity < 15 && wind > 25;
+      const spread = Math.round((wind || 0) * 2);
+
+      envState.fireWeather = { danger, fwi, redFlag, spread };
+
+      document.getElementById('fire-danger').textContent = danger;
+      document.getElementById('fire-danger').className = 'env-value ' + dangerClass;
+      document.getElementById('fire-fwi').textContent = fwi;
+      document.getElementById('fire-redflag').textContent = redFlag ? 'YES' : 'No';
+      document.getElementById('fire-redflag').className = 'env-value' + (redFlag ? ' danger' : '');
+      document.getElementById('fire-spread').textContent = spread;
+      document.getElementById('fire-status').textContent = danger;
+      document.getElementById('fire-status').className = 'env-panel-status' + (score >= 7 ? ' danger' : score >= 5 ? ' warning' : '');
+    }
+
+    // Alerts from NWS
+    async function fetchAlerts(lat, lon) {
+      try {
+        const res = await fetch(`https://api.weather.gov/alerts/active?point=${lat},${lon}`, {
+          headers: { 'User-Agent': 'DispatchProtocol/1.0' }
+        });
+        const data = await res.json();
+        envState.alerts = data.features.map(f => ({
+          id: f.properties.id,
+          event: f.properties.event,
+          severity: f.properties.severity,
+          headline: f.properties.headline,
+          description: f.properties.description
+        }));
+        updateAlertsDisplay();
+      } catch (err) {
+        console.warn('Alerts fetch error:', err);
+      }
+    }
+
+    function updateAlertsDisplay() {
+      const count = envState.alerts.length;
+      document.getElementById('alerts-count').textContent = count + ' Active';
+      document.getElementById('alerts-count').className = 'env-panel-status' + (count > 0 ? ' danger' : '');
+
+      const banner = document.getElementById('alerts-banner');
+      const scroll = document.getElementById('alerts-scroll');
+
+      if (count > 0) {
+        banner.hidden = false;
+        scroll.innerHTML = '<div class="alerts-scroll-inner">' +
+          envState.alerts.map(a => {
+            const sevClass = a.severity === 'Extreme' ? 'extreme' : a.severity === 'Severe' ? 'severe' : 'moderate';
+            return '<span class="alert-item ' + sevClass + '">' + a.event + ': ' + (a.headline || '') + '</span>';
+          }).join('') + '</div>';
+      } else {
+        banner.hidden = true;
+      }
+    }
+
+    // Radio/Comms status
+    function updateRadioStatus() {
+      const online = navigator.onLine;
+      document.getElementById('radio-internet').textContent = online ? 'Connected' : 'Offline';
+      document.getElementById('radio-internet').className = 'env-value' + (online ? '' : ' danger');
+      document.getElementById('radio-lora').textContent = 'Scanning...';
+      document.getElementById('radio-aprs').textContent = 'Not configured';
+      document.getElementById('radio-status').textContent = online ? 'Online' : 'Degraded';
+      document.getElementById('radio-status').className = 'env-panel-status' + (online ? '' : ' warning');
+      envState.radio.internet = online;
+    }
+
+    // Time updates
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('time-local').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+      document.getElementById('time-utc').textContent = now.toISOString().substring(11, 16) + 'Z';
+
+      // Demo sunrise/sunset (would calculate from lat/lon in production)
+      document.getElementById('time-sunrise').textContent = '06:45';
+      document.getElementById('time-sunset').textContent = '17:32';
+    }
+
+    // ============================================
+    // BROADCAST SYSTEM (API Integration Ready)
+    // ============================================
+
+    const broadcastConfig = {
+      // Built-in channels
+      channels: {
+        internal: true,      // Dispatch system
+        sms: false,          // Twilio/SMS API
+        email: false,        // SMTP/SendGrid
+        push: false,         // Web Push notifications
+        ipaws: false,        // FEMA IPAWS (requires authorization)
+        cap: false,          // Common Alerting Protocol
+        radio: false         // APRS/LoRa broadcast
+      },
+      // Webhook for external integrations
+      webhookUrl: null,
+      // API endpoints
+      apis: {
+        twilio: null,
+        sendgrid: null,
+        ipaws: null,
+        custom: null
+      }
+    };
+
+    function showBroadcastModal() {
+      // Would show modal with:
+      // - Message text
+      // - Severity (Critical/Emergency/Alert/Info)
+      // - Channel selection (which systems to broadcast to)
+      // - Geographic scope
+      // - Expiration time
+      const message = prompt('Enter broadcast message for all units:');
+      if (message) {
+        broadcastAlert({
+          type: 'manual',
+          severity: 'Alert',
+          message: message,
+          timestamp: new Date().toISOString()
+        });
+      }
+    }
+
+    async function broadcastAlert(alert) {
+      console.log('[Broadcast] Sending alert:', alert);
+
+      // 1. Internal dispatch notification
+      if (broadcastConfig.channels.internal) {
+        dispatchService.emit({ type: 'BROADCAST_ALERT', alert });
+        // Show in UI
+        const banner = document.getElementById('alerts-banner');
+        const scroll = document.getElementById('alerts-scroll');
+        banner.hidden = false;
+        scroll.innerHTML = '<div class="alerts-scroll-inner"><span class="alert-item severe">BROADCAST: ' + alert.message + '</span></div>';
+      }
+
+      // 2. Webhook for external systems
+      if (broadcastConfig.webhookUrl) {
+        try {
+          await fetch(broadcastConfig.webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(alert)
+          });
+        } catch (err) {
+          console.error('[Broadcast] Webhook failed:', err);
+        }
+      }
+
+      // 3. Custom API integrations would go here
+      // Twilio, SendGrid, IPAWS, etc.
+      console.log('[Broadcast] Alert sent to all configured channels');
+    }
+
+    // Public API for external systems to push alerts
+    window.DispatchProtocol = {
+      broadcastAlert,
+      configureWebhook: (url) => { broadcastConfig.webhookUrl = url; },
+      configureAPI: (name, config) => { broadcastConfig.apis[name] = config; },
+      enableChannel: (channel) => { broadcastConfig.channels[channel] = true; },
+      getAlerts: () => [...envState.alerts],
+      getWeather: () => ({ ...envState.weather }),
+      getFireWeather: () => ({ ...envState.fireWeather }),
+      getGPS: () => ({ ...envState.gps })
+    };
+
+    // ============================================
+    // INTERNATIONALIZATION (i18n)
+    // ============================================
+
+    const translations = {
+      en: {
+        online: 'Online', offline: 'Offline', units: 'Units', available: 'Available',
+        activeIncidents: 'Active Incidents', onDuty: 'On Duty', panelUnits: 'UNITS',
+        panelIncidents: 'ACTIVE INCIDENTS', panelPersonnel: 'PERSONNEL', all: 'All',
+        ground: 'Ground', air: 'Air', water: 'Water', dispatchSelected: 'Dispatch Selected',
+        markAvailable: 'Mark Available', markOOS: 'Mark OOS', newIncident: 'New Incident',
+        viewDetails: 'View Details', cancel: 'Cancel', dispatch: 'Dispatch',
+        createIncident: 'Create Incident', freeForever: 'FREE FOREVER | WHY?',
+        incidentType: 'Incident Type', priority: 'Priority', address: 'Address',
+        city: 'City', notes: 'Notes', structureFire: 'Structure Fire',
+        vehicleFire: 'Vehicle Fire', wildlandFire: 'Wildland Fire',
+        emsCardiac: 'EMS - Cardiac', emsTrauma: 'EMS - Trauma',
+        emsRespiratory: 'EMS - Respiratory', rescueVehicle: 'Vehicle Rescue',
+        rescueWater: 'Water Rescue', hazmatSpill: 'Hazmat Spill',
+        alarmFire: 'Fire Alarm', publicAssist: 'Public Assist',
+        priorityCritical: 'Critical - Life Threat', priorityEmergency: 'Emergency',
+        priorityUrgent: 'Urgent', priorityRoutine: 'Routine',
+        dispatchUnit: 'Dispatch Unit', selectIncident: 'Select Incident', assignedRole: 'Assigned Role'
+      },
+      es: {
+        online: 'En línea', offline: 'Sin conexión', units: 'Unidades', available: 'Disponible',
+        activeIncidents: 'Incidentes Activos', onDuty: 'De servicio', panelUnits: 'UNIDADES',
+        panelIncidents: 'INCIDENTES ACTIVOS', panelPersonnel: 'PERSONAL', all: 'Todos',
+        ground: 'Tierra', air: 'Aire', water: 'Agua', dispatchSelected: 'Despachar Seleccionado',
+        markAvailable: 'Marcar Disponible', markOOS: 'Fuera de Servicio', newIncident: 'Nuevo Incidente',
+        viewDetails: 'Ver Detalles', cancel: 'Cancelar', dispatch: 'Despachar',
+        createIncident: 'Crear Incidente', freeForever: 'GRATIS PARA SIEMPRE | ¿POR QUÉ?',
+        incidentType: 'Tipo de Incidente', priority: 'Prioridad', address: 'Dirección',
+        city: 'Ciudad', notes: 'Notas', structureFire: 'Incendio Estructural',
+        vehicleFire: 'Incendio Vehicular', wildlandFire: 'Incendio Forestal',
+        emsCardiac: 'Emergencia - Cardíaca', emsTrauma: 'Emergencia - Trauma',
+        emsRespiratory: 'Emergencia - Respiratoria', rescueVehicle: 'Rescate Vehicular',
+        rescueWater: 'Rescate Acuático', hazmatSpill: 'Derrame de Materiales Peligrosos',
+        alarmFire: 'Alarma de Incendio', publicAssist: 'Asistencia Pública',
+        priorityCritical: 'Crítico - Amenaza de Vida', priorityEmergency: 'Emergencia',
+        priorityUrgent: 'Urgente', priorityRoutine: 'Rutina',
+        dispatchUnit: 'Despachar Unidad', selectIncident: 'Seleccionar Incidente', assignedRole: 'Rol Asignado'
+      }
+    };
+
+    let currentLang = localStorage.getItem('dispatch-lang') || 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('dispatch-lang', lang);
+      document.documentElement.lang = lang;
+
+      // Update lang button states
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+        btn.setAttribute('aria-pressed', btn.textContent === lang.toUpperCase());
+      });
+
+      // Translate all elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    }
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+
+    // Initialize environment monitoring
+    initGPS();
+    updateRadioStatus();
+    updateTime();
+    setInterval(updateTime, 1000);
+    setInterval(updateRadioStatus, 5000);
+
+    // Apply saved language
+    setLang(currentLang);
+
+    console.log('Dispatch Protocol loaded - Free forever. frack predatory private equity.');
+    console.log('API available at window.DispatchProtocol for external integrations');
   </script>
 </body>
 </html>

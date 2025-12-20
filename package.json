@@ -9,6 +9,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli/index.js",
+    "server": "node dist/server/index.js",
+    "server:dev": "ts-node src/server/index.ts",
     "dev": "ts-node src/cli/index.ts",
     "test": "jest"
   },
@@ -28,12 +30,26 @@
     "url": "https://github.com/zjkramer/spaceorbust.git"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.0.0",
+    "@types/ws": "^8.18.1",
     "sharp": "^0.34.5",
     "ts-node": "^10.9.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@octokit/rest": "^20.0.0"
+    "@octokit/rest": "^20.0.0",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.5.0",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "stripe": "^20.1.0",
+    "ws": "^8.18.3"
   }
 }

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Llama wearing spaceorbust cap - monotone style -->
+  <style>
+    .stroke { stroke: #00ff88; stroke-width: 2; fill: none; }
+    .fill { fill: #00ff88; }
+    .dim { stroke: #004422; stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Head -->
+  <ellipse class="stroke" cx="200" cy="220" rx="80" ry="100"/>
+
+  <!-- Neck fluff -->
+  <path class="dim" d="M140 300 Q200 330 260 300"/>
+  <path class="dim" d="M150 310 Q200 340 250 310"/>
+  <path class="dim" d="M160 320 Q200 350 240 320"/>
+
+  <!-- Cap -->
+  <path class="stroke" d="
+    M120 170
+    Q120 120 200 110
+    Q280 120 280 170
+    L280 180
+    L120 180
+    Z
+  "/>
+
+  <!-- Cap brim -->
+  <path class="stroke" d="M100 180 L300 180 L320 200 L290 210 L110 210 L80 200 Z"/>
+  <path class="dim" d="M110 195 L290 195"/>
+
+  <!-- Logo on cap -->
+  <rect class="stroke" x="170" y="135" width="60" height="30" rx="2"/>
+  <text x="200" y="155" text-anchor="middle" class="fill" font-family="monospace" font-size="10">SOB</text>
+
+  <!-- Ears (sticking out from under cap) -->
+  <path class="stroke" d="M130 175 L115 130 Q110 110 125 115 L140 160"/>
+  <path class="stroke" d="M270 175 L285 130 Q290 110 275 115 L260 160"/>
+
+  <!-- Inner ears -->
+  <path class="dim" d="M128 160 L120 135 L135 150"/>
+  <path class="dim" d="M272 160 L280 135 L265 150"/>
+
+  <!-- Eyes -->
+  <circle class="fill" cx="165" cy="220" r="8"/>
+  <circle class="fill" cx="235" cy="220" r="8"/>
+
+  <!-- Eye shine -->
+  <circle cx="168" cy="217" r="2" fill="#0a0a0a"/>
+  <circle cx="238" cy="217" r="2" fill="#0a0a0a"/>
+
+  <!-- Snout -->
+  <ellipse class="stroke" cx="200" cy="270" rx="35" ry="28"/>
+
+  <!-- Nose -->
+  <ellipse class="fill" cx="200" cy="260" rx="12" ry="7"/>
+
+  <!-- Nostrils -->
+  <circle cx="192" cy="262" r="2" fill="#0a0a0a"/>
+  <circle cx="208" cy="262" r="2" fill="#0a0a0a"/>
+
+  <!-- Mouth -->
+  <path class="stroke" d="M175 285 Q200 300 225 285"/>
+
+  <!-- Happy expression lines -->
+  <path class="dim" d="M145 235 Q155 240 150 250"/>
+  <path class="dim" d="M255 235 Q245 240 250 250"/>
+
+  <!-- Tagline -->
+  <text x="200" y="385" text-anchor="middle" class="fill" font-family="monospace" font-size="12">SPACEORBUST</text>
+</svg>

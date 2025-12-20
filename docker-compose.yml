@@ -1,0 +1,42 @@
+# Dispatch Protocol - Docker Compose
+# Run: docker-compose up -d
+
+version: '3.8'
+
+services:
+  dispatch:
+    build: .
+    container_name: dispatch-protocol
+    ports:
+      - "3000:3000"  # REST API
+      - "3001:3001"  # WebSocket
+    volumes:
+      - dispatch-data:/app/data
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=${JWT_SECRET:-change-this-in-production}
+      - HTTP_PORT=3000
+      - WS_PORT=3001
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  # Optional: nginx reverse proxy for HTTPS
+  # nginx:
+  #   image: nginx:alpine
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - /etc/letsencrypt:/etc/letsencrypt:ro
+  #   depends_on:
+  #     - dispatch
+
+volumes:
+  dispatch-data:
+    driver: local
