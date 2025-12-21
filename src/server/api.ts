@@ -592,6 +592,91 @@ export function createAPI(db: DispatchDatabase, auth: AuthService, wss: Dispatch
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
+  // Root landing page - tells people what this is
+  app.get('/', (req, res) => {
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch Protocol API | Free Fire Department Dispatch Software</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      background: #0a0a0a;
+      color: #00ff88;
+      min-height: 100vh;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 1rem; }
+    h2 { font-size: 1.2rem; margin: 2rem 0 1rem; color: #fff; }
+    p { margin: 1rem 0; color: #ccc; }
+    a { color: #00ff88; }
+    code { background: #1a1a1a; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    pre { background: #1a1a1a; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
+    .status { color: #00ff88; }
+    .btn {
+      display: inline-block;
+      background: #00ff88;
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 0.5rem 0.5rem 0.5rem 0;
+    }
+    .btn:hover { background: #00cc6a; }
+    .endpoints { background: #1a1a1a; padding: 1rem; border-radius: 8px; }
+    .endpoints li { margin: 0.5rem 0; list-style: none; }
+    .method { color: #ff6b6b; font-weight: bold; }
+    .path { color: #00ff88; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚒 DISPATCH PROTOCOL API</h1>
+    <p class="status">Status: OPERATIONAL | Free Forever | MIT License</p>
+
+    <p>Open-source fire department dispatch software. No subscriptions. No vendor lock-in.
+    Run it yourself or use this API.</p>
+
+    <a href="https://github.com/zjkramer/spaceorbust" class="btn">📦 Download Source Code</a>
+    <a href="https://spaceorbust.com/dispatch" class="btn">🖥️ Web App</a>
+    <a href="https://spaceorbust.com/fire-departments/" class="btn">🗺️ Find Your Dept</a>
+
+    <h2>API Endpoints</h2>
+    <ul class="endpoints">
+      <li><span class="method">GET</span> <span class="path">/api/health</span> - Health check</li>
+      <li><span class="method">POST</span> <span class="path">/api/auth/register</span> - Register user</li>
+      <li><span class="method">POST</span> <span class="path">/api/auth/login</span> - Login</li>
+      <li><span class="method">GET</span> <span class="path">/api/incidents</span> - List incidents (auth required)</li>
+      <li><span class="method">POST</span> <span class="path">/api/incidents</span> - Create incident (auth required)</li>
+      <li><span class="method">GET</span> <span class="path">/api/units</span> - List units (auth required)</li>
+      <li><span class="method">GET</span> <span class="path">/api/nfirs/export</span> - Export NFIRS data (auth required)</li>
+    </ul>
+
+    <h2>Quick Start</h2>
+    <pre>git clone https://github.com/zjkramer/spaceorbust
+cd spaceorbust
+npm install
+npm run server</pre>
+
+    <h2>Why Free?</h2>
+    <p>Fire departments shouldn't pay $50,000+/year for dispatch software.
+    This is MIT licensed. Fork it. Modify it. Deploy it. No strings attached.</p>
+
+    <p style="margin-top: 2rem; font-size: 0.9rem; color: #666;">
+      Built by <a href="https://spaceorbust.com">spaceorbust</a> |
+      <a href="https://github.com/zjkramer/spaceorbust">GitHub</a>
+    </p>
+  </div>
+</body>
+</html>`);
+  });
+
   return app;
 }
 
