@@ -1,5 +1,5 @@
 # robots.txt for spaceorbust.com
-# Ghost Army SEO Protocol
+# Fire Department Directory
 
 User-agent: *
 Allow: /
