@@ -201,7 +201,7 @@ A free, open-source CAD/dispatch system for fire departments and EMS. **No vendo
 
 **Live Demo**: [spaceorbust.com/dispatch](https://spaceorbust.com/dispatch.html)
 
-**Live API**: [spaceorbust-production.up.railway.app](https://spaceorbust-production.up.railway.app/api/health)
+**Live API**: [spaceorbust-production.up.railway.app](https://spaceorbust-production.up.railway.app)
 
 ### Features
 
