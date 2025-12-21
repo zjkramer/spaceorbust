@@ -6,6 +6,27 @@
 ╚══════════════════════════════════════════════════════════╝
 ```
 
+## Status: LIVE
+
+| Component | URL | Status |
+|-----------|-----|--------|
+| Website | [spaceorbust.com](https://spaceorbust.com) | Live |
+| Dispatch App | [spaceorbust.com/dispatch](https://spaceorbust.com/dispatch.html) | Live |
+| API | [Railway](https://spaceorbust-production.up.railway.app) | Live |
+| Fire Dept Directory | [600+ departments](https://spaceorbust.com/fire-departments/) | Live |
+
+### Recent Updates (Dec 2025)
+
+- Railway API landing page - no more raw JSON at root URL
+- Fire department directory - 600+ departments with dedicated pages
+- French language support for Dispatch Protocol
+- Space llama mascots with neon color variations
+- Dispatch Protocol hackathon challenge
+- Multi-language support (EN/ES/FR)
+- Easter eggs throughout the codebase
+
+---
+
 > **This is real software, not just a game.**
 >
 > Space Or Bust includes a **production-ready dispatch system for fire departments and EMS** - free, open-source, no vendor lock-in. The "game" layer gamifies open-source contribution, but the tools underneath are built to save lives.
