@@ -13,6 +13,7 @@ import { DispatchDatabase } from './database';
 import { AuthService, User, UserRole } from './auth';
 import { DispatchWebSocketServer } from './websocket';
 import { NFIRSExporter } from './nfirs';
+import { fortress, securityHeaders, securityLogger } from './security/fortress';
 
 interface AuthRequest extends Request {
   user?: User;
@@ -55,6 +56,14 @@ export function createAPI(db: DispatchDatabase, auth: AuthService, wss: Dispatch
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
+
+  // ═══════════════════════════════════════════════════════════════
+  // FORTRESS PROTOCOL - Security Middleware
+  // Bot detection, honeypots, security headers, IP blocking
+  // ═══════════════════════════════════════════════════════════════
+  app.use(securityHeaders);   // Add security headers to all responses
+  app.use(securityLogger);    // Log and block suspicious requests
+  app.use(fortress);          // Bot detection, honeypots, IP blocking
 
   // Rate limiting
   const generalLimiter = rateLimit({
