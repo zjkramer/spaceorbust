@@ -17,13 +17,21 @@
 
 ### Recent Updates (Dec 2025)
 
+**v1.1.0 - Multi-Transport Failover**
+- Production-grade transport manager ported from NightjarOS
+- Internet transport with WebSocket + HTTP fallback
+- LoRa mesh transport (Meshtastic protocol)
+- GMRS radio transport (22 channels, gateway support)
+- SMS gateway transport (Twilio-style API)
+- Automatic failover with health monitoring
+- Message priority routing (CRITICAL broadcasts to all channels)
+
+**Earlier Updates**
 - Railway API landing page - no more raw JSON at root URL
 - Fire department directory - 600+ departments with dedicated pages
 - French language support for Dispatch Protocol
 - Space llama mascots with neon color variations
-- Dispatch Protocol hackathon challenge
 - Multi-language support (EN/ES/FR)
-- Easter eggs throughout the codebase
 
 ---
 
@@ -41,7 +49,7 @@ A terminal-based RPG where your GitHub commits fuel civilization's expansion int
 $ spaceorbust status
 
 ╔══════════════════════════════════════════════════════════╗
-║   SPACEORBUST v0.1.0 | Year: 2024 | Era: Earth-Bound    ║
+║   SPACEORBUST v1.1.0 | Year: 2024 | Era: Earth-Bound    ║
 ╚══════════════════════════════════════════════════════════╝
 
   RESOURCES
@@ -246,18 +254,25 @@ npm install
 npm run dev
 ```
 
-### Transport Fallbacks
+### Transport Fallbacks (v1.1)
 
-When internet fails, the system cascades through available transports:
+When internet fails, the system cascades through available transports with automatic failover:
 
-| Priority | Transport | Range | License Required |
-|----------|-----------|-------|------------------|
-| 1 | Ethernet/WiFi | Local | No |
-| 2 | Cellular | Varies | No |
-| 3 | Starlink | Global | No |
-| 4 | LoRa Mesh | ~10km | No |
-| 5 | Ham/APRS | Unlimited | Yes (Technician) |
-| 6 | QR Sync | Sneakernet | No |
+| Priority | Transport | Range | License Required | Status |
+|----------|-----------|-------|------------------|--------|
+| 1 | Internet (WebSocket/HTTP) | Global | No | **v1.1** |
+| 2 | Starlink | Global | No | Planned |
+| 3 | GMRS Radio | ~30km | FCC License ($35) | **v1.1** |
+| 4 | LoRa Mesh (Meshtastic) | ~10km | No | **v1.1** |
+| 5 | Ham/APRS | Unlimited | Yes (Technician) | v1.0 |
+| 6 | SMS Gateway | Global | No | **v1.1** |
+| 7 | QR Sync | Sneakernet | No | v1.0 |
+
+**New in v1.1:**
+- Health monitoring with automatic channel selection
+- Message priority routing (CRITICAL uses all channels)
+- Exponential backoff retries with configurable limits
+- Metrics tracking per channel (success rate, latency)
 
 ### Fire Weather Integration
 
@@ -285,9 +300,15 @@ src/
 │   └── guilds.ts  # Guild mechanics
 ├── physics/       # Real physics
 │   └── orbital.ts # Orbital mechanics
-├── comms/         # Multi-transport
+├── comms/         # Multi-transport (v1.1)
 │   ├── protocol.ts # Message protocol
-│   └── transport.ts # Transport layer
+│   ├── manager.ts  # Transport manager + failover
+│   ├── transport.ts # Legacy transport layer
+│   └── transports/  # v1.1 implementations
+│       ├── internet.ts  # WebSocket + HTTP
+│       ├── lora.ts      # Meshtastic mesh
+│       ├── gmrs.ts      # GMRS radio
+│       └── sms.ts       # SMS gateway
 ├── forge/         # Git forge integration
 │   ├── github.ts  # GitHub client
 │   └── gitea.ts   # Gitea/Forgejo client

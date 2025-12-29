@@ -1,6 +1,6 @@
 {
   "name": "spaceorbust",
-  "version": "0.2.0",
+  "version": "1.1.0",
   "description": "An open-source RPG that gamifies humanity's evolution into a spacefaring civilization",
   "main": "dist/index.js",
   "bin": {
